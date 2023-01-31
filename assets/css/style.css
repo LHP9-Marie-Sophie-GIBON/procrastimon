@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+body {
+    background-image: url('../img/background1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* HEADER */
+header nav{
+    background-color: #acccfc;
+   
+}
+
+header img {
+    width: 50px;   
+}
+
+header a.navbar-brand {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px  !important;
+    color: #fff;
+    
+}
+
+/* MAIN */
+/* PROGRESS BAR */
+main div.row.progressbar {
+    margin-top: 4rem !important;  
+    width: 100% ;
+}
+
+.progress {
+    margin: 0.5rem ;
+}
+
+/* CHARACTER */
+div.row.character img {
+    height: 300px;
+}
+
+
+/* OPTIONS */
+div.row.options {
+    margin-top: 2rem;
+    background-color: #acccfc;
+    height: 30vh;
+
+}
+
+
+
+
