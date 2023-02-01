@@ -11,17 +11,6 @@
 </head>
 
 <body>
-    <!-- animated background -->
-    <div class='light x1'></div>
-    <div class='light x2'></div>
-    <div class='light x3'></div>
-    <div class='light x4'></div>
-    <div class='light x5'></div>
-    <div class='light x6'></div>
-    <div class='light x7'></div>
-    <div class='light x8'></div>
-    <div class='light x9'></div>
-
 
     <header>
         <nav class="navbar fixed-top">
@@ -56,16 +45,14 @@
         </nav>
     </header>
 
-
-
     <main class="row">
         <div class="row progressbar justify-content-end">
             <div class="col-6">
                 <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: 100%"></div>
+                    <div class="progress-bar barPV" style="width: 100%"></div>
                 </div>
                 <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-info" style="width: 0%"></div>
+                    <div class="progress-bar barPP" style="width: 0%"></div>
                 </div>
             </div>
         </div>
@@ -75,36 +62,18 @@
         </div>
 
         <div class="row options">
-            <div class="col text-center text-white">
-                <h5 class="m-1">GOALS</h5>
-                <nav class="navbar">
-                    <form class="container-fluid">
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">@</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
-                </nav>
+            <div class="col-6 text-center text-white p-1">
+                <h5 class="m-1 p-1 border border-light rounded">GOALS</h5>
             </div>
-            <div class="col text-center text-white">
-                <h5 class="m-1">TO-DO LIST</h5>
-                <nav class="navbar">
-                    <form class="container-fluid">
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">@</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
-                </nav>
-
+            <div class="col-6 text-center text-white p-1">
+                <h5 class="m-1 p-1 border border-light rounded">TO-DO LIST</h5>
             </div>
         </div>
-
-        <footer>
-
-        </footer>
     </main>
-    <footer></footer>
+
+    <footer>
+
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

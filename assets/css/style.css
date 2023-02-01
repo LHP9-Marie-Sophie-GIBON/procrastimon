@@ -36,6 +36,11 @@ main div.row.progressbar {
     margin: 0.5rem ;
 }
 
+div.progress-bar.barPV {
+    background-color: #24f562 !important;
+}
+
+
 /* CHARACTER */
 div.row.character img {
     height: 300px;
@@ -43,6 +48,9 @@ div.row.character img {
 
 
 /* OPTIONS */
+.row {
+    --bs-gutter-x: 0 !important;
+}
 div.row.options {
     margin-top: 2rem;
     background-color: #acccfc;
