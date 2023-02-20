@@ -1,2 +1,2 @@
-<!-- fonction abaissant .progress de 5% -->
-
+<?php 
+include '../views/view-home.php';

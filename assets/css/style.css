@@ -1,63 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
-    background-image: url('../img/background1.svg');
+    background-image: url('../img/background.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-
-/* HEADER */
-header nav{
-    background-color: #acccfc;
-   
+/* LOGIN */
+span.danger i {
+    color:red;
 }
 
-header img {
-    width: 50px;   
-}
-
-header a.navbar-brand {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 15px  !important;
-    color: #fff;
-    
-}
 
 /* MAIN */
 /* PROGRESS BAR */
 main div.row.progressbar {
-    margin-top: 4rem !important;  
-    width: 100% ;
+    margin-top: 4rem !important;
+    width: 100%;
 }
 
 .progress {
-    margin: 0.5rem ;
+    margin: 0.5rem;
 }
 
 div.progress-bar.barPV {
-    background-color: #24f562 !important;
+    background-color: #24f5af !important;
 }
 
 
 /* CHARACTER */
-div.row.character img {
-    height: 300px;
+div.row.character {
+    margin-top: 9rem !important;
 }
 
+div.row.character img {
+    height: 30vh;
+    width: auto;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* ovale under the character img */
+div.row.character div.oval {
+    width: 50%;
+    height: 10%;
+    background: #ebeff6;
+    border-radius: 50%;
+    z-index: -1;
+    position: absolute;
+    bottom: 37% !important;
+
+}
 
 /* OPTIONS */
-.row {
-    --bs-gutter-x: 0 !important;
-}
-div.row.options {
-    margin-top: 2rem;
+
+nav.options {
     background-color: #acccfc;
-    height: 30vh;
-
 }
 
+button.btn {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background: linear-gradient(315deg, #b8daff, #9bb8e3);
+    box-shadow:  -8px -8px 13px #8da7cf,
+                 8px 8px 13px #cbf1ff;
+}
 
+button.btn:hover {
+    background-color: #de8dfb !important;
+    color: #fff !important;
+}
 
+/* HEADER */
+header nav {
+    background-color: #acccfc00;
+}
 
