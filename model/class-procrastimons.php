@@ -47,6 +47,29 @@ class Procrastimon
 
     }
 
+    // méthode pour récupérer un procrastimon par son id
+    public function getProcrastimonById()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM procrastimons WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':id' => $this->id
+        ]);
+
+        // récupération des données
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        // hydratation de l'objet
+        $this->name = $data['name'];
+        $this->level = $data['level'];
+        $this->hp = $data['hp'];
+        $this->exp = $data['exp'];
+        $this->id_users = $data['id_users'];
+        $this->id_sprites = $data['id_sprites'];
+    }
+
 }
 
 class Sprite {
