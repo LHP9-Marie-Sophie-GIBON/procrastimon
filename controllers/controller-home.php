@@ -8,8 +8,6 @@ require('../helper/database.php');
 require('../config/connect.php');
 
 
-var_dump ($_SESSION); 
-
 if (isset($_SESSION['user_id'])) {
     $user = new User();
     $user->id = $_SESSION['user_id'];
@@ -18,13 +16,6 @@ if (isset($_SESSION['user_id'])) {
     $procrastimon = new Procrastimon();
     $procrastimon->id = $_SESSION['user_id'];
     $procrastimon->getProcrastimonById();
-
-    // afficher un  message de connexion à user
-    echo "Bienvenue " . $user->login . " !";
-    echo "Ton procrastimon est " . $procrastimon->name . " !";
-    echo "Tu as " . $procrastimon->exp . " points d'expérience !";
-    echo "Tu es au niveau " . $procrastimon->level . " !";
-    echo "Tu as " . $procrastimon->hp . " points de vie !";
 
     $sprite = new Sprite(); 
     $sprite->id = $procrastimon->id_sprites; 

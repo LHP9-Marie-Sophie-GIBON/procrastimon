@@ -6,7 +6,7 @@
 
     <!-- mise en place du menu -->
     <main>
-GOALS
+
     </main>
     
     <!-- mise en place du footer -->
