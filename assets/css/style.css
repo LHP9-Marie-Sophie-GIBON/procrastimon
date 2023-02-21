@@ -13,6 +13,11 @@ span.danger i {
     color:red;
 }
 
+select {
+    width: 315.84px !important;
+    border-radius: 5px;
+    border-color: #acccfc00;
+}
 
 /* MAIN */
 /* PROGRESS BAR */

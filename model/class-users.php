@@ -6,9 +6,9 @@ class User
     private string $login;
     private string $mail;
     private string $password;
-    private int $day_night; 
-    
-    private object $_pdo; 
+    private int $day_night;
+
+    private object $_pdo;
 
     // méthode magique pour GET les attributs
     public function __get($attribut)
@@ -31,13 +31,14 @@ class User
     // méthode pour insérer un utilisateur dans la base de données
     public function insertUser()
     {
-        $sql = "INSERT INTO users (login, mail, password, day_night) VALUES (:login, :mail, :password, :day_night)";
-        $stmt = $this->_pdo->prepare($sql);
-        $stmt->bindValue(':login', $this->login);
-        $stmt->bindValue(':mail', $this->mail);
-        $stmt->bindValue(':password', $this->password);
-        $stmt->bindValue(':day_night', $this->day_night);
-        $stmt->execute();
-    }
+        // préparation de la requête
+        $query = $this->_pdo->prepare("INSERT INTO users (login, mail, password) VALUES (:login, :mail, :password)");
 
+        // exécution de la requête 
+        $query->execute([
+            ':login' => $this->login,
+            ':mail' => $this->mail,
+            ':password' => $this->password
+        ]);
+    }
 }
