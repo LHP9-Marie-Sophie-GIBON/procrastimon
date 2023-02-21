@@ -96,5 +96,21 @@ class Sprite {
         $this->_pdo = Database::connect();
     }
 
-   
+    // méthode pour récupérer le sprite par son id
+    public function getSpriteById()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM sprites WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':id' => $this->id
+        ]);
+
+        // récupération des données
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        // hydratation de l'objet
+        $this->sprite = $data['sprite'];
+    }
 }

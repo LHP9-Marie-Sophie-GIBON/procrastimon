@@ -9,7 +9,7 @@
     
 
     <div class="row character justify-content-center">
-        <img src="../assets/img/sprite_tamagochi.png" alt="character">
+        <img src="<?= $sprite->sprite ?>" alt="character">
         <div class="oval"></div>
     </div>
     </main>

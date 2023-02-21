@@ -25,12 +25,10 @@ if (isset($_SESSION['user_id'])) {
     echo "Tu as " . $procrastimon->exp . " points d'expérience !";
     echo "Tu es au niveau " . $procrastimon->level . " !";
     echo "Tu as " . $procrastimon->hp . " points de vie !";
-    
 
-   
-
-
-
+    $sprite = new Sprite(); 
+    $sprite->id = $procrastimon->id_sprites; 
+    $sprite ->getSpriteById();
 
 }
 
