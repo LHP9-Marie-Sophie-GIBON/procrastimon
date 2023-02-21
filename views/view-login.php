@@ -23,12 +23,12 @@ include 'components/head.php';
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                <input type="text" class="form-control" placeholder="password" aria-label="password" aria-describedby="password" name="password">
+                <input type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="password" name="password">
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['confirm-password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                <input type="text" class="form-control" placeholder="confirm-password" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
+                <input type="password" class="form-control" placeholder="confirm-password" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
             </div>
 
 

@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification du mot de passe
     if (isset($_POST['password'])) {
         $password = $_POST['password'];
+        if (strlen($password) < 8) { // Si le mot de passe a moins de 8 caractères, on envoie une erreur
+            $arrayErrors['password'] = $wrong;
+        } else if (!preg_match('/[A-Za-z]/', $password) || !preg_match('/\d/', $password)) { // Si le mot de passe ne contient pas au moins une lettre et un chiffre, on envoie une erreur
+            $arrayErrors['password'] = $wrong;
+        }
     }
     if (empty($password)) { // Si le mot de passe est vide, on envoie une erreur
         $arrayErrors['password'] = $missing;
@@ -57,78 +62,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arrayErrors['procrastimon'] = $missing;
     }
 
-    // // Vérification de todo
-    // if (isset($_POST['todo'])) {
-    //     $todo = $_POST['todo'];
-    // }
-    // if (empty($todo)) { // Si le todo est vide, on envoie une erreur
-    //     $arrayErrors['todo'] = $missing;
-    // }
-    // // Vérification de la priorité du todo
-    // if (isset($_POST['priority'])) {
-    //     $priority = $_POST['priority'];
-    // }
-    // if (empty($priority)) { // Si la priorité du todo est vide, on envoie une erreur
-    //     $arrayErrors['priority'] = $missing;
-    // }
-
-    // // Vérification de goal
-    // if (isset($_POST['goal'])) {
-    //     $goal = $_POST['goal'];
-    // }
-    // if (empty($goal)) { // Si le goal est vide, on envoie une erreur
-    //     $arrayErrors['goal'] = $missing;
-    // }
-    // // Vérification de la catagorie du goal
-    // if (isset($_POST['category'])) {
-    //     $category = $_POST['category'];
-    // }
-    // if (empty($category)) { // Si la catagorie du goal est vide, on envoie une erreur
-    //     $arrayErrors['category'] = $missing;
-    // }
-    // // Vérification de la date du goal
-    // if (isset($_POST['due_date'])) {
-    //     $date = $_POST['due_date'];
-    // }
-    // if (empty($date)) { // Si la date du goal est vide, on envoie une erreur
-    //     $arrayErrors['due_date'] = $missing;
-    // }
-
-
-
 
 
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
+        // hachage du mot de passe
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         // on crée un nouvel utilisateur
         $user = new User();
         $user->login = $login;
         $user->mail = $mail;
-        $user->password = $password;
+        $user->password = $hashedPassword;
 
         // on envoie les données dans la base de données
         $user->insertUser();
 
-        // on récupère les données du table sprites
-        $sprites = new Sprite();
-
-
         // vérification si l'utilisateur a été créé
         if ($user->_pdo->lastInsertId() > 0) {
-        //    on crée un nouveau procrastimon
+            //    on crée un nouveau procrastimon
             $procrastimon = new Procrastimon();
             $procrastimon->name = $_POST['procrastimon'];
             $procrastimon->id_users = $user->_pdo->lastInsertId();
-            // on récupère l'id du sprite
             $procrastimon->id_sprites = 1;
 
             // on envoie les données dans la base de données
             $procrastimon->insertProcrastimon();
-
         } else {
             echo "échec de la création de l'utilisateur";
-            
         }
 
 
