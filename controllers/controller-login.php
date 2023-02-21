@@ -12,7 +12,6 @@ $wrong = "<span class='danger'><i class='bi bi-x-circle-fill'></i></span>";
 // Si le formulaire est envoyé, on vérifie les champs
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
     // Vérification du pseudo
     if (isset($_POST['login'])) {
         $login = $_POST['login'];
@@ -62,8 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arrayErrors['procrastimon'] = $missing;
     }
 
-
-
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
         // hachage du mot de passe
@@ -78,6 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // on envoie les données dans la base de données
         $user->insertUser();
 
+        // création d'une variable de session 
+        session_start();
+        $_SESSION['user_id'] = $user->_pdo->lastInsertId();
+        
         // vérification si l'utilisateur a été créé
         if ($user->_pdo->lastInsertId() > 0) {
             //    on crée un nouveau procrastimon
@@ -92,11 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "échec de la création de l'utilisateur";
         }
 
-
-
-
-        // header('Location: controller-home.php');
-        // exit;
+        header('Location: controller-home.php');
+        exit;
     }
 }
 
