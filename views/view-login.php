@@ -61,31 +61,7 @@ include 'components/head.php';
 
             </div>
 
-            <div class="mb-3">
-                <label for="goal">Create your first goal</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['goal'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
-                    <input type="text" class="form-control" placeholder="" aria-label="goal" aria-describedby="goal" name="goal" value="<?= $goal ?? '' ?>">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon2"><?= $arrayErrors['category'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
-                    <select name="category" id="category">
-                        <option value="default" selected disabled>Category</option>
-                        <option value="body">Body</option>
-                        <option value="mind">Mind</option>
-                        <option value="work">Work</option>
-                        <option value="other">other</option>
-                    </select>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon2"><?= $arrayErrors['due_date'] ?? '<i class="bi bi-hourglass"></i>' ?></span>
-                    <select name="due_date" id="due_date">
-                        <option value="default" selected disabled>Due date</option>
-                        <option value="1">1 month</option>
-                        <option value="2">6 month</option>
-                        <option value="3">1 year</option>
-                    </select>
-                </div> -->
+           
 
             </div>
 

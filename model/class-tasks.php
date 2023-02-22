@@ -76,6 +76,7 @@ class Goal
     private int $due_date;
     private int $statute;
     private int $penality;
+    private int $id_users;
 
     private object $_pdo;
 
@@ -101,7 +102,7 @@ class Goal
     public function insertGoal()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, due_date, statute, penality) VALUES (:name, :category, :due_date, :statute, :penality)");
+        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, due_date, id_users) VALUES (:name, :category, :due_date, :id_users)");
 
         // appel de la méthode setDueDate pour calculer la date d'échéance
         $this->setDueDate();
@@ -111,15 +112,15 @@ class Goal
             ':name' => $this->name,
             ':category' => $this->category,
             ':due_date' => date('Y-m-d', $this->due_date), // conversion en format de date MySQL
-            ':statute' => $this->statute,
-            ':penality' => $this->penality
+            ':id_users' => $this->id_users, 
+            
         ]);
     }
 
     // méthode pour définir la date d'échéance en fonction du niveau de priorité
     public function setDueDate()
     {
-        switch ($this->statute) {
+        switch ($this->due_date) {
             case 1:
                 $this->due_date = strtotime('+1 month');
                 break;
