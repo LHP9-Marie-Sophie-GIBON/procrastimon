@@ -10,6 +10,7 @@ require('../config/connect.php');
 $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
+$goal = new Goal();
 
 if (isset($_SESSION['user_id'])) {
    
@@ -21,6 +22,9 @@ if (isset($_SESSION['user_id'])) {
     
     $sprite->id = $procrastimon->id_sprites;
     $sprite->getSpriteById();
+
+     
+    $goal->id_users = $_SESSION['user_id'];
 }
 
 
@@ -67,12 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $goal->due_date = $due_date;
         $goal->id_users = $_SESSION['user_id'];
 
-        var_dump($goal); 
         // on envoie les données dans la base de données
         $goal->insertGoal();
     } 
   
 }
+
 
 
 

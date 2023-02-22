@@ -136,5 +136,21 @@ class Goal
                 break;
         }
     }
+
+    // méthode pour récupérer tous les objectifs d'un utilisateur
+    public function getGoals()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users");
+
+        // exécution de la requête
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+
+        // récupération des résultats
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+        
+    }
 }
 

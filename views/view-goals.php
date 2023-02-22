@@ -6,6 +6,8 @@
 
     <!-- mise en place du menu -->
     <main>
+
+    <!-- modal de formulaire -->
         <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -51,6 +53,21 @@
             </div>
         </div>
 
+        <!-- Affichage des goals -->
+        <div class="container">
+            <?php
+            $goalsList = $goal->getGoals(); 
+            foreach ($goalsList as $goal) { ?>
+            <div class="row">
+                <div class="col"><?= $goal['name']?></div>
+                <div class="col"><?= $goal['category']?></div>
+                <div class="col"><?= $goal['due_date']?></div>
+            </div>
+            <?php } ?>
+
+
+
+       
 
 
 
