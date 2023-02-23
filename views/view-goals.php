@@ -7,7 +7,7 @@
     <!-- mise en place du menu -->
     <main>
 
-    <!-- modal de formulaire -->
+        <!-- modal de formulaire -->
         <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -56,18 +56,63 @@
         <!-- Affichage des goals -->
         <div class="container">
             <?php
-            $goalsList = $goal->getGoals(); 
+            $goalsList = $goal->getGoals();
+
             foreach ($goalsList as $goal) { ?>
-            <div class="row">
-                <div class="col"><?= $goal['name']?></div>
-                <div class="col"><?= $goal['category']?></div>
-                <div class="col"><?= $goal['due_date']?></div>
-            </div>
+                <div class="row">
+
+                    <button type="button" class="btn col-1" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
+                    <div class="col"><?= $goal['name'] ?></div>
+                    <div class="col-1"><?= $goal['category'] ?></div>
+                    <div class="col"><?= $goal['due_date'] ?></div>
+                    <button type="button" class="col-2 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis"><i class="bi bi-trash3-fill"></i></button>
+
+                </div>
+
+                <!-- modal de confirmation -->
+                <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Are your sure ?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="" method="post">
+                                    <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
+                                    <button type="submit" name="checked" class="btn btn-primary">Yes</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- modal de confirmationBis -->
+                <div class="modal fade" id="confirmationModalBis" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Are your sure ?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="" method="post">
+                                    <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
+                                    <button type="submit" name="delete" class="btn btn-primary">Yes</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             <?php } ?>
 
 
 
-       
+
 
 
 

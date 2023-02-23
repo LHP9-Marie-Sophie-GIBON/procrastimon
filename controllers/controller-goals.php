@@ -23,7 +23,6 @@ if (isset($_SESSION['user_id'])) {
     $sprite->id = $procrastimon->id_sprites;
     $sprite->getSpriteById();
 
-     
     $goal->id_users = $_SESSION['user_id'];
 }
 
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['goal'])) {
         $name = $_POST['goal'];
     }
-    if (empty($name)) { // Si le pseudo est vide, on envoie une erreur
+    if (empty($name)) {     
         $arrayErrors['goal'] = $missing;
     }
 
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['category'])) {
         $category = $_POST['category'];
     }
-    if (empty($category)) { // Si le category est vide, on envoie une erreur
+    if (empty($category)) { 
         $arrayErrors['category'] =  $missing;
     }
 
@@ -56,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['due_date'])) {
         $due_date = $_POST['due_date'];
     }
-    if (empty($due_date)) { // Si le due_date est vide, on envoie une erreur
+    if (empty($due_date)) { 
         $arrayErrors['due_date'] = $missing;
     }
 
@@ -77,6 +76,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
 }
 
+// Options de checked et delete 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['checked'])) {
+        $goal->checkGoal($_POST['goalId']);
+    }
+
+    if (isset($_POST['delete'])) {
+        $goal->deleteGoal($_POST['goalId']);
+    }
+}
 
 
 
