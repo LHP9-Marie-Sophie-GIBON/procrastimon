@@ -14,8 +14,8 @@ if (isset($_SESSION['user_id'])) {
     $user->getUserById();
 
     $procrastimon = new Procrastimon();
-    $procrastimon->id = $_SESSION['user_id'];
-    $procrastimon->getProcrastimonById();
+    $procrastimon->id_users = $_SESSION['user_id'];
+    $procrastimon->getLastProcrastimon();
 
     $sprite = new Sprite(); 
     $sprite->id = $procrastimon->id_sprites; 

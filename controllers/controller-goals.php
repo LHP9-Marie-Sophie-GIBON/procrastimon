@@ -17,8 +17,8 @@ if (isset($_SESSION['user_id'])) {
     $user->id = $_SESSION['user_id'];
     $user->getUserById();
 
-    $procrastimon->id = $_SESSION['user_id'];
-    $procrastimon->getProcrastimonById();
+    $procrastimon->id_users = $_SESSION['user_id'];
+    $procrastimon->getLastProcrastimon();
 
     $sprite->id = $procrastimon->id_sprites;
     $sprite->getSpriteById();
@@ -81,20 +81,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $goal->checkGoal($_POST['goalId']);
         $procrastimon->addExp($_SESSION['user_id'], 50);
         
-
-
-        header('Location: controller-goals.php');
     }
 
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
         $procrastimon->removeHp($_SESSION['user_id'], 2);
 
-        header('Location: controller-goals.php');
     }
 }
 
 $procrastimon->levelUp($_SESSION['user_id'], $procrastimon);
+
+if ($procrastimon->hp == 0) {
+    $procrastimon->ko($_SESSION['user_id'], $procrastimon);
+
+    header('Location: controller-reset.php');
+}
 
 
 

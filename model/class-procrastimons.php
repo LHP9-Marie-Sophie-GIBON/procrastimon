@@ -68,6 +68,30 @@ class Procrastimon
         $this->id_sprites = $data['id_sprites'];
     }
 
+    // méthode pour récupérer le dernier procrastimon crée
+    public function getLastProcrastimon()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM procrastimons WHERE id_users = :id_users ORDER BY id DESC LIMIT 1");
+
+        // exécution de la requête
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+
+        // récupération des données
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        // hydratation de l'objet
+        $this->id = $data['id'];
+        $this->name = $data['name'];
+        $this->level = $data['level'];
+        $this->hp = $data['hp'];
+        $this->exp = $data['exp'];
+        $this->id_users = $data['id_users'];
+        $this->id_sprites = $data['id_sprites'];
+    }
+
     // méthode pour ajouter de l'exp à procratimon
     public function addExp($user, $exp)
     {
@@ -117,13 +141,15 @@ class Procrastimon
     }
 
     // méthode pour delete le procrastimon lorsque ses hp sont à 0
-    public function ko($user)
+    public function ko($user, $procrastimon)
     {
-        // préparation de la requête
+
         $query = $this->_pdo->prepare("DELETE FROM procrastimons WHERE id_users = :id_users");
         $query->execute([
             ':id_users' => $user
         ]);
+
+
     }
 }
 
