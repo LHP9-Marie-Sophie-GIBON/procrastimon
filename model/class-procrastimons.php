@@ -93,6 +93,18 @@ class Procrastimon
                 ':id_users' => $user
             ]);
         }
+
+        // méthode pour faire évoluer le procrastimon lorsque exp = 100
+        public function levelUp($user)
+        {
+            // préparation de la requête
+            $query = $this->_pdo->prepare("UPDATE procrastimons SET level = level + 1, exp = 0 WHERE id_users = :id_users");
+    
+            // exécution de la requête
+            $query->execute([
+                ':id_users' => $user
+            ]);
+        }
 }
 
 class Sprite {
