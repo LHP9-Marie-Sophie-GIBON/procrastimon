@@ -70,6 +70,29 @@ class Procrastimon
         $this->id_sprites = $data['id_sprites'];
     }
 
+     // méthode pour ajouter de l'exp à procratimon
+        public function addExp($user, $exp)
+        {
+            // préparation de la requête
+            $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users");
+    
+            // exécution de la requête
+            $query->execute([
+                ':id_users' => $user
+            ]);
+        }
+
+        // méthode pour enlever de hp à procrastimon
+        public function removeHp($user, $hp)
+        {
+            // préparation de la requête
+            $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users");
+    
+            // exécution de la requête
+            $query->execute([
+                ':id_users' => $user
+            ]);
+        }
 }
 
 class Sprite {

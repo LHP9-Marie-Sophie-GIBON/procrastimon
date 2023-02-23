@@ -80,10 +80,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
         $goal->checkGoal($_POST['goalId']);
+        $procrastimon->addExp($_SESSION['user_id'], 10);
+
+
+        header('Location: controller-goals.php');
     }
 
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
+        $procrastimon->removeHp($_SESSION['user_id'], 2);
+
+        header('Location: controller-goals.php');
     }
 }
 

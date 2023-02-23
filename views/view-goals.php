@@ -18,7 +18,7 @@
                             <label for="goal">Description : </label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text goal" id="basic-addon1"> <?= $arrayErrors['goal'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
-                                <input type="text" class="form-control" placeholder="" aria-label="goal" aria-describedby="goal" name="goal" value="<?= $name ?? '' ?>">
+                                <input type="text" class="form-control" placeholder="" aria-label="goal" aria-describedby="goal" name="goal">
                             </div>
 
                             <label for="category">Choose a category : </label>
@@ -69,7 +69,7 @@
 
                 </div>
 
-                <!-- modal de confirmation -->
+                <!-- modal de confirmation checked-->
                 <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -77,7 +77,7 @@
                                 Are your sure ?
                             </div>
                             <div class="modal-footer">
-                                <form action="" method="post">
+                                <form action="controller-goals.php" method="post">
                                     <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
                                     <button type="submit" name="checked" class="btn btn-primary">Yes</button>
                                 </form>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <!-- modal de confirmationBis -->
+                <!-- modal de confirmation delete -->
                 <div class="modal fade" id="confirmationModalBis" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">

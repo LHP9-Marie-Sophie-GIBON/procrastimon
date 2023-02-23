@@ -121,13 +121,11 @@ class Goal
     // méthode pour insérer un objectif dans la base de données
     public function insertGoal()
     {
-        // préparation de la requête
         $query = $this->_pdo->prepare("INSERT INTO goals (name, category, due_date, id_users) VALUES (:name, :category, :due_date, :id_users)");
 
         // appel de la méthode setDueDate pour calculer la date d'échéance
         $this->setDueDate();
 
-        // exécution de la requête
         $query->execute([
             ':name' => $this->name,
             ':category' => $this->category,
@@ -140,25 +138,17 @@ class Goal
     // méthode pour récupérer tous les objectifs d'un utilisateur
     public function getGoals()
     {
-        // préparation de la requête
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users");
-
-        // exécution de la requête
         $query->execute([
             ':id_users' => $this->id_users
         ]);
-
-        // récupération des résultats
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // méthode pour supprimer un goal en fonction de son id
     public function deleteGoal($goalId)
     {
-        // préparation de la requête
         $query = $this->_pdo->prepare("DELETE FROM goals WHERE id = :id");
-
-        // exécution de la requête
         $query->execute([
             ':id' => $goalId
         ]);
@@ -167,13 +157,11 @@ class Goal
     // méthode pour check un goal
     public function checkGoal($goalId)
     {
-        // préparation de la requête
         $query = $this->_pdo->prepare("UPDATE goals SET statute = 1 WHERE id = :id");
-
-        // exécution de la requête
         $query->execute([
             ':id' => $goalId
         ]);
     }
+
 
 }
