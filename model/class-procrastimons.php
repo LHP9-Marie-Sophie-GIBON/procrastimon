@@ -1,6 +1,6 @@
 <?php
 
-class Procrastimon 
+class Procrastimon
 {
     private int $id;
     private string $name;
@@ -9,8 +9,8 @@ class Procrastimon
     private int $exp;
     private int $id_users;
     private int $id_sprites;
-    
-    private object $_pdo; 
+
+    private object $_pdo;
 
     // méthode magique pour GET les attributs
     public function __get($attribut)
@@ -30,7 +30,6 @@ class Procrastimon
         $this->_pdo = Database::connect();
     }
 
-    
     // methode pour insérer un nouveau procrastimon
     public function insertProcrastimon()
     {
@@ -44,7 +43,6 @@ class Procrastimon
             ':id_sprites' => $this->id_sprites
 
         ]);
-
     }
 
     // méthode pour récupérer un procrastimon par son id
@@ -70,47 +68,72 @@ class Procrastimon
         $this->id_sprites = $data['id_sprites'];
     }
 
-     // méthode pour ajouter de l'exp à procratimon
-        public function addExp($user, $exp)
-        {
-            // préparation de la requête
-            $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users");
-    
-            // exécution de la requête
-            $query->execute([
-                ':id_users' => $user
-            ]);
-        }
+    // méthode pour ajouter de l'exp à procratimon
+    public function addExp($user, $exp)
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users");
 
-        // méthode pour enlever de hp à procrastimon
-        public function removeHp($user, $hp)
-        {
-            // préparation de la requête
-            $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users");
-    
-            // exécution de la requête
-            $query->execute([
-                ':id_users' => $user
-            ]);
-        }
+        // exécution de la requête
+        $query->execute([
+            ':id_users' => $user
+        ]);
+    }
 
-        // méthode pour faire évoluer le procrastimon lorsque exp = 100
-        public function levelUp($user)
-        {
-            // préparation de la requête
-            $query = $this->_pdo->prepare("UPDATE procrastimons SET level = level + 1, exp = 0 WHERE id_users = :id_users");
-    
-            // exécution de la requête
+    // méthode pour enlever de hp à procrastimon
+    public function removeHp($user, $hp)
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users");
+
+        // exécution de la requête
+        $query->execute([
+            ':id_users' => $user
+        ]);
+    }
+
+    // méthode pour levelUp 
+    public function levelUp($user, $procrastimon)
+    {
+        // Si le procrastimon a atteint l'expérience maximale
+        if ($procrastimon->exp == 100) {
+            // Incrémenter le niveau du procrastimon
+            $procrastimon->level += 1;
+
+            // Si le procrastimon est au niveau 3 ou plus
+            if ($procrastimon->level >= 2) {
+                // Évoluer le procrastimon
+                $procrastimon->id_sprites += 1;
+            }
+
+            // Mettre à jour le procrastimon dans la base de données
+            $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites, exp = 0 WHERE id_users = :id_users");
             $query->execute([
+                ':level' => $procrastimon->level,
+                ':id_sprites' => $procrastimon->id_sprites,
                 ':id_users' => $user
             ]);
         }
+    }
+
+    // méthode pour delete le procrastimon lorsque ses hp sont à 0
+    public function ko($user)
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("DELETE FROM procrastimons WHERE id_users = :id_users");
+        $query->execute([
+            ':id_users' => $user
+        ]);
+    }
 }
 
-class Sprite {
+
+
+class Sprite
+{
 
     private int $id;
-    private string $sprite; 
+    private string $sprite;
     private object $_pdo;
 
     // méthode magique pour GET les attributs

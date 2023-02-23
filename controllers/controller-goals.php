@@ -13,13 +13,13 @@ $sprite = new Sprite();
 $goal = new Goal();
 
 if (isset($_SESSION['user_id'])) {
-   
+
     $user->id = $_SESSION['user_id'];
     $user->getUserById();
 
     $procrastimon->id = $_SESSION['user_id'];
     $procrastimon->getProcrastimonById();
-    
+
     $sprite->id = $procrastimon->id_sprites;
     $sprite->getSpriteById();
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['goal'])) {
         $name = $_POST['goal'];
     }
-    if (empty($name)) {     
+    if (empty($name)) {
         $arrayErrors['goal'] = $missing;
     }
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['category'])) {
         $category = $_POST['category'];
     }
-    if (empty($category)) { 
+    if (empty($category)) {
         $arrayErrors['category'] =  $missing;
     }
 
@@ -55,14 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['due_date'])) {
         $due_date = $_POST['due_date'];
     }
-    if (empty($due_date)) { 
+    if (empty($due_date)) {
         $arrayErrors['due_date'] = $missing;
     }
 
 
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
-       
+
         // on crée une nouvelle tâche
         $goal = new Goal();
         $goal->name = $name;
@@ -72,15 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // on envoie les données dans la base de données
         $goal->insertGoal();
-    } 
-  
+    }
 }
 
 // Options de checked et delete 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
         $goal->checkGoal($_POST['goalId']);
-        $procrastimon->addExp($_SESSION['user_id'], 10);
+        $procrastimon->addExp($_SESSION['user_id'], 50);
+        
 
 
         header('Location: controller-goals.php');
@@ -93,6 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: controller-goals.php');
     }
 }
+
+$procrastimon->levelUp($_SESSION['user_id'], $procrastimon);
+
+
+
+
+
+
+
 
 
 
