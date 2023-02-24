@@ -27,22 +27,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['login']) && isset($_POST['password'])) {
         $login = $_POST['login'];
         $password = $_POST['password'];
+    
+        // Vérifier si l'utilisateur existe	
+        $user = new User();
+        $user->login = $login;
+        $user->getUserByLogin();
 
-        $stmt = $pdo->prepare('SELECT id FROM users WHERE login = ?');
-        $stmt->execute([$login]);
-        $user = $stmt->fetch();
-        // if ($user && password_verify($password, $user['password'])) {
-        //   // Authentification réussie : enregistrer l'utilisateur dans la session et rediriger vers la page privée
-        //   $_SESSION['user_id'] = $user['id'];
-        //   header('Location: controller-home.php');
-        //   exit;
-        // } else {
-        //     // Authentification échouée : afficher un message d'erreur
-        //     $error_message = 'Nom d\'utilisateur ou mot de passe invalide';
-        // }
+        // Vérifier si le mot de passe est correct
+        if ($user && password_verify($password, $user->password)) {
+            // Authentification réussie : enregistrer l'utilisateur dans la session et rediriger vers la page privée
+            $_SESSION['user_id'] = $user->id;
+           
+            header('Location: controller-home.php');
+            exit;
+        } else {
+            // Authentification échouée : afficher un message d'erreur
+           echo 'Nom d\'utilisateur ou mot de passe invalide';
+        }
+
     } else {
         // Champs manquants : afficher un message d'erreur
-        $error_message = 'Veuillez saisir votre nom d\'utilisateur et votre mot de passe';
+        echo 'Veuillez saisir votre nom d\'utilisateur et votre mot de passe';
     }
 
 }

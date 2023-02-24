@@ -62,4 +62,25 @@ class User
         $this->password = $data['password'];
         $this->day_night = $data['day_night'];
     }
+
+    // méthode pour récupérer un utilisateur par son login
+    public function getUserByLogin()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM users WHERE login = :login");
+
+        // exécution de la requête
+        $query->execute([
+            ':login' => $this->login
+        ]);
+
+        // récupération des données
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        // hydratation de l'objet
+        $this->id = $data['id'];
+        $this->mail = $data['mail'];
+        $this->password = $data['password'];
+        $this->day_night = $data['day_night'];
+    }
 }
