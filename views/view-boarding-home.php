@@ -32,7 +32,7 @@
                 $procrastimonList = $procrastimon->getOldProcrastimons();
                 // si $procrastimonList est vide, afficher un message
                 if (empty($procrastimonList)) {
-                    echo "Vous n'avez pas encore de procrastimon";
+                    echo "The boarding-home is empty for now";
                 } else {
                     // sinon, afficher les procrastimons
                     foreach ($procrastimonList as $oldprocrastimon) {
@@ -40,7 +40,6 @@
                         $sprite = new Sprite();
                         $sprite->id = $oldprocrastimon['id_sprites'];
                         $sprite->getSpriteById();
-
                 ?>
                         <div class="col-3">
                             <div class="card">

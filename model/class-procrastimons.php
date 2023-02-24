@@ -126,6 +126,7 @@ class Sprite
 
     private int $id;
     private string $sprite;
+    private string $chibi; 
     private object $_pdo;
 
     // méthode magique pour GET les attributs
@@ -162,5 +163,18 @@ class Sprite
 
         // hydratation de l'objet
         $this->sprite = $data['sprite'];
+        $this->chibi = $data['chibi'];
+    }
+
+    // méthode pour afficher aléatoirement un starter à la création d'un nouveau procrastimon
+    public function getRandomStarter()
+    {
+        $query = $this->_pdo->prepare("SELECT * FROM sprites WHERE (id - 1) % 3 = 0 ORDER BY RAND() LIMIT 1");
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        $this->id = $data['id'];
+        $this->sprite = $data['sprite'];
+        $this->chibi = $data['chibi'];
     }
 }
