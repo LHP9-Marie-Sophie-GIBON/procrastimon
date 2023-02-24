@@ -1,3 +1,3 @@
 <?php 
 
-header ('Location: controllers/controller-login.php'); 
+header ('Location: controllers/controller-start.php'); 
