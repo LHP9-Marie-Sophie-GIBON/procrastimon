@@ -42,23 +42,6 @@ class Procrastimon
         ]);
     }
 
-    // méthode pour récupérer un procrastimon par son id
-    public function getProcrastimonById()
-    {
-        $query = $this->_pdo->prepare("SELECT * FROM procrastimons WHERE id = :id");
-        $query->execute([
-            ':id' => $this->id
-        ]);
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-
-        $this->name = $data['name'];
-        $this->level = $data['level'];
-        $this->hp = $data['hp'];
-        $this->exp = $data['exp'];
-        $this->id_users = $data['id_users'];
-        $this->id_sprites = $data['id_sprites'];
-    }
-
     // méthode pour récupérer tous les procrastimon sauf le dernier
     public function getOldProcrastimons()
     {
@@ -66,15 +49,7 @@ class Procrastimon
         $query->execute([
             ':id_users' => $this->id_users
         ]);
-        $data = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        $this->id = $data['id'];
-        $this->name = $data['name'];
-        $this->level = $data['level'];
-        $this->hp = $data['hp'];
-        $this->exp = $data['exp'];
-        $this->id_users = $data['id_users'];
-        $this->id_sprites = $data['id_sprites'];
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // méthode pour récupérer le dernier procrastimon crée

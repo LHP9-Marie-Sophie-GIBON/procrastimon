@@ -92,11 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $procrastimon->levelUp($_SESSION['user_id'], $procrastimon);
 
-if ($procrastimon->hp == 0) {
-    $procrastimon->ko($_SESSION['user_id'], $procrastimon);
+// if ($procrastimon->hp == 0) {
+//     $procrastimon->ko($_SESSION['user_id'], $procrastimon);
 
-    header('Location: controller-reset.php');
-}
+//     header('Location: controller-reset.php');
+// }
 
 
 
