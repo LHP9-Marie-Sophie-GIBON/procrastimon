@@ -30,20 +30,29 @@
             <div class="row" data-masonry='{"percentPosition": true }'>
                 <?php
                 $procrastimonList = $procrastimon->getOldProcrastimons();
-                foreach ($procrastimonList as $oldprocrastimon) {
+                // si $procrastimonList est vide, afficher un message
+                if (empty($procrastimonList)) {
+                    echo "Vous n'avez pas encore de procrastimon";
+                } else {
+                    // sinon, afficher les procrastimons
+                    foreach ($procrastimonList as $oldprocrastimon) {
 
-                    $sprite = new Sprite();
-                    $sprite->id = $oldprocrastimon['id_sprites'];
-                    $sprite->getSpriteById();
+                        $sprite = new Sprite();
+                        $sprite->id = $oldprocrastimon['id_sprites'];
+                        $sprite->getSpriteById();
 
                 ?>
-                    <div class="col-3">
-                        <div class="card">
-                            <img src="<?= $sprite->sprite ?>" class="card-img-top img-fluid" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
+                        <div class="col-3">
+                            <div class="card">
+                                <img src="<?= $sprite->sprite ?>" class="card-img-top img-fluid" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
+                            </div>
                         </div>
-                    </div>
                 <?php
-                } ?>
+                    }
+                } 
+                ?>
+
+
             </div>
         </div>
 
