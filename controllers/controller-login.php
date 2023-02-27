@@ -63,38 +63,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
-        // hachage du mot de passe
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);// hachage du mot de passe
 
-        // on crée un nouvel utilisateur
         $user = new User();
         $user->login = $login;
         $user->mail = $mail;
         $user->password = $hashedPassword;
 
-        // on envoie les données dans la base de données
-        $user->insertUser();
-
-        // création d'une variable de session 
-        session_start();
-        $_SESSION['user_id'] = $user->_pdo->lastInsertId();
         
-        // vérification si l'utilisateur a été créé
-        if ($user->_pdo->lastInsertId() > 0) {
-            //    on crée un nouveau procrastimon
-            $procrastimon = new Procrastimon();
-            $procrastimon->name = $_POST['procrastimon'];
-            $procrastimon->id_users = $user->_pdo->lastInsertId();
-            $procrastimon->id_sprites = 1;
+        if ($user->checkLogin()) { // on vérifie si le pseudo et le mail est déjà utilisé
+            $message = " already exists";
 
-            // on envoie les données dans la base de données
-            $procrastimon->insertProcrastimon();
-        } else {
-            echo "échec de la création de l'utilisateur";
+        } else { // on envoie les données dans la base de données
+            $user->insertUser();
+
+            session_start(); // création d'une variable de session 
+            $_SESSION['user_id'] = $user->_pdo->lastInsertId();
+
+            // vérification si l'utilisateur a été créé
+            if ($user->_pdo->lastInsertId() > 0) {
+                //    on crée un nouveau procrastimon
+                $procrastimon = new Procrastimon();
+                $procrastimon->name = $_POST['procrastimon'];
+                $procrastimon->id_users = $user->_pdo->lastInsertId();
+
+                // on utilise la fonction getRandomStarter pour générer un sprite
+                $sprite = new Sprite();
+                $sprite->getRandomStarter();
+                $procrastimon->id_sprites = $sprite->id;
+
+                // on envoie les données dans la base de données
+                $procrastimon->insertProcrastimon();
+            } else {
+                echo "échec de la création de l'utilisateur";
+            }
+
+            // header('Location: controller-home.php');
+            // exit;
         }
-
-        header('Location: controller-home.php');
-        exit;
     }
 }
 

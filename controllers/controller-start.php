@@ -24,7 +24,11 @@ if (isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if (isset($_POST['login']) && isset($_POST['password'])) {
+    // si les champs sont vide : echo "erreur"
+    if (empty($_POST['login']) || empty($_POST['password'])) {
+        echo 'Veuillez remplir tous les champs';
+        
+    } else if (isset($_POST['login']) && isset($_POST['password'])) {
         $login = $_POST['login'];
         $password = $_POST['password'];
     
@@ -32,23 +36,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = new User();
         $user->login = $login;
         $user->getUserByLogin();
+        $existingUser = $user->login;
 
         // Vérifier si le mot de passe est correct
-        if ($user && password_verify($password, $user->password)) {
-            // Authentification réussie : enregistrer l'utilisateur dans la session et rediriger vers la page privée
-            $_SESSION['user_id'] = $user->id;
-           
-            header('Location: controller-home.php');
-            exit;
+        if ($existingUser) {
+            if ($user && password_verify($password, $user->password)) {
+                // Authentification réussie : enregistrer l'utilisateur dans la session et rediriger vers la page privée
+                $_SESSION['user_id'] = $user->id;
+               
+                header('Location: controller-home.php');
+                exit;
+            } else {
+                // Authentification échouée : afficher un message d'erreur
+               echo 'Nom d\'utilisateur ou mot de passe invalide';
+               
+            }
         } else {
             // Authentification échouée : afficher un message d'erreur
-           echo 'Nom d\'utilisateur ou mot de passe invalide';
+            echo 'Nom d\'utilisateur ou mot de passe invalide';
         }
-
-    } else {
-        // Champs manquants : afficher un message d'erreur
-        echo 'Veuillez saisir votre nom d\'utilisateur et votre mot de passe';
-    }
+    } 
 
 }
 include '../views/view-start.php';

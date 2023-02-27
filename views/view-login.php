@@ -11,7 +11,7 @@ include 'components/head.php';
             <!-- user part -->
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                <input type="text" class="form-control" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?>">
+                <input type="text" class="form-control" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?><?= $message ?? ''?>">
             </div>
 
 
@@ -68,7 +68,8 @@ include 'components/head.php';
 
             <!-- submit -->
             <div>
-                <input type="submit" class="btn btn-primary" value="let's go!">
+                <input type="submit" class="btn btn-outline-light" value="let's go!">
+                <button class="btn btn-outline-light"><a href="controller-start.php">return</a></button>
 
             </div>
         </form>

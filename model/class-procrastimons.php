@@ -175,6 +175,6 @@ class Sprite
 
         $this->id = $data['id'];
         $this->sprite = $data['sprite'];
-        $this->chibi = $data['chibi'];
+        $this->chibi = $data['chibi']; 
     }
 }

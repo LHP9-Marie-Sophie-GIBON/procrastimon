@@ -83,4 +83,32 @@ class User
         $this->password = $data['password'];
         $this->day_night = $data['day_night'];
     }
+
+    // méthode pour vérifier que le login et le mail n'existe pas déja
+    public function checkLogin()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM users WHERE login = :login OR mail = :mail");
+
+        // exécution de la requête
+        $query->execute([
+            ':login' => $this->login,
+            ':mail' => $this->mail
+        ]);
+
+        // check if any rows were returned from the query
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        // return whether a user was found with the given login or email
+        return $data !== false;
+
+        // // récupération des données
+        // $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        // // hydratation de l'objet
+        // $this->id = $data['id'];
+        // $this->login = $data['login'];
+        // $this->mail = $data['mail'];
+        // $this->password = $data['password'];
+        // $this->day_night = $data['day_night'];
+    }
 }
