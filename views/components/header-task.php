@@ -1,6 +1,6 @@
 <div class="row progressbar">
         <div class="col-3">
-            <img src="<?= $sprite->sprite ?>" alt="" class="img-fluid">
+            <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid">
         </div>
         <div class="col-7">
             <div>

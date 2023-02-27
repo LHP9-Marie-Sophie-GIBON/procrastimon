@@ -43,7 +43,7 @@
                 ?>
                         <div class="col-3">
                             <div class="card">
-                                <img src="<?= $sprite->sprite ?>" class="card-img-top img-fluid" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
+                                <img src="<?= $sprite->chibi ?>" class="card-img-top img-fluid" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
                             </div>
                         </div>
                 <?php

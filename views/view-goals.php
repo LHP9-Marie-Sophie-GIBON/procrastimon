@@ -59,9 +59,9 @@
             $goalsList = $goal->getGoals();
 
             foreach ($goalsList as $goal) { ?>
-                <div class="row">
+                <div class="row <?= $success ?? ''?>">
 
-                    <button type="button" class="btn col-1" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
+                    <button type="button" class="btn col-1" id="<?= $goal['id']?>"data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
                     <div class="col"><?= $goal['name'] ?></div>
                     <div class="col-1"><?= $goal['category'] ?></div>
                     <div class="col"><?= $goal['due_date'] ?></div>
@@ -120,4 +120,10 @@
 
     <!-- mise en place du footer -->
     <?php include 'components/footer-task.php'; ?>
+    <?php
+
+    // if($disabled) {
+    //     echo '<script>document.getElementById('.$goal["id"].'").disabled = true;</script>';
+    // }
+    ?>
 </body>

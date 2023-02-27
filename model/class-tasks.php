@@ -157,11 +157,38 @@ class Goal
     // méthode pour check un goal
     public function checkGoal($goalId)
     {
-        $query = $this->_pdo->prepare("UPDATE goals SET statute = 1 WHERE id = :id");
+        
+        $query = $this->_pdo->prepare("UPDATE goals SET statute = 1, category = 'achieved', due_date = DATE_ADD(due_date, INTERVAL 1 DAY) WHERE id = :id");
         $query->execute([
             ':id' => $goalId
         ]);
     }
 
+    // méthode pour supprimer un goal à 0:00 lorsque statute = 1
+    public function GoalComplete()
+    {
+        // déterminer le jour actuel
+        $today = date('Y-m-d');
+
+        // select goal due_date where statute =1
+        $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE statute = 1");
+        $query->execute();
+
+        // récupérer les résultats
+        $due_date = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        // boucle pour vérifier si la date d'échéance est inférieure à la date du jour
+        foreach ($due_date as $date) {
+            if ($date['due_date'] <= $today) {
+                $query = $this->_pdo->prepare("DELETE FROM goals WHERE due_date = :due_date");
+                $query->execute([
+                    ':due_date' => $date['due_date']
+                ]);
+            }
+        }
+
+
+        
+    }
 
 }

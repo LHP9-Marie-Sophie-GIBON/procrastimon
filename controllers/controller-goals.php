@@ -78,19 +78,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Options de checked et delete 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
-        $goal->checkGoal($_POST['goalId']);
+        $goal->checkGoal($_POST['goalId']); 
         $procrastimon->addExp($_SESSION['user_id'], 10);
+        $procrastimon->levelUp($_SESSION['user_id'], $procrastimon);
+       
+        $disabled = true;
         
+
+        header('Location: controller-goals.php');
+        exit;
     }
 
+   
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
         $procrastimon->removeHp($_SESSION['user_id'], 10);
 
+        header('Location: controller-goals.php');
+        exit;
     }
 }
 
-$procrastimon->levelUp($_SESSION['user_id'], $procrastimon);
+$goal->GoalComplete();
+
+
 
 // if ($procrastimon->hp == 0) {
 //     $procrastimon->ko($_SESSION['user_id'], $procrastimon);
