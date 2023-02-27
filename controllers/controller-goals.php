@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$goal->GoalComplete();
+// $goal->GoalComplete();
 
 
 
