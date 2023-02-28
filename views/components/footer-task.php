@@ -8,6 +8,11 @@
                 <img src="https://img.icons8.com/sf-black/48/FFFFFF/u-turn-to-left.png" /> 
             </a>
         </button>
+        <button class="btn btn-outline-light border-5" type="button">
+            <a href="../controllers/controller-trophies.php">
+                <img src="https://img.icons8.com/ios-filled/48/FFFFFF/laurel-wreath.png" />
+            </a>
+        </button>
     </div>
 </nav>
 
