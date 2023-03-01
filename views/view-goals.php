@@ -8,7 +8,7 @@
     <main>
 
         <!-- modal de formulaire -->
-        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -134,11 +134,16 @@
     </main>
 
     <!-- mise en place du footer -->
+    
     <?php include 'components/footer-task.php'; ?>
-    <?php
+    <script>
+        // creation de l'objet openModal, nous ciblons la classe openModal
+        let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
+            keyboard: false
+        })
+        // nous l'ouvrons avec la methode show()
+        openModal.show()
+    </script>
+   
 
-    // if($disabled) {
-    //     echo '<script>document.getElementById('.$goal["id"].'").disabled = true;</script>';
-    // }
-    ?>
 </body>
