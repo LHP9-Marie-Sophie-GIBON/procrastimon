@@ -72,6 +72,7 @@ class Goal
     private $id;
     private string $name;
     private string $category;
+    private string $creation;
     private int $due_date;
     private int $statute;
     private int $penality;
@@ -121,7 +122,9 @@ class Goal
     // méthode pour insérer un objectif dans la base de données
     public function insertGoal()
     {
-        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, due_date, id_users) VALUES (:name, :category, :due_date, :id_users)");
+
+        // préparation de la requête
+        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, creation, due_date, id_users) VALUES (:name, :category, :creation, :due_date, :id_users)");
 
         // appel de la méthode setDueDate pour calculer la date d'échéance
         $this->setDueDate();
@@ -129,6 +132,7 @@ class Goal
         $query->execute([
             ':name' => $this->name,
             ':category' => $this->category,
+            ':creation' => date('Y-m-d', strtotime($this->creation)), 
             ':due_date' => date('Y-m-d', $this->due_date), // conversion en format de date MySQL
             ':id_users' => $this->id_users,
 
@@ -145,7 +149,7 @@ class Goal
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // méthode pour supprimer un goal en fonction de son id
+    // méthode pour supprimer un goal 
     public function deleteGoal($goalId)
     {
         $query = $this->_pdo->prepare("DELETE FROM goals WHERE id = :id");
@@ -164,32 +168,29 @@ class Goal
 
     }
 
-    // DATE_ADD(due_date, INTERVAL 1 DAY)
-    // méthode pour supprimer un goal à 0:00 lorsque statute = 1
-    // public function GoalComplete()
-    // {
-    //     // déterminer le jour actuel
-    //     $today = date('Y-m-d');
+    // méthode pour déterminer le nombre de jours restants avant l'échéance
+    public function getRemainingDays($goalId)
+    {
+        $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE id = :id");
+        $query->execute([
+            ':id' => $goalId
+        ]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $dueDate = strtotime($result['due_date']);
+        $remainingDays = ceil(($dueDate - time()) / (60 * 60 * 24));
+        echo $remainingDays;
+    }
 
-    //     // select goal due_date where statute =1
-    //     $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE statute = 1");
-    //     $query->execute();
-
-    //     // récupérer les résultats
-    //     $due_date = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    //     // boucle pour vérifier si la date d'échéance est inférieure à la date du jour
-    //     foreach ($due_date as $date) {
-    //         if ($date['due_date'] <= $today) {
-    //             $query = $this->_pdo->prepare("DELETE FROM goals WHERE due_date = :due_date");
-    //             $query->execute([
-    //                 ':due_date' => $date['due_date']
-    //             ]);
-    //         }
-    //     }
-
-
-        
-    // }
+    // méthode pour afficher un goal dont la due_date est aujourdh'ui
+    public function isDueDay()
+    {
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date = :due_date");
+        $query->execute([
+            ':id_users' => $this->id_users,
+            ':due_date' => date('Y-m-d')
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
+

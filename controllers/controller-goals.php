@@ -24,6 +24,14 @@ if (isset($_SESSION['user_id'])) {
     $sprite->getSpriteById();
 
     $goal->id_users = $_SESSION['user_id'];
+    $result = $goal->isDueDay();
+    $Dday = []; 
+    if (empty($result)) {
+        $Dday['result'] = ''; 
+        
+    } else {
+        $Dday['result'] = 'modalDday'; 
+    }
 }
 
 
@@ -63,10 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
 
+        // déterminer le jour actuel
+        $today = date('Y-m-d');
+
         // on crée une nouvelle tâche
         $goal = new Goal();
         $goal->name = $name;
         $goal->category = $category;
+        $goal->creation = $today; 
         $goal->due_date = $due_date;
         $goal->id_users = $_SESSION['user_id'];
 

@@ -24,9 +24,13 @@ if (isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    $arrayErrors = [];
+    $missing = "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>"; 
+    $wrong = "<span class='danger error-message'><i class='bi bi-x-circle-fill'></i></span>"; 
+
     // si les champs sont vide : echo "erreur"
     if (empty($_POST['login']) || empty($_POST['password'])) {
-        echo 'Veuillez remplir tous les champs';
+        $arrayErrors['login'] = $missing;
         
     } else if (isset($_POST['login']) && isset($_POST['password'])) {
         $login = $_POST['login'];
@@ -47,13 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: controller-home.php');
                 exit;
             } else {
-                // Authentification échouée : afficher un message d'erreur
-               echo 'Nom d\'utilisateur ou mot de passe invalide';
+                $arrayErrors['password'] = $wrong;
                
             }
         } else {
             // Authentification échouée : afficher un message d'erreur
-            echo 'Nom d\'utilisateur ou mot de passe invalide';
+            $arrayErrors['login'] = $wrong;
+            $arrayErrors['password'] = $wrong;
+            $success = false;
         }
     } 
 

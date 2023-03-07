@@ -59,21 +59,32 @@
             $goalsList = $goal->getGoals();
 
             foreach ($goalsList as $goal) { ?>
-                <div class="row <?= $success ?? ''?>">
-                    <button type="button" class="btn col-1" id="<?= $goal['id']?>"data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
+                <div class="row <?= $success ?? '' ?>">
+                    <button type="button" class="btn col-1" id="<?= $goal['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
                     <div class="col"><?= $goal['name'] ?></div>
-                    <button type="button" class="col-2 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id']?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png"/></button>
+                    <button type="button" class="col-2 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>
                     <button type="button" class="col-2 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis"><i class="bi bi-trash3-fill"></i></button>
                 </div>
 
-                <div class="modal fade" id="modal<?= $goal['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <!-- modal d'informations -->
+                <div class="modal fade" id="modal<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <p>Goal : <?= $goal['name']?></p>
-                                <p>Category : <?= $goal['category']?></p>
-                                <p>Creation : </p>
-                                <p>Due Date : <?= $goal['due_date']?></p>
+                                <p>Goal : <?= $goal['name'] ?></p>
+                                <p>Category : <?= $goal['category'] ?></p>
+                                <p>Creation : <?= $goal['creation'] ?></p>
+                                <p>Due Date : <?= $goal['due_date'] ?></p>
+                                <p>Time left :
+                                    <?php
+                                    // déterminer le nombre de jour restant jusqu'à duedate
+                                    $date = new DateTime($goal['due_date']);
+                                    $now = new DateTime();
+                                    $interval = $date->diff($now);
+                                    $days = $interval->format('%a');
+                                    echo $days . ' days';
+                                    ?>
+                                </p>
                                 <p>Comments : </p>
                             </div>
                             <div class="modal-footer">
@@ -82,7 +93,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <!-- modal de confirmation checked-->
                 <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -120,11 +130,33 @@
                     </div>
                 </div>
 
-
-
-
             <?php } ?>
 
+            <!-- modal D-day -->
+            <div class="modal fade <?= $Dday['result'] ?? ''?>" id="modalDday" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            Have you achieved your goal ?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="controller-goals.php?statute=success">
+                                <button type="button" name="success" class="btn btn-primary">Yes</button>
+                            </a>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    No
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="controller-goals.php?statute=reset">Reset</a></li>
+                                    <li><a class="dropdown-item" href="controller-goaks.php?statute=drop">Drop</a></li>
+                                </ul>
+                                <button type="button" class="btn btn-secondary">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -134,8 +166,9 @@
     </main>
 
     <!-- mise en place du footer -->
-    
+
     <?php include 'components/footer-task.php'; ?>
+
     <script>
         // creation de l'objet openModal, nous ciblons la classe openModal
         let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
@@ -144,6 +177,6 @@
         // nous l'ouvrons avec la methode show()
         openModal.show()
     </script>
-   
+
 
 </body>
