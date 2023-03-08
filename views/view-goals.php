@@ -157,12 +157,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
     </main>
 
     <!-- mise en place du footer -->
@@ -176,6 +170,13 @@
         })
         // nous l'ouvrons avec la methode show()
         openModal.show()
+
+        // creation de l'objet modalDday, nous ciblons la classe modalDday
+        let modalDday = new bootstrap.Modal(document.querySelector('.modalDday'), {
+            keyboard: false
+        })
+        // nous l'ouvrons avec la methode show()
+        modalDday.show()
     </script>
 
 
