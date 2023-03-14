@@ -12,31 +12,28 @@ require('../config/connect.php');
 $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
+
+
+
+// récupération des données de session
+$user->login($user, $procrastimon, $sprite);
+
+// récupération des goals
 $goal = new Goal();
-
-if (isset($_SESSION['user_id'])) {
-
-    // récupération des données de session
-    $user->login($user, $procrastimon, $sprite, $goal);
-
-    // récupération des goals et vérification des duedates
-    $goal->id_users = $_SESSION['user_id'];
-    $result = $goal->isDueDay();
-    $Dday = []; 
-    if (empty($result)) {
-        $Dday['result'] = ''; 
-        
-    } else {
-        $Dday['result'] = 'modalDday'; 
-    }
-    
+$goal->id_users = $_SESSION['user_id'];
+// vérification des duedates
+$result = $goal->isDueDay();
+$Dday = [];
+if (empty($result)) {
+    $Dday['result'] = '';
+} else {
+    $Dday['result'] = 'modalDday';
 }
 
 
 // vérification du formulaire new goal
 $arrayErrors = [];
 $missing =  "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";
-
 
 // Si le formulaire est envoyé, on vérifie les champs
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -75,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $goal = new Goal();
         $goal->name = $name;
         $goal->category = $category;
-        $goal->creation = $today; 
+        $goal->creation = $today;
         $goal->due_date = $due_date;
         $goal->id_users = $_SESSION['user_id'];
 
@@ -87,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Modal de checked et delete 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
-        $goal->checkGoal($_POST['goalId']); 
-        $procrastimon->addExp($_SESSION['user_id'], 10, $procrastimon->id);
-        
+        // $goal->checkGoal($_POST['goalId']);
+        $procrastimon->addExp($_SESSION['user_id'], 50, $procrastimon->id);
+       
         header('Location: controller-goals.php');
         exit;
     }
@@ -102,24 +99,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+var_dump($procrastimon); 
 
-// Lorsque l'exp du procrastimon atteint 100, level up
+// Si le procrastimon a atteint l'expérience maximale
 if ($procrastimon->exp >= 100) {
+    $procrastimon->level += 1;
+    $procrastimon->exp = 0;
+
+    // le sprite prendd + 1 tant que l'on est strictement inférieur au level 4
+    if ($procrastimon->level < 4) {
+        $procrastimon->id_sprites += 1;
+    }
+
+    // le procrastimon monte de niveau
     $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
 }
 
-// Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
-if ($procrastimon->hp <= 0) {
-    header('Location: controller-gameover.php');
-    exit;
-}
 
-// lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
+// (BOARDING HOME) lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
 if ($procrastimon->level == 4) {
     header('Location: controller-home.php?new');
     exit;
 }
 
+// (GAME OVER) Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
+if ($procrastimon->hp <= 0) {
+    header('Location: controller-gameover.php');
+    exit;
+}
 
 
 

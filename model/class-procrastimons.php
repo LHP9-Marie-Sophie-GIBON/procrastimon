@@ -92,24 +92,19 @@ class Procrastimon
 
     // (LEVEL UP) méthode pour monter de niveau 
     public function levelUp($user_id, $procrastimon, $procrastimon_id)
-    {
-        // Si le procrastimon a atteint l'expérience maximale
-        if ($procrastimon->exp == 100) {
-            $procrastimon->level += 1;
-            if ($procrastimon->level >= 2) {
-                $procrastimon->id_sprites += 1;
-            }
-
-            // Mettre à jour le procrastimon dans la base de données
-            $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites , exp = 0 WHERE id_users = :id_users AND id = :id");
-            $query->execute([
-                ':level' => $procrastimon->level,
-                ':id_sprites' => $procrastimon->id_sprites,
-                ':id_users' => $user_id,
-                ':id' => $procrastimon_id
-            ]);
-        }
+{
+        // Mettre à jour le procrastimon dans la base de données
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites , exp = :exp WHERE id_users = :id_users AND id = :id");
+        $query->execute([
+            ':level' => $procrastimon->level,
+            ':id_sprites' => $procrastimon->id_sprites,
+            ':exp' => $procrastimon->exp,
+            ':id_users' => $user_id,
+            ':id' => $procrastimon_id
+        ]);
     }
+
+
 
 
     // (GAMEOVER) methode pour supprimer le procrastimon 
@@ -121,7 +116,8 @@ class Procrastimon
             ':id' => $procrastimon_id
         ]);
     }
-    
+
+
 }
 
 
