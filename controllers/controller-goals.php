@@ -3,7 +3,9 @@ session_start();
 
 require('../model/class-users.php');
 require('../model/class-procrastimons.php');
-require('../model/class-tasks.php');
+require('../model/class-sprites.php');
+require('../model/class-goals.php');
+require('../model/class-todos.php');
 require('../helper/database.php');
 require('../config/connect.php');
 
@@ -11,6 +13,8 @@ $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 $goal = new Goal();
+
+ 
 
 if (isset($_SESSION['user_id'])) {
 
@@ -32,6 +36,8 @@ if (isset($_SESSION['user_id'])) {
     } else {
         $Dday['result'] = 'modalDday'; 
     }
+    
+    var_dump($procrastimon->id);
 }
 
 
@@ -67,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arrayErrors['due_date'] = $missing;
     }
 
-
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
 
@@ -87,16 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Options de checked et delete 
+// Modal de checked et delete 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
         $goal->checkGoal($_POST['goalId']); 
-        $procrastimon->addExp($_SESSION['user_id'], 10);
-        $procrastimon->levelUp($_SESSION['user_id'], $procrastimon);
-       
-        $disabled = true;
+        $procrastimon->addExp($_SESSION['user_id'], 10, $procrastimon->id);
+        // $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
         
-
         header('Location: controller-goals.php');
         exit;
     }
@@ -104,22 +106,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
-        $procrastimon->removeHp($_SESSION['user_id'], 10);
+        $procrastimon->removeHp($_SESSION['user_id'], 10, $procrastimon->id);
 
         header('Location: controller-goals.php');
         exit;
     }
 }
 
-// $goal->GoalComplete();
+// Lorsque l'exp du procrastimon atteint 100, level up
+if ($procrastimon->exp >= 100) {
+    $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
+}
 
+// Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
+if ($procrastimon->hp <= 0) {
+    header('Location: controller-gameover.php');
+    exit;
+}
 
-
-// if ($procrastimon->hp == 0) {
-//     $procrastimon->ko($_SESSION['user_id'], $procrastimon);
-
-//     header('Location: controller-reset.php');
-// }
 
 
 

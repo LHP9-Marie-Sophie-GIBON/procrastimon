@@ -71,25 +71,27 @@ class Procrastimon
     }
 
     // méthode pour ajouter de l'exp à procratimon
-    public function addExp($user, $exp)
+    public function addExp($user, $exp, $procrastimon_id)
     {
-        $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users");
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':id_users' => $user
+            ':id_users' => $user,
+            ':id' => $procrastimon_id
         ]);
     }
 
     // méthode pour enlever de hp à procrastimon
-    public function removeHp($user, $hp)
+    public function removeHp($user_id, $hp, $procrastimon_id)
     {
-        $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users");
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':id_users' => $user
+            ':id_users' => $user_id,
+            ':id' => $procrastimon_id
         ]);
     }
 
-    // méthode pour levelUp 
-    public function levelUp($user, $procrastimon)
+    // (LEVEL UP) méthode pour monter de niveau 
+    public function levelUp($user_id, $procrastimon, $procrastimon_id)
     {
         // Si le procrastimon a atteint l'expérience maximale
         if ($procrastimon->exp == 100) {
@@ -99,21 +101,33 @@ class Procrastimon
             }
 
             // Mettre à jour le procrastimon dans la base de données
-            $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites, exp = 0 WHERE id_users = :id_users");
+            $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites , exp = 0 WHERE id_users = :id_users AND id = :id");
             $query->execute([
                 ':level' => $procrastimon->level,
                 ':id_sprites' => $procrastimon->id_sprites,
-                ':id_users' => $user
+                ':id_users' => $user_id,
+                ':id' => $procrastimon_id
             ]);
         }
     }
 
-    // méthode pour reset le procrastimon lorsque ses hp sont à 0
-    public function reset($user, $procrastimon)
+    // (GAMEOVER) methode pour reset le procrastimon 
+    public function resetProcrastimon($user_id, $procrastimon_id)
     {
-        $query = $this->_pdo->prepare("UPDATE procrastimons SET level = 1, hp = 100, exp = 0, id_sprites = 1 WHERE id_users = :id_users");
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET level = 1, hp = 100, exp = 0, id_sprites = 1 WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':id_users' => $user
+            ':id_users' => $user_id,
+            ':id' => $procrastimon_id
+        ]);
+    }
+
+    // (GAMEOVER) methode pour supprimer le procrastimon 
+    public function deleteProcrastimon($user_id, $procrastimon_id)
+    {
+        $query = $this->_pdo->prepare("DELETE FROM procrastimons WHERE id_users = :id_users AND id = :id");
+        $query->execute([
+            ':id_users' => $user_id,
+            ':id' => $procrastimon_id
         ]);
     }
     
@@ -121,60 +135,3 @@ class Procrastimon
 
 
 
-class Sprite
-{
-
-    private int $id;
-    private string $sprite;
-    private string $chibi; 
-    private object $_pdo;
-
-    // méthode magique pour GET les attributs
-    public function __get($attribut)
-    {
-        return $this->$attribut;
-    }
-
-    // méthode magique pour SET les attributs
-    public function __set($attribut, $value)
-    {
-        $this->$attribut = $value;
-    }
-
-    // constructeur pour instancier la connexion PDO
-    public function __construct()
-    {
-        $this->_pdo = Database::connect();
-    }
-
-    // méthode pour récupérer le sprite par son id
-    public function getSpriteById()
-    {
-        // préparation de la requête
-        $query = $this->_pdo->prepare("SELECT * FROM sprites WHERE id = :id");
-
-        // exécution de la requête
-        $query->execute([
-            ':id' => $this->id
-        ]);
-
-        // récupération des données
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-
-        // hydratation de l'objet
-        $this->sprite = $data['sprite'];
-        $this->chibi = $data['chibi'];
-    }
-
-    // méthode pour afficher aléatoirement un starter à la création d'un nouveau procrastimon
-    public function getRandomStarter()
-    {
-        $query = $this->_pdo->prepare("SELECT * FROM sprites WHERE (id - 1) % 3 = 0 ORDER BY RAND() LIMIT 1");
-        $query->execute();
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-
-        $this->id = $data['id'];
-        $this->sprite = $data['sprite'];
-        $this->chibi = $data['chibi']; 
-    }
-}
