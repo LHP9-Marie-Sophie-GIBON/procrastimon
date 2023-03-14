@@ -14,19 +14,12 @@ $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 $goal = new Goal();
 
- 
-
 if (isset($_SESSION['user_id'])) {
 
-    $user->id = $_SESSION['user_id'];
-    $user->getUserById();
+    // récupération des données de session
+    $user->login($user, $procrastimon, $sprite, $goal);
 
-    $procrastimon->id_users = $_SESSION['user_id'];
-    $procrastimon->getLastProcrastimon();
-
-    $sprite->id = $procrastimon->id_sprites;
-    $sprite->getSpriteById();
-
+    // récupération des goals et vérification des duedates
     $goal->id_users = $_SESSION['user_id'];
     $result = $goal->isDueDay();
     $Dday = []; 
@@ -37,7 +30,6 @@ if (isset($_SESSION['user_id'])) {
         $Dday['result'] = 'modalDday'; 
     }
     
-    var_dump($procrastimon->id);
 }
 
 
@@ -97,13 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
         $goal->checkGoal($_POST['goalId']); 
         $procrastimon->addExp($_SESSION['user_id'], 10, $procrastimon->id);
-        // $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
         
         header('Location: controller-goals.php');
         exit;
     }
 
-   
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
         $procrastimon->removeHp($_SESSION['user_id'], 10, $procrastimon->id);
@@ -121,6 +111,12 @@ if ($procrastimon->exp >= 100) {
 // Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
 if ($procrastimon->hp <= 0) {
     header('Location: controller-gameover.php');
+    exit;
+}
+
+// lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
+if ($procrastimon->level == 4) {
+    header('Location: controller-home.php?new');
     exit;
 }
 

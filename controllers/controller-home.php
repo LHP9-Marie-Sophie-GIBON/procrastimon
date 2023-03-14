@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 require('../model/class-users.php');
@@ -9,20 +9,15 @@ require('../model/class-todos.php');
 require('../helper/database.php');
 require('../config/connect.php');
 
+$user = new User();
+$procrastimon = new Procrastimon();
+$sprite = new Sprite();
+
 
 if (isset($_SESSION['user_id'])) {
-    $user = new User();
-    $user->id = $_SESSION['user_id'];
-    $user->getUserById();
-
-    $procrastimon = new Procrastimon();
-    $procrastimon->id_users = $_SESSION['user_id'];
-    $procrastimon->getLastProcrastimon();
-
-    $sprite = new Sprite(); 
-    $sprite->id = $procrastimon->id_sprites; 
-    $sprite ->getSpriteById();
-
+    $user->login($user, $procrastimon, $sprite);
 }
+
+
 
 include '../views/view-home.php';

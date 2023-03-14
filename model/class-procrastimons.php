@@ -30,7 +30,7 @@ class Procrastimon
         $this->_pdo = Database::connect();
     }
 
-    // methode pour insérer un nouveau procrastimon
+    // (CREATION) methode pour insérer un nouveau procrastimon
     public function insertProcrastimon()
     {
         $query = $this->_pdo->prepare("INSERT INTO procrastimons (name, id_users, id_sprites) VALUES (:name, :id_users, :id_sprites)");
@@ -42,7 +42,7 @@ class Procrastimon
         ]);
     }
 
-    // méthode pour récupérer tous les procrastimon sauf le dernier
+    // (BOARDING HOME) méthode pour récupérer tous les procrastimon sauf le dernier
     public function getOldProcrastimons()
     {
         $query = $this->_pdo->prepare("SELECT * FROM procrastimons WHERE id_users = :id_users ORDER BY id DESC LIMIT 1, 100");
@@ -52,7 +52,7 @@ class Procrastimon
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // méthode pour récupérer le dernier procrastimon crée
+    // (HOME) méthode pour récupérer le dernier procrastimon crée
     public function getLastProcrastimon()
     {
         $query = $this->_pdo->prepare("SELECT * FROM procrastimons WHERE id_users = :id_users ORDER BY id DESC LIMIT 1");
@@ -70,7 +70,7 @@ class Procrastimon
         $this->id_sprites = $data['id_sprites'];
     }
 
-    // méthode pour ajouter de l'exp à procratimon
+    // (STATUTE) méthode pour ajouter de l'exp à procratimon
     public function addExp($user, $exp, $procrastimon_id)
     {
         $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users AND id = :id");
@@ -80,7 +80,7 @@ class Procrastimon
         ]);
     }
 
-    // méthode pour enlever de hp à procrastimon
+    // (STATUTE) méthode pour enlever de hp à procrastimon
     public function removeHp($user_id, $hp, $procrastimon_id)
     {
         $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users AND id = :id");
@@ -111,15 +111,6 @@ class Procrastimon
         }
     }
 
-    // (GAMEOVER) methode pour reset le procrastimon 
-    public function resetProcrastimon($user_id, $procrastimon_id)
-    {
-        $query = $this->_pdo->prepare("UPDATE procrastimons SET level = 1, hp = 100, exp = 0, id_sprites = 1 WHERE id_users = :id_users AND id = :id");
-        $query->execute([
-            ':id_users' => $user_id,
-            ':id' => $procrastimon_id
-        ]);
-    }
 
     // (GAMEOVER) methode pour supprimer le procrastimon 
     public function deleteProcrastimon($user_id, $procrastimon_id)

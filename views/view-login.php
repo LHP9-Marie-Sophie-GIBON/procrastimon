@@ -42,29 +42,6 @@ include 'components/head.php';
             </div>
 
 
-            <!-- task part -->
-            <!-- <div class="mb-3">
-                <label for="todo">Create your first task in your to-do list</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['todo'] ?? '<i class="bi bi-list-task"></i>' ?></span>
-                    <input type="text" class="form-control" placeholder="" aria-label="todo" aria-describedby="todo" name="todo" value="<?= $todo ?? '' ?>">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon2"><?= $arrayErrors['priority'] ?? '<i class="bi bi-patch-exclamation"></i>' ?></span>
-                    <select name="priority" id="priority">
-                        <option value="default" selected disabled>Priority</option>
-                        <option value="1">Important & urgent (1 day) </option>
-                        <option value="2">Important but not urgent (2 days)</option>
-                        <option value="3">Neither (3 days)</option>
-                    </select>
-                </div>
-
-            </div>
-
-           
-
-            </div>
-
 
             <!-- submit -->
             <div>

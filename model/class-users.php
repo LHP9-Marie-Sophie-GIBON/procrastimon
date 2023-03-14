@@ -100,15 +100,19 @@ class User
         $data = $query->fetch(PDO::FETCH_ASSOC);
         // return whether a user was found with the given login or email
         return $data !== false;
+    }
 
-        // // récupération des données
-        // $data = $query->fetch(PDO::FETCH_ASSOC);
+    // méthode pour se connecter à son compte
+    public function login($user, $procrastimon, $sprite)
+    {
+            $user->id = $_SESSION['user_id'];
+            $user->getUserById();
+        
+            $procrastimon->id_users = $_SESSION['user_id'];
+            $procrastimon->getLastProcrastimon();
+        
+            $sprite->id = $procrastimon->id_sprites;
+            $sprite->getSpriteById();
 
-        // // hydratation de l'objet
-        // $this->id = $data['id'];
-        // $this->login = $data['login'];
-        // $this->mail = $data['mail'];
-        // $this->password = $data['password'];
-        // $this->day_night = $data['day_night'];
     }
 }

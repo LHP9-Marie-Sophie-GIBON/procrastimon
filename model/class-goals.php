@@ -32,27 +32,7 @@ class Goal
     }
 
 
-    // méthode pour définir la date d'échéance en fonction du niveau de priorité
-    public function setDueDate()
-    {
-        switch ($this->due_date) {
-            case 1:
-                $this->due_date = strtotime('+1 month');
-                break;
-            case 2:
-                $this->due_date = strtotime('+6 months');
-                break;
-            case 3:
-                $this->due_date = strtotime('+1 year');
-                break;
-            default:
-                // si le niveau de priorité n'est pas 1, 2 ou 3, on utilise une date par défaut dans 3 mois
-                $this->due_date = strtotime('+3 months');
-                break;
-        }
-    }
-
-    // méthode pour insérer un objectif dans la base de données
+    // (CREATION) méthode pour insérer un objectif dans la base de données
     public function insertGoal()
     {
 
@@ -65,14 +45,34 @@ class Goal
         $query->execute([
             ':name' => $this->name,
             ':category' => $this->category,
-            ':creation' => date('Y-m-d', strtotime($this->creation)), 
+            ':creation' => date('Y-m-d', strtotime($this->creation)),
             ':due_date' => date('Y-m-d', $this->due_date), // conversion en format de date MySQL
             ':id_users' => $this->id_users,
 
         ]);
     }
 
-    // méthode pour récupérer tous les objectifs d'un utilisateur
+     // (CREATION) méthode pour définir la date d'échéance en fonction du niveau de priorité
+     public function setDueDate()
+     {
+         switch ($this->due_date) {
+             case 1:
+                 $this->due_date = strtotime('+1 month');
+                 break;
+             case 2:
+                 $this->due_date = strtotime('+6 months');
+                 break;
+             case 3:
+                 $this->due_date = strtotime('+1 year');
+                 break;
+             default:
+                 // si le niveau de priorité n'est pas 1, 2 ou 3, on utilise une date par défaut dans 3 mois
+                 $this->due_date = strtotime('+3 months');
+                 break;
+         }
+     }
+
+    // (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
     public function getGoals()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0");
@@ -82,7 +82,7 @@ class Goal
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // méthode pour supprimer un goal 
+    // (DELETE) méthode pour supprimer un goal 
     public function deleteGoal($goalId)
     {
         $query = $this->_pdo->prepare("DELETE FROM goals WHERE id = :id");
@@ -91,14 +91,13 @@ class Goal
         ]);
     }
 
-    // méthode pour check un goal
+    // (COMPLETE) méthode pour check un goal
     public function checkGoal($goalId)
     {
         $query = $this->_pdo->prepare("UPDATE goals SET statute = 1, category = 'achieved', due_date = null WHERE id = :id");
         $query->execute([
             ':id' => $goalId
         ]);
-
     }
 
     // méthode pour déterminer le nombre de jours restants avant l'échéance
@@ -124,6 +123,4 @@ class Goal
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
-

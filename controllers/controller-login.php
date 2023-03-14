@@ -1,7 +1,9 @@
 <?php
 require('../model/class-users.php');
 require('../model/class-procrastimons.php');
-require('../model/class-tasks.php');
+require('../model/class-sprites.php');
+require('../model/class-goals.php');
+require('../model/class-todos.php');
 require('../helper/database.php');
 require('../config/connect.php');
 
