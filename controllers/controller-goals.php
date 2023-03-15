@@ -31,14 +31,13 @@ if (empty($result)) {
 }
 
 
-// vérification du formulaire new goal
+// (GOAL CREATION) 
 $arrayErrors = [];
 $missing =  "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";
 
-// Si le formulaire est envoyé, on vérifie les champs
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Vérification de goal
+    // Vérification que tous les champs sont remplis
     if (isset($_POST['goal'])) {
         $name = $_POST['goal'];
     }
@@ -46,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arrayErrors['goal'] = $missing;
     }
 
-    // Vérification de category
     if (isset($_POST['category'])) {
         $category = $_POST['category'];
     }
@@ -54,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arrayErrors['category'] =  $missing;
     }
 
-    // Vérification de due_date
     if (isset($_POST['due_date'])) {
         $due_date = $_POST['due_date'];
     }
@@ -63,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // si arrayErrors est vide, le formulaire est envoyé
-    if (empty($arrayErrors)) {
+    if (empty($arrayErrors) && isset($_POST['insert'])) {
 
         // déterminer le jour actuel
         $today = date('Y-m-d');
@@ -81,16 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Modal de checked et delete 
+// (GOAL STATUTE) 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Goal complete
     if (isset($_POST['checked'])) {
-        // $goal->checkGoal($_POST['goalId']);
-        $procrastimon->addExp($_SESSION['user_id'], 50, $procrastimon->id);
-       
+        $goal->checkGoal($_POST['goalId']);
+        $procrastimon->addExp($_SESSION['user_id'], 10, $procrastimon->id);
+
         header('Location: controller-goals.php');
         exit;
     }
 
+    // Delete goal 
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
         $procrastimon->removeHp($_SESSION['user_id'], 10, $procrastimon->id);
@@ -98,10 +98,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: controller-goals.php');
         exit;
     }
-}
-var_dump($procrastimon); 
 
-// Si le procrastimon a atteint l'expérience maximale
+    // Edit goal 
+    if (isset($_POST['edit'])) {
+        if (empty($arrayErrors)) {
+            $goal->editGoal($_POST['goalId'], $_POST['goal'], $_POST['category'], $_POST['duedate']);
+            header('Location: controller-goals.php');
+            exit;
+        }
+    }
+}
+
+
+// (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
 if ($procrastimon->exp >= 100) {
     $procrastimon->level += 1;
     $procrastimon->exp = 0;

@@ -52,25 +52,25 @@ class Goal
         ]);
     }
 
-     // (CREATION) méthode pour définir la date d'échéance en fonction du niveau de priorité
-     public function setDueDate()
-     {
-         switch ($this->due_date) {
-             case 1:
-                 $this->due_date = strtotime('+1 month');
-                 break;
-             case 2:
-                 $this->due_date = strtotime('+6 months');
-                 break;
-             case 3:
-                 $this->due_date = strtotime('+1 year');
-                 break;
-             default:
-                 // si le niveau de priorité n'est pas 1, 2 ou 3, on utilise une date par défaut dans 3 mois
-                 $this->due_date = strtotime('+3 months');
-                 break;
-         }
-     }
+    // (DUE DATE) méthode pour définir la date d'échéance en fonction du niveau de priorité
+    public function setDueDate()
+    {
+        switch ($this->due_date) {
+            case 1:
+                $this->due_date = strtotime('+1 month');
+                break;
+            case 2:
+                $this->due_date = strtotime('+6 months');
+                break;
+            case 3:
+                $this->due_date = strtotime('+1 year');
+                break;
+            default:
+                // si le niveau de priorité n'est pas 1, 2 ou 3, on utilise une date par défaut dans 3 mois
+                $this->due_date = strtotime('+3 months');
+                break;
+        }
+    }
 
     // (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
     public function getGoals()
@@ -91,6 +91,17 @@ class Goal
         ]);
     }
 
+    // (EDIT) méthode pour modifier un goal
+    public function editGoal($goalId, $goalName, $goalCategory, $goalDuedate)
+    {
+        $query = $this->_pdo->prepare("UPDATE goals SET name = :name, category = :category, due_date = :due_date WHERE id = :id");
+        $query->execute([
+            ':name' => $goalName,
+            ':category' => $goalCategory,
+            ':due_date' => date('Y-m-d', $goalDuedate),
+            ':id' => $goalId
+        ]);
+    }
     // (COMPLETE) méthode pour check un goal
     public function checkGoal($goalId)
     {
