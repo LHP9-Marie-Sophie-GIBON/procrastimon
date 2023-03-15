@@ -13,24 +13,33 @@ class Goal
 
     private object $_pdo;
 
-    // méthode magique pour GET les attributs
+    // (GET) méthode magique pour GET les attributs
     public function __get($attribut)
     {
         return $this->$attribut;
     }
 
-    // méthode magique pour SET les attributs
+    // (SET) méthode magique pour SET les attributs
     public function __set($attribut, $value)
     {
         $this->$attribut = $value;
     }
 
-    // constructeur pour instancier la connexion PDO
+    // (PDO) constructeur pour instancier la connexion PDO
     public function __construct()
     {
         $this->_pdo = Database::connect();
     }
 
+    // (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
+    public function getGoals()
+    {
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // (CREATION) méthode pour insérer un objectif dans la base de données
     public function insertGoal()
@@ -72,14 +81,17 @@ class Goal
         }
     }
 
-    // (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
-    public function getGoals()
+    // (DUE DATE - TIME LEFT) méthode pour déterminer le nombre de jours restants avant l'échéance
+    public function getRemainingDays($goalId)
     {
-        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0");
+        $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE id = :id");
         $query->execute([
-            ':id_users' => $this->id_users
+            ':id' => $goalId
         ]);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $dueDate = strtotime($result['due_date']);
+        $remainingDays = ceil(($dueDate - time()) / (60 * 60 * 24));
+        echo $remainingDays;
     }
 
     // (DELETE) méthode pour supprimer un goal 
@@ -102,6 +114,18 @@ class Goal
             ':id' => $goalId
         ]);
     }
+
+    // (RESET) méthode pour reset un goal
+    public function resetGoal($goalId, $goalCategory)
+    {
+        $query = $this->_pdo->prepare("UPDATE goals SET statute = 0, category = :category, due_date = :due_date WHERE id = :id");
+        $query->execute([
+            ':due_date' => date('Y-m-d', $this->due_date),
+            ':category'=> $goalCategory,
+            ':id' => $goalId
+        ]);
+    }
+
     // (COMPLETE) méthode pour check un goal
     public function checkGoal($goalId)
     {
@@ -111,25 +135,12 @@ class Goal
         ]);
     }
 
-    // méthode pour déterminer le nombre de jours restants avant l'échéance
-    public function getRemainingDays($goalId)
-    {
-        $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE id = :id");
-        $query->execute([
-            ':id' => $goalId
-        ]);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        $dueDate = strtotime($result['due_date']);
-        $remainingDays = ceil(($dueDate - time()) / (60 * 60 * 24));
-        echo $remainingDays;
-    }
-
-    // méthode pour afficher un goal dont la due_date est aujourdh'ui
-    public function isDueDay()
+    // (DUE DATE IS TODAY) méthode pour afficher un goal dont la due_date est aujourdh'ui
+    public function isDueDay($id_users)
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date = :due_date");
         $query->execute([
-            ':id_users' => $this->id_users,
+            ':id_users' => $id_users,
             ':due_date' => date('Y-m-d')
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);

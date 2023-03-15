@@ -21,14 +21,13 @@ $user->login($user, $procrastimon, $sprite);
 // récupération des goals
 $goal = new Goal();
 $goal->id_users = $_SESSION['user_id'];
+
+// s'il n'y pas de goals d'enregistré
+$empty = empty($goal->getGoals());
+   
 // vérification des duedates
-$result = $goal->isDueDay();
-$Dday = [];
-if (empty($result)) {
-    $Dday['result'] = '';
-} else {
-    $Dday['result'] = 'modalDday';
-}
+$dueDay = $goal->isDueDay($_SESSION['user_id']);
+
 
 
 // (GOAL CREATION) 
@@ -93,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Delete goal 
     if (isset($_POST['delete'])) {
         $goal->deleteGoal($_POST['goalId']);
-        $procrastimon->removeHp($_SESSION['user_id'], 10, $procrastimon->id);
+        $procrastimon->removeHp($_SESSION['user_id'], 5, $procrastimon->id);
 
         header('Location: controller-goals.php');
         exit;
@@ -107,6 +106,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
+
+    // Reset goal
+    if (isset($_POST['reset'])) {
+            $goal->editGoal($_POST['id'], $_POST['name'], $_POST['category'], $_POST['due_date']);
+            $procrastimon->removeHp($_SESSION['user_id'], 10, $procrastimon->id);
+            header('Location: controller-goals.php');
+            exit;
+    }
+ 
 }
 
 
@@ -123,6 +131,8 @@ if ($procrastimon->exp >= 100) {
     // le procrastimon monte de niveau
     $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
 }
+
+// (IS DUE DAY) méthode GET 
 
 
 // (BOARDING HOME) lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
