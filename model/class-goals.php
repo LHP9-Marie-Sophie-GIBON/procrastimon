@@ -8,7 +8,7 @@ class Goal
     private string $creation;
     private int $due_date;
     private int $statute;
-    private int $achievement_day;
+    private string $achievement_day;
     private int $id_users;
 
     private object $_pdo;
@@ -131,6 +131,7 @@ class Goal
     {
         // set le jour de l'accomplissement du goal
         $this->achievement_day = date('Y-m-d');
+        
 
         $query = $this->_pdo->prepare("UPDATE goals SET statute = 1, category = 'achieved', due_date = null, achievement_day = :achievement_day WHERE id = :id");
         $query->execute([

@@ -14,6 +14,7 @@ $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 
 $user->login($user, $procrastimon, $sprite);
+$procrastimon->setEvolutionDay($_SESSION['user_id'], $procrastimon->id);
 
 $arrayErrors = [];
 $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";

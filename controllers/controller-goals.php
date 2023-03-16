@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // (GOAL STATUTE) 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Goal complete
+    // Complete goal
     if (isset($_POST['checked'])) {
-        $goal->checkGoal($_POST['goalId']);
+        // $goal->checkGoal($_POST['goalId']);
         $procrastimon->addExp($_SESSION['user_id'], 50, $procrastimon->id);
 
         header('Location: controller-goals.php');
@@ -124,7 +124,6 @@ if ($procrastimon->exp >= 100) {
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4
 if ($procrastimon->level == 4) {
-    $procrastimon->setEvolutionDay($_SESSION['user_id'], $procrastimon->id);
     header('Location: controller-endgame.php');
     exit;
 }

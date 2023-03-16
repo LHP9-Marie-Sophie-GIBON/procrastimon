@@ -98,10 +98,14 @@ class Procrastimon
     // (LEVEL UP MAX) set le jour de l'évolution finale
     public function setEvolutionDay($user_id, $procrastimon_id)
     {
-        $query = $this->_pdo->prepare("UPDATE procrastimons SET final_evolution = NOW() WHERE id_users = :id_users AND id = :id");
+        // __set final_evolution a aujourd'hui
+        $this->final_evolution = date('Y-m-d');
+
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET final_evolution = :final_evolution WHERE id_users = :id_users AND id = :id");
         $query->execute([
             ':id_users' => $user_id,
-            ':id' => $procrastimon_id
+            ':id' => $procrastimon_id,
+            ':final_evolution' => $this->final_evolution
         ]);
     }
 
