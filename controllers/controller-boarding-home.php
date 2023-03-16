@@ -13,11 +13,10 @@ require('../config/connect.php');
 $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
-$goal = new Goal();
+
 
 // AFFICHAGE DE LA PAGE
 $user->login($user, $procrastimon, $sprite);// récupération des données de session
-$goal->id_users = $_SESSION['user_id'];
 $procrastimonList = $procrastimon->getOldProcrastimons();
 
 

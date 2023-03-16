@@ -131,7 +131,7 @@ class Goal
     {
         // set le jour de l'accomplissement du goal
         $this->achievement_day = date('Y-m-d');
-        
+
 
         $query = $this->_pdo->prepare("UPDATE goals SET statute = 1, category = 'achieved', due_date = null, achievement_day = :achievement_day WHERE id = :id");
         $query->execute([
@@ -152,10 +152,16 @@ class Goal
     }
 
     // (BOARDING HOME) méthode pour afficher les goals dont la date est égale ou inférieur a evolution_day
-    public function getGoalsByEvolutionDay($id_users, $id_procrastimon)
+    public function getGoalsHistory($id_users, $id_procrastimon)
     {
-        // select final_evolution de $id_procrastimon / $id_users
-        $query = $this->_pdo->prepare("SELECT goals.* FROM goals JOIN procrastimons ON goals.id_users = procrastimons.id_users WHERE goals.id_users = :id_users AND goals.achievement_day <= procrastimons.final_evolution AND procrastimons.id = :procrastimons_id");
+        $query = $this->_pdo->prepare("
+        SELECT goals.*
+        FROM goals
+        JOIN procrastimons ON goals.id_users = procrastimons.id_users
+        WHERE goals.id_users = :id_users
+        AND goals.achievement_day BETWEEN procrastimons.birthday AND procrastimons.final_evolution
+        AND procrastimons.id = :procrastimons_id
+    ");
         $query->execute([
             ':id_users' => $id_users,
             ':procrastimons_id' => $id_procrastimon

@@ -7,6 +7,7 @@ class Procrastimon
     private int $level;
     private int $hp;
     private int $exp;
+    private string $birthday; 
     private string $final_evolution; 
     private int $id_users;
     private int $id_sprites;
@@ -34,11 +35,14 @@ class Procrastimon
     // (CREATION) methode pour insérer un nouveau procrastimon
     public function insertProcrastimon()
     {
-        $query = $this->_pdo->prepare("INSERT INTO procrastimons (name, id_users, id_sprites) VALUES (:name, :id_users, :id_sprites)");
+        $this->birthday = date('Y-m-d');
+
+        $query = $this->_pdo->prepare("INSERT INTO procrastimons (name, id_users, id_sprites, birthday) VALUES (:name, :id_users, :id_sprites, :birthday)");
         $query->execute([
             ':name' => $this->name,
             ':id_users' => $this->id_users,
-            ':id_sprites' => $this->id_sprites
+            ':id_sprites' => $this->id_sprites,
+            ':birthday' => $this->birthday
 
         ]);
     }
@@ -98,7 +102,7 @@ class Procrastimon
     // (LEVEL UP MAX) set le jour de l'évolution finale
     public function setEvolutionDay($user_id, $procrastimon_id)
     {
-        // __set final_evolution a aujourd'hui
+        
         $this->final_evolution = date('Y-m-d');
 
         $query = $this->_pdo->prepare("UPDATE procrastimons SET final_evolution = :final_evolution WHERE id_users = :id_users AND id = :id");

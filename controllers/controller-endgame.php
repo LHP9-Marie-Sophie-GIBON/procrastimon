@@ -29,10 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors)) {
-        // // On efface l'ancien procrastimon
+        
         $user_id = $_SESSION['user_id'];
-        // $procrastimon_id = $procrastimon->id;
-        // $procrastimon->deleteProcrastimon($user_id, $procrastimon_id);
 
         // on créer le nouveau procrastimon
         $procrastimon = new Procrastimon();
@@ -52,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-var_dump($procrastimon);
 
 
 include '../views/view-endgame.php';
