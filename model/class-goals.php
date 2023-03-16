@@ -154,17 +154,30 @@ class Goal
     // (BOARDING HOME) méthode pour afficher les goals dont la date est égale ou inférieur a evolution_day
     public function getGoalsHistory($id_users, $id_procrastimon)
     {
-        $query = $this->_pdo->prepare("
-        SELECT goals.*
-        FROM goals
-        JOIN procrastimons ON goals.id_users = procrastimons.id_users
-        WHERE goals.id_users = :id_users
-        AND goals.achievement_day BETWEEN procrastimons.birthday AND procrastimons.final_evolution
-        AND procrastimons.id = :procrastimons_id
-    ");
+        $query = $this->_pdo->prepare("SELECT goals.* FROM goals JOIN procrastimons ON goals.id_users = procrastimons.id_users WHERE goals.id_users = :id_users AND goals.achievement_day BETWEEN procrastimons.birthday AND procrastimons.final_evolution AND procrastimons.id = :procrastimons_id ");
         $query->execute([
             ':id_users' => $id_users,
             ':procrastimons_id' => $id_procrastimon
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // (TROPHY) méthode récupérant le nombre de goals accomplis par l'utilisateur
+    public function countAchievedGoals($id_users)
+    {
+        $query = $this->_pdo->prepare("SELECT COUNT(*) FROM goals WHERE id_users = :id_users AND statute = 1");
+        $query->execute([
+            ':id_users' => $id_users
+        ]);
+        return $query->fetchColumn();
+    }
+
+    // (TROPHY) méthode récupérant les goals accomplis par l'utilisateur
+    public function getAchievedGoals($id_users)
+    {
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 1");
+        $query->execute([
+            ':id_users' => $id_users
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

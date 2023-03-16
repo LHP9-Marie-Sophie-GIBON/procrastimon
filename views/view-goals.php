@@ -162,7 +162,7 @@
             <!-- Affichage des goals -->
             <div class="container">
                 <?php
-                $goalsList = $goal->getGoals();
+                
 
                 foreach ($goalsList as $goal) { ?>
                     <div class="row <?= $success ?? '' ?>">

@@ -6,6 +6,7 @@ require('../model/class-procrastimons.php');
 require('../model/class-sprites.php');
 require('../model/class-goals.php');
 require('../model/class-todos.php');
+require('../model/class-trophies.php');
 require('../helper/database.php');
 require('../config/connect.php');
 
@@ -14,11 +15,13 @@ $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 $goal = new Goal();
+ 
 
 // AFFICHAGE DE LA PAGE
 $user->login($user, $procrastimon, $sprite);// récupération des données de session
 $goal->id_users = $_SESSION['user_id'];
-$empty = empty($goal->getGoals());// s'il n'y pas de goals d'enregistré
+$goalsList = $goal->getGoals(); // affichage des goals
+$empty = empty($goal->getGoals());// s'il n'y pas de goals enregistrés
 $dueDay = $goal->isDueDay($_SESSION['user_id']);// vérification des duedates
 
 
@@ -65,6 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // on envoie les données dans la base de données
         $goal->insertGoal();
+
+        // on redirige vers la page des goals
+        header('Location: controller-goals.php');
+        exit;
     }
 }
 
@@ -73,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Complete goal
     if (isset($_POST['checked'])) {
-        // $goal->checkGoal($_POST['goalId']);
-        $procrastimon->addExp($_SESSION['user_id'], 50, $procrastimon->id);
+        $goal->checkGoal($_POST['goalId']);
+        $procrastimon->addExp($_SESSION['user_id'], 10, $procrastimon->id);
 
         header('Location: controller-goals.php');
         exit;
@@ -133,6 +140,47 @@ if ($procrastimon->hp <= 0) {
     header('Location: controller-gameover.php');
     exit;
 }
+
+// (GOAL TROPHIES) Création des trophés en fonction du nombre de goals accomplis
+if (!isset($_SESSION['totalTrophies'])) {// initialiser une variable de session 'totalTrophies'
+    $_SESSION['totalTrophies'] = 0;
+}
+$achievedGoals = $goal->countAchievedGoals($_SESSION['user_id']);// Récupération du nombre de goals
+
+if ($achievedGoals == 1 && $_SESSION['totalTrophies'] < 1 ) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy($trophy->id_users, 'Bronze goal\'s trophy');
+    $_SESSION['totalTrophies']++;
+
+    echo "You just won a Trophy, check it out in the trophy room";
+
+} elseif ($achievedGoals == 3 && $_SESSION['totalTrophies'] < 2) {
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy($trophy->id_users, 'Silver goal\'s trophy');
+    $_SESSION['totalTrophies']++;
+
+    echo "You just won a Trophy, check it out in the trophy room";
+
+} elseif ($achievedGoals == 5 && $_SESSION['totalTrophies'] < 3) {
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy($trophy->id_users, 'Gold goal\'s trophy');
+    $_SESSION['totalTrophies']++;
+
+    echo "You just won a Trophy, check it out in the trophy room";
+
+} elseif ($achievedGoals == 10 && $_SESSION['totalTrophies'] < 5) {
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy($trophy->id_users, 'Diamond goal\'s trophy');
+    $_SESSION['totalTrophies']++;
+
+    echo "You just won a Trophy, check it out in the trophy room";
+}
+
+
 
 
 
