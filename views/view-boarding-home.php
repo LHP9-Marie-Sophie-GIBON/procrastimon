@@ -2,7 +2,7 @@
 
 <body>
     <!-- mise en place du Header -->
-    <?php include 'components/header-task.php'; ?>
+    <?php include 'components/header-boarding-home.php'; ?>
 
     <main>
         <div class="container">
