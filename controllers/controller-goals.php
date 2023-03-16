@@ -9,31 +9,22 @@ require('../model/class-todos.php');
 require('../helper/database.php');
 require('../config/connect.php');
 
+// INSTANCIATION DES CLASSES
 $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
-
-
-
-// récupération des données de session
-$user->login($user, $procrastimon, $sprite);
-
-// récupération des goals
 $goal = new Goal();
+
+// AFFICHAGE DE LA PAGE
+$user->login($user, $procrastimon, $sprite);// récupération des données de session
 $goal->id_users = $_SESSION['user_id'];
-
-// s'il n'y pas de goals d'enregistré
-$empty = empty($goal->getGoals());
-   
-// vérification des duedates
-$dueDay = $goal->isDueDay($_SESSION['user_id']);
+$empty = empty($goal->getGoals());// s'il n'y pas de goals d'enregistré
+$dueDay = $goal->isDueDay($_SESSION['user_id']);// vérification des duedates
 
 
-
-// (GOAL CREATION) 
+// (GOAL CREATION) vérification du formulaire et insertion dans la BDD
 $arrayErrors = [];
 $missing =  "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification que tous les champs sont remplis
@@ -83,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Goal complete
     if (isset($_POST['checked'])) {
         $goal->checkGoal($_POST['goalId']);
-        $procrastimon->addExp($_SESSION['user_id'], 10, $procrastimon->id);
+        $procrastimon->addExp($_SESSION['user_id'], 50, $procrastimon->id);
 
         header('Location: controller-goals.php');
         exit;
@@ -117,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
 }
 
-
 // (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
 if ($procrastimon->exp >= 100) {
     $procrastimon->level += 1;
@@ -132,12 +122,9 @@ if ($procrastimon->exp >= 100) {
     $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
 }
 
-// (IS DUE DAY) méthode GET 
-
-
-// (BOARDING HOME) lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
+// (LEVEL MAX) lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
 if ($procrastimon->level == 4) {
-    header('Location: controller-home.php?new');
+    header('Location: controller-endgame.php');
     exit;
 }
 

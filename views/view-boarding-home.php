@@ -1,29 +1,8 @@
 <?php include 'components/head.php'; ?>
 
 <body>
-    <header>
-        <div class="row progressbar">
-            <div class="col">
-                <img src="<?= $sprite->sprite ?>" alt="" class="img-fluid">
-            </div>
-            <div class="col-7">
-                <div>
-                    <?= $procrastimon->name ?> (lvl <?= $procrastimon->level ?>)
-                </div>
-                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="<?= $procrastimon->hp ?>" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar barPV" style="width: <?= $procrastimon->hp ?>%"></div>
-                </div>
-                <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="<?= $procrastimon->exp ?>" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar barPP" style="width: <?= $procrastimon->exp ?>%"></div>
-                </div>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-light">
-                    <a href="../controllers/controller-home.php"><img src="https://img.icons8.com/sf-regular-filled/30/FFFFFF/home-page.png" /></a>
-                </button>
-            </div>
-        </div>
-    </header>
+    <!-- mise en place du Header -->
+    <?php include 'components/header-task.php'; ?>
 
     <main>
         <div class="container">
@@ -41,14 +20,33 @@
                         $sprite->id = $oldprocrastimon['id_sprites'];
                         $sprite->getSpriteById();
                 ?>
-                        <div class="col-3">
-                            <div class="card">
+                        <div class="col-2">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#infoModal<?= $oldprocrastimon['id'] ?>">
                                 <img src="<?= $sprite->chibi ?>" class="card-img-top img-fluid" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
+                            </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="infoModal<?= $oldprocrastimon['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 <?php
                     }
-                } 
+                }
                 ?>
 
 

@@ -13,11 +13,10 @@ $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 
-
+// AFFICHAGE DE LA PAGE D'ACCUEIL
 if (isset($_SESSION['user_id'])) {
     $user->login($user, $procrastimon, $sprite);
 }
-
 
 
 include '../views/view-home.php';
