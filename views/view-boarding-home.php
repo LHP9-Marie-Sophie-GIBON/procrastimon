@@ -6,9 +6,9 @@
 
     <main>
         <div class="container">
-            <div class="row" data-masonry='{"percentPosition": true }'>
+            <div class="row" >
                 <?php
-                $procrastimonList = $procrastimon->getOldProcrastimons();
+                
                 // si $procrastimonList est vide, afficher un message
                 if (empty($procrastimonList)) {
                     echo "The boarding-home is empty for now";
@@ -19,6 +19,9 @@
                         $sprite = new Sprite();
                         $sprite->id = $oldprocrastimon['id_sprites'];
                         $sprite->getSpriteById();
+
+                        $goalList = $goal->getGoalsByEvolutionDay($_SESSION['user_id'], $oldprocrastimon['id']);
+                        
                 ?>
                         <div class="col-2">
                             <button class="btn" data-bs-toggle="modal" data-bs-target="#infoModal<?= $oldprocrastimon['id'] ?>">
@@ -31,11 +34,13 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Goals achieved with <?= $oldprocrastimon['name']?></h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ...
+                                        <?php foreach ($goalList as $goal) { ?>
+                                        <p><?= $goal['creation'] ?> : <?= $goal['name'] ?>, complete the <?= $goal['achievement_day'] ?></p>
+                                        <?php } ?>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

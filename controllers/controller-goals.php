@@ -122,8 +122,9 @@ if ($procrastimon->exp >= 100) {
     $procrastimon->levelUp($_SESSION['user_id'], $procrastimon, $procrastimon->id);
 }
 
-// (LEVEL MAX) lorsque le procrastimon atteint le niveau 4, redirection vers controller-start.php?new
+// (LEVEL MAX) lorsque le procrastimon atteint le niveau 4
 if ($procrastimon->level == 4) {
+    $procrastimon->setEvolutionDay($_SESSION['user_id'], $procrastimon->id);
     header('Location: controller-endgame.php');
     exit;
 }
