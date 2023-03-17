@@ -6,7 +6,7 @@ class User
     private string $login;
     private string $mail;
     private string $password;
-    private int $day_night;
+    private int $total_trophies;
 
     private object $_pdo;
 
@@ -60,7 +60,7 @@ class User
         $this->login = $data['login'];
         $this->mail = $data['mail'];
         $this->password = $data['password'];
-        $this->day_night = $data['day_night'];
+        
     }
 
     // méthode pour récupérer un utilisateur par son login
@@ -81,7 +81,7 @@ class User
         $this->id = $data['id'];
         $this->mail = $data['mail'];
         $this->password = $data['password'];
-        $this->day_night = $data['day_night'];
+        
     }
 
     // méthode pour vérifier que le login et le mail n'existe pas déja
@@ -114,5 +114,31 @@ class User
             $sprite->id = $procrastimon->id_sprites;
             $sprite->getSpriteById();
 
+    }
+
+    // méthode pour ajouter un trophée à un utilisateur
+    public function addTrophy()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE users SET total_trophies = total_trophies+1 WHERE id = :id");
+        $query->execute([
+            ':id' => $this->id
+        ]);
+    }
+
+    // méthode pour récupérer le nombre de trophées d'un utilisateur
+    public function getTotalTrophies()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT total_trophies FROM users WHERE id = :id");
+        $query->execute([
+            ':id' => $this->id
+        ]);
+    
+        // récupération des données
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+    
+        // retourne la valeur de total_trophies
+        return $data['total_trophies'];
     }
 }

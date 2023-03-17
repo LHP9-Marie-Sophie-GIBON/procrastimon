@@ -100,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "échec de la création de l'utilisateur";
             }
 
-            // header('Location: controller-home.php');
-            // exit;
+            header('Location: controller-home.php');
+            exit;
         }
     }
 }

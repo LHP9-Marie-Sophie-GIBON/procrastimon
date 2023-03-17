@@ -66,27 +66,27 @@ class Procrastimon
     }
 
     // (STATUTE) méthode pour ajouter de l'exp à procratimon
-    public function addExp($user, $exp, $procrastimon_id)
+    public function addExp($exp, $procrastimon_id)
     {
         $query = $this->_pdo->prepare("UPDATE procrastimons SET exp = exp + $exp WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':id_users' => $user,
+            ':id_users' => $this->id_users,
             ':id' => $procrastimon_id
         ]);
     }
 
     // (STATUTE) méthode pour enlever de hp à procrastimon
-    public function removeHp($user_id, $hp, $procrastimon_id)
+    public function removeHp($hp, $procrastimon_id)
     {
         $query = $this->_pdo->prepare("UPDATE procrastimons SET hp = hp - $hp WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':id_users' => $user_id,
+            ':id_users' => $this->id_users,
             ':id' => $procrastimon_id
         ]);
     }
 
     // (LEVEL UP) méthode pour monter de niveau 
-    public function levelUp($user_id, $procrastimon, $procrastimon_id)
+    public function levelUp($procrastimon, $procrastimon_id)
     {
         // Mettre à jour le procrastimon dans la base de données
         $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites , exp = :exp WHERE id_users = :id_users AND id = :id");
@@ -94,20 +94,20 @@ class Procrastimon
             ':level' => $procrastimon->level,
             ':id_sprites' => $procrastimon->id_sprites,
             ':exp' => $procrastimon->exp,
-            ':id_users' => $user_id,
+            ':id_users' => $this->id_users,
             ':id' => $procrastimon_id
         ]);
     }
 
     // (LEVEL UP MAX) set le jour de l'évolution finale
-    public function setEvolutionDay($user_id, $procrastimon_id)
+    public function setEvolutionDay($procrastimon_id)
     {
         
         $this->final_evolution = date('Y-m-d');
 
         $query = $this->_pdo->prepare("UPDATE procrastimons SET final_evolution = :final_evolution WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':id_users' => $user_id,
+            ':id_users' => $this->id_users,
             ':id' => $procrastimon_id,
             ':final_evolution' => $this->final_evolution
         ]);

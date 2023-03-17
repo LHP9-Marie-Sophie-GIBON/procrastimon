@@ -11,7 +11,7 @@
         </div>
     <?php } else ?>
 
-    <!-- mise en place des goals ayant atteint leur due'date-->
+    <!-- mise en place des goals ayant atteint leur due date-->
     <?php if ($dueDay) { ?>
         <div class="card">
             <div class="card-body">
@@ -78,7 +78,7 @@
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <h5 class="modal-title">Reset your Goal : </h5>
-                                        <form class="container" method="post" >
+                                        <form class="container" method="post">
                                             <p><?= $goal['name'] ?> (<?= $goal['category'] ?>)</p>
                                             <!-- hidden input id, name et category -->
                                             <input type="hidden" name="id" value="<?= $goal['id'] ?>">
@@ -108,8 +108,22 @@
 
             </div>
         </div>
-    <?php } else { ?>
+    <?php } else ?>
 
+    <!-- mise en place des goals dont le due date est expiré -->
+    <?php if ($expiredDate) { ?>
+        
+        <div class="alert alert-danger" role="alert">
+            <?php 
+            foreach ($expiredDate as $expiredGoal) { 
+                $procrastimon->removeHp(5, $procrastimon->id);
+                $goal->expiredGoal($expiredGoal['id']);
+                ?>
+                <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date']?>) !</p>
+            <?php } ?>
+            <a href="controller-goals.php?expiredGoals" class="btn btn-danger">Next</a>
+        </div>
+    <?php } else { ?>
         <!-- mise en place du menu principal-->
         <main>
 
@@ -150,7 +164,8 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-secondary" value="Add new Goal" name="insert">Save</button>
+
+                                    <button type="submit" class="btn btn-secondary" name="insert">Save</button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </form>
@@ -162,14 +177,12 @@
             <!-- Affichage des goals -->
             <div class="container">
                 <?php
-                
-
                 foreach ($goalsList as $goal) { ?>
                     <div class="row <?= $success ?? '' ?>">
                         <button type="button" class="btn col-1" id="<?= $goal['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
                         <div class="col"><?= $goal['name'] ?></div>
                         <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>
-                        <button type="button" class="col-1 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?><?= $goal['category'] ?>"><i class="bi bi-pencil-fill"></i></button>
+                        <!-- <button type="button" class="col-1 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?><?= $goal['category'] ?>"><i class="bi bi-pencil-fill"></i></button> -->
                         <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis"><i class="bi bi-trash3-fill"></i></button>
                     </div>
 
@@ -201,51 +214,7 @@
                         </div>
                     </div>
 
-                    <!-- modal de modification -->
-                    <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="modal<?= $goal['id'] ?><?= $goal['category'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <h5 class="modal-title">Edit your Goal</h5>
-                                    <form class="container" method="post" id="formGoal">
-                                        <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
 
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text goal" id="basic-addon1"> <?= $arrayErrors['goal'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
-                                            <input type="text" class="form-control" placeholder="" aria-label="goal" aria-describedby="goal" name="goal" value="<?= $goal['name'] ?>">
-                                        </div>
-
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text category" id="basic-addon2"><?= $arrayErrors['category'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
-                                            <select name="category" id="category">
-
-                                                <option value="body" <?= ($goal['category'] == 'body' ? 'selected' : '') ?>>Body</option>
-                                                <option value="mind" <?= ($goal['category'] == 'mind' ? 'selected' : '') ?>>Mind</option>
-                                                <option value="work" <?= ($goal['category'] == 'work' ? 'selected' : '') ?>>Work</option>
-                                                <option value="other" <?= ($goal['category'] == 'other' ? 'selected' : '') ?>>other</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text duedate" id="basic-addon2"><?= $arrayErrors['due_date'] ?? '<i class="bi bi-hourglass"></i>' ?></span>
-                                            <select name="due_date" id="due_date">
-
-                                                <option value="1" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>1 month</option>
-                                                <option value="2" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>6 month</option>
-                                                <option value="3" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>1 year</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <button type="submit" class="btn btn-secondary" value="Edit goal" name="edit">Save</button>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- modal de confirmation checked-->
                     <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

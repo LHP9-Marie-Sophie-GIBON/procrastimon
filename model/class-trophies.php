@@ -37,7 +37,7 @@ class Trophy {
     }
 
     // (CREATION) méthode pour insérer un trophée dans la base de données
-    public function insertTrophy($id_users, $title)
+    public function insertTrophy($title)
     {
         $this->creation = date('Y-m-d');
 
@@ -46,8 +46,18 @@ class Trophy {
         $query->execute([
             ':creation' => $this->creation,
             ':title' => $title,
-            ':id_users' => $id_users,
+            ':id_users' => $this->id_users,
         ]);
+    }
+
+    // (DISPLAY) méthode pour afficher les trophées de l'utilisateur
+    public function displayTrophies()
+    {
+        $query = $this->_pdo->prepare("SELECT * FROM trophies WHERE id_users = :id_users");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
