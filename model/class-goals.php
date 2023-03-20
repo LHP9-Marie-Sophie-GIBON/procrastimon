@@ -39,7 +39,7 @@ class Goal
     }
 
     /**
-     * (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
+     * (DISPLAY) méthode pour récupérer tous les objectifs d'un utilisateur
      */ 
     public function getGoals()
     {

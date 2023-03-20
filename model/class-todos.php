@@ -4,9 +4,10 @@ class Todo
     private $id;
     private string $name;
     private int $task_priority_level;
-    private int $due_date;
+    private string $creation; 
+    private string $due_date;
     private int $statute;
-    private int $penality;
+ 
 
     private object $_pdo;
 
@@ -36,10 +37,10 @@ class Todo
                 $this->due_date = time() + (1 * 24 * 60 * 60); // 1 jour
                 break;
             case 2:
-                $this->due_date = time() + (2 * 24 * 60 * 60); // 2 jours
+                $this->due_date = time() + (3 * 24 * 60 * 60); // 3 jours
                 break;
             case 3:
-                $this->due_date = time() + (3 * 24 * 60 * 60); // 3 jours
+                $this->due_date = time() + (5 * 24 * 60 * 60); // 5 jours
                 break;
             default:
                 $this->due_date = time() + (1 * 24 * 60 * 60); // par défaut, 1 jour
@@ -50,18 +51,63 @@ class Todo
     public function insertTodo()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("INSERT INTO todos (name, task_priority_level, due_date, statute, penality) VALUES (:name, :task_priority_level, :due_date, :statute, :penality)");
+        $query = $this->_pdo->prepare("INSERT INTO todolist (name, task_priority_level, creation, due_date, id_users) VALUES (:name, :task_priority_level, :creation, :due_date, :id_users)");
 
-        // appel de la méthode setDueDate pour calculer la date d'échéance
+        //calcule de la date d'échéance
+        
         $this->setDueDate();
 
         // exécution de la requête
         $query->execute([
             ':name' => $this->name,
             ':task_priority_level' => $this->task_priority_level,
+            ':creation' => $this->creation,
             ':due_date' => date('Y-m-d', $this->due_date), // conversion en format de date MySQL
-            ':statute' => $this->statute,
-            ':penality' => $this->penality
+            ':id_users' => $this->id_users
+        ]);
+    }
+
+    // méthode pour récupérer les tâches d'un utilisateur
+    public function getTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users ORDER BY due_date ASC");
+
+        // exécution de la requête
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+
+        // récupération des données
+        $todos = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        // retour des données
+        return $todos;
+    }
+
+    // Time left, méthode pour calculer le temps restant entre la création de la todo et la due-date
+    public function timeLeft()
+    {
+        // récupération de la date de création et la date d'échéance
+        $creation = $this->creation;
+        $due_date = $this->due_date;
+
+        // calcul du temps restant
+        $time_left = $due_date - $creation;
+
+        // retour du temps restant
+        return $time_left;
+    }
+
+    // méthode pour supprimer une tache
+    public function deleteTodo()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("DELETE FROM todos WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':id' => $this->id
         ]);
     }
 }
