@@ -82,15 +82,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // (TODO STATUTE) 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Complete goal
-    // if (isset($_POST['checked'])) {
-    //     $goal->checkGoal($_POST['goalId']);
-    //     $procrastimon->addExp(10, $procrastimon->id);
+    // Complete todo
+    if (isset($_POST['checked'])) {
+        $todo->id = $_POST['taskId']; 
+        $todo->completeTodo($_POST['taskId']);
+        $procrastimon->addExp(10, $procrastimon->id);
 
-    //     header('Location: controller-goals.php');
-    // }
+        header('Location: controller-todos.php');
+    }
 
-    // Delete goal 
+    // Delete todo 
     if (isset($_POST['delete'])) {
         $todo->id = $_POST['taskId'];
         $todo->deleteTodo();

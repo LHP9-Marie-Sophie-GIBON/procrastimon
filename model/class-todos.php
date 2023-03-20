@@ -71,7 +71,7 @@ class Todo
     public function getTodos()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users ORDER BY due_date ASC");
+        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 0 ORDER BY due_date ASC");
 
         // exécution de la requête
         $query->execute([
@@ -104,6 +104,18 @@ class Todo
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("DELETE FROM todolist WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':id' => $this->id
+        ]);
+    }
+
+    // méthode pour compléter une tache
+    public function completeTodo()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE todolist SET statute = 1 WHERE id = :id");
 
         // exécution de la requête
         $query->execute([

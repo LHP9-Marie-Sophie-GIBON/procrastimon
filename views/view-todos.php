@@ -132,7 +132,7 @@
                                     Are your sure ?
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="controller-tasks.php" method="post">
+                                    <form action="controller-todos.php" method="post">
                                         <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
                                         <button type="submit" name="checked" class="btn btn-primary">Yes</button>
                                     </form>
