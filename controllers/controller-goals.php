@@ -183,6 +183,9 @@ elseif ($achievedGoals === 5 && $totalTrophies < 3) {
     echo "You just won a Trophy, check it out in the trophy room";
 }
 
+// (ERROR 404), 
+
+
 
 
 

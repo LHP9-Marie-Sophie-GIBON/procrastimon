@@ -1,27 +1,76 @@
 <?php include 'components/head.php'; ?>
 
 <main>
-    <div class="row justify-content-center">
-        <button class="col-3 btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalLogin">
-            LOAD GAME
-        </button>
-    </div>
-    <div class="row justify-content-center">
-        <button class="col-3 btn btn-outline-light">
-            <a href="controller-login.php">
-                NEW GAME
-            </a>
-        </button>
-    </div>
+    <?php if (isset($_GET['newGame'])) { ?>
+        <div class="container mt-3 p-3">
+            <form action="" method="post">
 
-    <!-- Modal Login-->
-    <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?> " id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <?php
-                    if (isset($_SESSION['user_id'])) {
-                        echo '
+                <!-- user part -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
+                    <input type="text" class="form-control" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?><?= $message ?? '' ?>">
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></span>
+                    <input type="text" class="form-control" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $mail ?? '' ?>">
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
+                    <input type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="password" name="password">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['confirm-password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
+                    <input type="password" class="form-control" placeholder="confirm-password" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
+                </div>
+
+
+                <!-- Procrastimon part -->
+                <div class="mb-3">
+                    <!-- <label for="procrastimon">Name your procrastimon</label> -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['procrastimon'] ?? '<i class="bi bi-emoji-laughing-fill"></i>' ?></span>
+                        <input type="text" class="form-control" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $name ?? '' ?>">
+                    </div>
+                </div>
+
+
+
+                <!-- submit -->
+                <div>
+                    <input type="submit" class="btn btn-outline-light" value="let's go!">
+                    <button class="btn btn-outline-light"><a href="controller-start.php">return</a></button>
+
+                </div>
+            </form>
+        </div>
+
+    <?php } else { ?>
+        <div class="row justify-content-center">
+            <button class="col-3 btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalLogin">
+                LOAD GAME
+            </button>
+        </div>
+        <div class="row justify-content-center">
+            <button class="col-3 btn btn-outline-light">
+                <a href="controller-start.php?newGame">
+                    NEW GAME
+                </a>
+            </button>
+        </div>
+
+        <!-- Modal Login-->
+        <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?> " id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <?php
+                        if (isset($_SESSION['user_id'])) {
+                            echo '
                         <div class="row progressbar">
                             <div class="col">
                                 <img src="' . $sprite->sprite . '" alt="" class="img-fluid">
@@ -46,34 +95,35 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
                     </div>
                     ';
-                    } else { ?>
+                        } else { ?>
 
-                        <div class="row justify-content-center">
-                            <form method="post" action="" id="loginForm">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="errorLogin"><?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                                    <input id="login" type="text" class="form-control" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?>">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="errorPassword"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                                    <input id="password" type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="password" name="password">
-                                </div>
-                                <button type="submit" class="col-3 btn btn-outline-light">
-                                    Log in
-                                </button>
-                            </form>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
-                </div>
-            <?php
-                    }
-            ?>
+                            <div class="row justify-content-center">
+                                <form method="post" action="" id="loginForm">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="errorLogin"><?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
+                                        <input id="login" type="text" class="form-control" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?>">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="errorPassword"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
+                                        <input id="password" type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="password" name="password">
+                                    </div>
+                                    <button type="submit" class="col-3 btn btn-outline-light">
+                                        Log in
+                                    </button>
+                                </form>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
+                    </div>
+                <?php
+                        }
+                ?>
 
+                </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
 </main>
 
 
