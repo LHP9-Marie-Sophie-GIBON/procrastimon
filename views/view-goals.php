@@ -152,10 +152,10 @@
                                     <span class="input-group-text category" id="basic-addon2"><?= $arrayErrors['category'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
                                     <select name="category" id="category">
                                         <option value="default" selected disabled></option>
-                                        <option value="body">Body</option>
-                                        <option value="mind">Mind</option>
-                                        <option value="work">Work</option>
-                                        <option value="other">other</option>
+                                        <option value="1">Body</option>
+                                        <option value="2">Mind</option>
+                                        <option value="3">Work</option>
+                                        <option value="4">other</option>
                                     </select>
                                 </div>
 
@@ -192,9 +192,21 @@
                         <div class="modal-body">
                             <h5 class="modal-title">Confirm you new goal : </h5>
                             <p> Description : <?= $_SESSION['newGoal']['goal'] ?></p>
-                            <p> Category : <?= $_SESSION['newGoal']['category'] ?></p>
+                            <p> Category :
+                                <?php
+                                if ($_SESSION['newGoal']['category'] == 1) {
+                                    echo 'Body';
+                                } elseif ($_SESSION['newGoal']['category'] == 2) {
+                                    echo 'Mind';
+                                } elseif ($_SESSION['newGoal']['category'] == 3) {
+                                    echo 'Work';
+                                } elseif ($_SESSION['newGoal']['category'] == 4) {
+                                    echo 'Other';
+                                }
+                                ?></p>
                             <p> Due date :
                                 <?php
+
                                 if ($_SESSION['newGoal']['due_date'] == 1) {
                                     echo '1 month';
                                 } elseif ($_SESSION['newGoal']['due_date'] == 2) {
@@ -243,7 +255,19 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <p>Goal : <?= $goal['name'] ?></p>
-                                    <p>Category : <?= $goal['category'] ?></p>
+                                    <p>Category :
+                                        <?php
+                                        if ($goal['category'] == 1) {
+                                            echo 'Body';
+                                        } elseif ($goal['category'] == 2) {
+                                            echo 'Mind';
+                                        } elseif ($goal['category'] == 3) {
+                                            echo 'Work';
+                                        } elseif ($goal['category'] == 4) {
+                                            echo 'Other';
+                                        }
+                                        ?>
+                                    </p>
                                     <p>Creation : <?= $goal['creation'] ?></p>
                                     <p>Due Date : <?= $goal['due_date'] ?></p>
                                     <p>Comments : <?= $goal['comments'] ?></p>

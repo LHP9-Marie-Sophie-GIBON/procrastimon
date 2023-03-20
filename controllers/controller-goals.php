@@ -60,14 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors) && isset($_POST['insert'])) {
-
         // Créer une variable de session newGoal avec les données de $_POST
         $_SESSION['newGoal'] = $_POST;
-        var_dump($_SESSION); 
         
     }
 }
-
 
 // (GOAL CREATION) Insertion dans la BDD méthod get
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -96,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit;
     }
 }
-
 
 // (GOAL STATUTE) 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

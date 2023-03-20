@@ -4,7 +4,7 @@ class Goal
 {
     private $id;
     private string $name;
-    private string $category;
+    private int $category;
     private string $creation;
     private int $due_date;
     private string $comments;
