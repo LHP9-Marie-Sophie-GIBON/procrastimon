@@ -85,8 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Complete todo
     if (isset($_POST['checked'])) {
         $todo->id = $_POST['taskId']; 
-        $todo->completeTodo($_POST['taskId']);
-        $procrastimon->addExp(10, $procrastimon->id);
+        $todo->completeTodo();
+        $procrastimon->addExp(100, $procrastimon->id);
+        
 
         header('Location: controller-todos.php');
     }
@@ -95,12 +96,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['delete'])) {
         $todo->id = $_POST['taskId'];
         $todo->deleteTodo();
-        $procrastimon->removeHp(5, $procrastimon->id);
+        $procrastimon->removeHp(2, $procrastimon->id);
 
         header('Location: controller-todos.php');
         exit;
     }
  
+}
+
+// (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
+if ($procrastimon->exp >= 100) {
+    $procrastimon->level ++;
+    $procrastimon->exp = 0;
+
+    // le sprite prend + 1 tant que l'on est strictement inférieur au level 4
+    if ($procrastimon->level < 4) {
+        $procrastimon->id_sprites ++;
+    }
+
+    // le procrastimon monte de niveau
+    $procrastimon->levelUp($procrastimon->id);
+    // header
+    header('Location: controller-todos.php');
 }
 
 

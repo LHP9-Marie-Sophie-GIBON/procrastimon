@@ -155,12 +155,12 @@ class Goal
      * @param int $goalID id du goal complété
      * @return void 
      */ 
-    public function checkGoal(int $goalId) : void
+    public function completeGoal(int $goalId) : void
     {
         // set le jour de l'accomplissement du goal
         $this->achievement_day = date('Y-m-d');
 
-        $query = $this->_pdo->prepare("UPDATE goals SET statute = 1, category = 'achieved', achievement_day = :achievement_day WHERE id = :id");
+        $query = $this->_pdo->prepare("UPDATE goals SET statute = 1, achievement_day = :achievement_day WHERE id = :id");
         $query->execute([
             ':id' => $goalId,
             ':achievement_day' => $this->achievement_day

@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Complete goal
     if (isset($_POST['checked'])) {
-        $goal->checkGoal($_POST['goalId']);
+        $goal->completeGoal($_POST['goalId']);
         $procrastimon->addExp(10, $procrastimon->id);
 
         header('Location: controller-goals.php');
@@ -126,16 +126,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
 if ($procrastimon->exp >= 100) {
-    $procrastimon->level += 1;
+    $procrastimon->level ++;
     $procrastimon->exp = 0;
 
     // le sprite prendd + 1 tant que l'on est strictement inférieur au level 4
     if ($procrastimon->level < 4) {
-        $procrastimon->id_sprites += 1;
+        $procrastimon->id_sprites ++;
     }
 
     // le procrastimon monte de niveau
-    $procrastimon->levelUp($procrastimon, $procrastimon->id);
+    $procrastimon->levelUp($procrastimon->id);
+
+    header('Location: controller-todos.php');
 }
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4

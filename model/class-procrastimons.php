@@ -86,14 +86,14 @@ class Procrastimon
     }
 
     // (LEVEL UP) méthode pour monter de niveau 
-    public function levelUp($procrastimon, $procrastimon_id)
+    public function levelUp($procrastimon_id)
     {
         // Mettre à jour le procrastimon dans la base de données
         $query = $this->_pdo->prepare("UPDATE procrastimons SET level = :level, id_sprites = :id_sprites , exp = :exp WHERE id_users = :id_users AND id = :id");
         $query->execute([
-            ':level' => $procrastimon->level,
-            ':id_sprites' => $procrastimon->id_sprites,
-            ':exp' => $procrastimon->exp,
+            ':level' => $this->level,
+            ':id_sprites' => $this->id_sprites,
+            ':exp' => $this->exp,
             ':id_users' => $this->id_users,
             ':id' => $procrastimon_id
         ]);
@@ -133,3 +133,5 @@ class Procrastimon
         ]);
     }
 }
+
+
