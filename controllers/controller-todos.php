@@ -59,15 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $today = date('Y-m-d');
 
         // on crée une nouvelle tâche
-        $task = new Todo();
+        $todo = new Todo();
 
-        $task->name = $_SESSION['newTask']['task'];
-        $task->task_priority_level = $_SESSION['newTask']['task_priority_level'];
-        $task->creation = $today;
-        $task->id_users = $_SESSION['user_id'];
+        $todo->name = $_SESSION['newTask']['task'];
+        $todo->task_priority_level = $_SESSION['newTask']['task_priority_level'];
+        $todo->creation = $today;
+        $todo->id_users = $_SESSION['user_id'];
 
         // on envoie les données dans la base de données
-        $task->insertTodo();
+        $todo->insertTodo();
 
         // on supprime la variable de session
         unset($_SESSION['newTask']);
@@ -77,6 +77,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit;
         
     }
+}
+
+// (TODO STATUTE) 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Complete goal
+    // if (isset($_POST['checked'])) {
+    //     $goal->checkGoal($_POST['goalId']);
+    //     $procrastimon->addExp(10, $procrastimon->id);
+
+    //     header('Location: controller-goals.php');
+    // }
+
+    // Delete goal 
+    if (isset($_POST['delete'])) {
+        $todo->id = $_POST['taskId'];
+        $todo->deleteTodo();
+        $procrastimon->removeHp(5, $procrastimon->id);
+
+        header('Location: controller-todos.php');
+        exit;
+    }
+ 
 }
 
 

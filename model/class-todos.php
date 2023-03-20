@@ -103,7 +103,7 @@ class Todo
     public function deleteTodo()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("DELETE FROM todos WHERE id = :id");
+        $query = $this->_pdo->prepare("DELETE FROM todolist WHERE id = :id");
 
         // exécution de la requête
         $query->execute([
