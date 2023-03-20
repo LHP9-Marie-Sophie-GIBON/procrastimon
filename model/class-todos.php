@@ -169,5 +169,15 @@ class Todo
         return $query->fetchColumn();
     }
 
+    // méthode pour récupérer les tâches manquées de l'utilisateur
+    public function getMissedTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users AND statute = 2 ORDER BY due_date ASC");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 }

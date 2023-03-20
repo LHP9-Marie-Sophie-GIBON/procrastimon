@@ -27,7 +27,12 @@ $trophiesList = $trophy->displayTrophies(); // récupération des trophés
 $empty = empty($trophiesList);
 
 $goal->id_users = $_SESSION['user_id'];
-$goalsList = $goal->getAchievedGoals(); // récupération des objectifs
+$goalsList = $goal->getAchievedGoals(); // récupération des objectifs réalisés
+$missedGoals = $goal->getMissedGoals(); // récupération des objectifs manqués
+
+$todo->id_users = $_SESSION['user_id']; 
+$todosList = $todo->getCompletedTodos(); 
+$missedTodos = $todo->getMissedTodos(); 
 
 
 

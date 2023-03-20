@@ -247,4 +247,15 @@ class Goal
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+   // méthode pour récupérer les tâches manquées de l'utilisateur
+   public function getMissedGoals()
+   {
+       // préparation de la requête
+       $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 2 ORDER BY due_date ASC");
+       $query->execute([
+           ':id_users' => $this->id_users
+       ]);
+       return $query->fetchAll(PDO::FETCH_ASSOC);
+   }
 }
