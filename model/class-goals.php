@@ -7,46 +7,57 @@ class Goal
     private string $category;
     private string $creation;
     private int $due_date;
+    private string $comments;
     private int $statute;
     private string $achievement_day;
     private int $id_users;
 
     private object $_pdo;
 
-    // (GET) méthode magique pour GET les attributs
+    /**
+     * (GET) méthode magique pour GET les attributs
+     */ 
     public function __get($attribut)
     {
         return $this->$attribut;
     }
 
-    // (SET) méthode magique pour SET les attributs
+    /**
+     * (SET) méthode magique pour SET les attributs
+     */ 
     public function __set($attribut, $value)
     {
         $this->$attribut = $value;
     }
 
-    // (PDO) constructeur pour instancier la connexion PDO
+    /**
+     * (PDO) constructeur pour instancier la connexion PDO
+     */ 
     public function __construct()
     {
         $this->_pdo = Database::connect();
     }
 
-    // (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
+    /**
+     * (LOGIN) méthode pour récupérer tous les objectifs d'un utilisateur
+     */ 
     public function getGoals()
     {
-        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0");
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0 ORDER BY due_date ASC");
         $query->execute([
             ':id_users' => $this->id_users
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // (CREATION) méthode pour insérer un objectif dans la base de données
+    /**
+     * (CREATION) méthode pour insérer un objectif dans la base de données
+     */ 
     public function insertGoal()
     {
 
         // préparation de la requête
-        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, creation, due_date, id_users) VALUES (:name, :category, :creation, :due_date, :id_users)");
+        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, creation, due_date, comments, id_users) VALUES (:name, :category, :creation, :due_date, :comments, :id_users)");
 
         // appel de la méthode setDueDate pour calculer la date d'échéance
         $this->setDueDate();
@@ -55,13 +66,16 @@ class Goal
             ':name' => $this->name,
             ':category' => $this->category,
             ':creation' => date('Y-m-d', strtotime($this->creation)),
-            ':due_date' => date('Y-m-d', $this->due_date), // conversion en format de date MySQL
+            ':due_date' => date('Y-m-d', $this->due_date), 
+            ':comments' => $this->comments, 
             ':id_users' => $this->id_users,
 
         ]);
     }
 
-    // (DUE DATE) méthode pour définir la date d'échéance en fonction du niveau de priorité
+    /**
+     * (DUE DATE) méthode pour définir la date d'échéance en fonction du niveau de priorité
+     */ 
     public function setDueDate()
     {
         switch ($this->due_date) {
@@ -81,8 +95,13 @@ class Goal
         }
     }
 
-    // (DUE DATE - TIME LEFT) méthode pour déterminer le nombre de jours restants avant l'échéance
-    public function getRemainingDays($goalId)
+    /**
+     * (DUE DATE - TIME LEFT) méthode pour déterminer le nombre de jours restants avant l'échéance
+     * 
+     * @param int $goalId id du goal visé
+     * @return void
+     */ 
+    public function getRemainingDays($goalId) : void
     {
         $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE id = :id");
         $query->execute([
@@ -94,8 +113,13 @@ class Goal
         echo $remainingDays;
     }
 
-    // (DELETE) méthode pour supprimer un goal 
-    public function deleteGoal($goalId)
+    /**
+     * (DELETE) méthode pour supprimer un goal
+     * 
+     * @param int $goalId id du goal à supprimer
+     * @return void 
+     */ 
+    public function deleteGoal($goalId) : void
     {
         $query = $this->_pdo->prepare("DELETE FROM goals WHERE id = :id");
         $query->execute([
@@ -103,37 +127,35 @@ class Goal
         ]);
     }
 
-    // (EDIT) méthode pour modifier un goal
-    public function editGoal($goalId, $goalName, $goalCategory, $goalDuedate)
+    /**
+     * (EDIT) méthode pour modifier un goal
+     * 
+     * @param int $goalId id du goal à modifier
+     * @param string $goalName du nom à modifier
+     * @param string $goalCategory de la catégorie à modifier
+     * @param string $goalDuedate de la date d'échéance à modifier
+     * @param string $goalComments des commentaires à modifier
+     * @return void
+     */
+    public function editGoal($goalId, $goalName, $goalCategory, $goalDuedate, $goalComment) : void
     {
-        $query = $this->_pdo->prepare("UPDATE goals SET name = :name, category = :category, due_date = :due_date WHERE id = :id");
+        $query = $this->_pdo->prepare("UPDATE goals SET name = :name, category = :category, due_date = :due_date, comments= :comments WHERE id = :id");
         $query->execute([
             ':name' => $goalName,
             ':category' => $goalCategory,
             ':due_date' => date('Y-m-d', $goalDuedate),
+            ':comments' => $goalComment,
             ':id' => $goalId
         ]);
     }
 
-//   /** 
-//    * (RESET) méthode permettant de reset un goal
-//    * 
-//    * @param int $goalId id du goal à modifier
-//    * @param string $goalCategory category du goal à modifier
-//    * @return void
-//    */
-//     public function resetGoal(int $goalId, string $goalCategory) : void
-//     {
-//         $query = $this->_pdo->prepare("UPDATE goals SET statute = 0, category = :category, due_date = :due_date WHERE id = :id");
-//         $query->execute([
-//             ':due_date' => date('Y-m-d', $this->due_date),
-//             ':category' => $goalCategory,
-//             ':id' => $goalId
-//         ]);
-//     }
-
-    // (COMPLETE) méthode pour check un goal
-    public function checkGoal($goalId)
+    /**
+     * (COMPLETE) méthode pour check un goal
+     *  
+     * @param int $goalID id du goal complété
+     * @return void 
+     */ 
+    public function checkGoal(int $goalId) : void
     {
         // set le jour de l'accomplissement du goal
         $this->achievement_day = date('Y-m-d');
@@ -145,7 +167,9 @@ class Goal
         ]);
     }
 
-    // (GAME OVER - EXPIRED DATE) méthode pour récupérer un goal selon la due_date est dépassée
+    /**
+     * (GAME OVER - EXPIRED DATE) méthode pour récupérer les goals expirés
+     */ 
     public function expiredDate()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date < :due_date AND statute = 0");
@@ -156,8 +180,13 @@ class Goal
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // méthode pour passer le goal expired en statute 2
-    public function expiredGoal($goalId)
+    /**
+     * méthode pour passer le goal expired en statute 2
+     * 
+     * @param int $goalId id du goal à modifier
+     * @return void
+     */ 
+    public function expiredGoal($goalId) : void
     {
         $query = $this->_pdo->prepare("UPDATE goals SET statute = 2 WHERE id = :id");
         $query->execute([
@@ -165,7 +194,9 @@ class Goal
         ]);
     }
 
-    // (GAME OVER - DUE DATE IS TODAY) méthode pour afficher un goal dont la due_date est aujourdh'ui
+    /**
+     * (GAME OVER - DUE DATE IS TODAY) méthode pour afficher un goal dont la due_date est aujourdh'ui
+     */ 
     public function isDueDay()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date = :due_date");
@@ -176,28 +207,38 @@ class Goal
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // (BOARDING HOME) méthode pour afficher les goals dont la date est égale ou inférieur a evolution_day
-    public function getGoalsHistory($id_users, $id_procrastimon)
+    /**
+     * (BOARDING HOME) méthode pour afficher les goals dont la date est égale ou inférieur a evolution_day
+     * 
+     * @param int $id_procrastimon id du procrastimon
+     * @return void	
+     * 
+     */ 
+    public function getGoalsHistory(int $id_procrastimon) 
     {
         $query = $this->_pdo->prepare("SELECT goals.* FROM goals JOIN procrastimons ON goals.id_users = procrastimons.id_users WHERE goals.id_users = :id_users AND goals.achievement_day BETWEEN procrastimons.birthday AND procrastimons.final_evolution AND procrastimons.id = :procrastimons_id ");
         $query->execute([
-            ':id_users' => $id_users,
+            ':id_users' => $this->id_users,
             ':procrastimons_id' => $id_procrastimon
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // (TROPHY) méthode récupérant le nombre de goals accomplis par l'utilisateur
-    public function countAchievedGoals($id_users)
+    /**
+     * (TROPHY) méthode récupérant le nombre de goals accomplis par l'utilisateur
+     */ 
+    public function countAchievedGoals()
     {
         $query = $this->_pdo->prepare("SELECT COUNT(*) FROM goals WHERE id_users = :id_users AND statute = 1");
         $query->execute([
-            ':id_users' => $id_users
+            ':id_users' => $this->id_users
         ]);
         return $query->fetchColumn();
     }
 
-    // (TROPHY) méthode récupérant les goals accomplis par l'utilisateur
+    /**
+     * (TROPHY) méthode récupérant les goals accomplis par l'utilisateur
+     */ 
     public function getAchievedGoals()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 1");

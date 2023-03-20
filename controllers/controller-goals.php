@@ -54,29 +54,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $arrayErrors['due_date'] = $missing;
     }
 
+    if (isset($_POST['comment'])) {
+        $comment = $_POST['comment'];
+    }
+
     // si arrayErrors est vide, le formulaire est envoyé
     if (empty($arrayErrors) && isset($_POST['insert'])) {
 
+        // Créer une variable de session newGoal avec les données de $_POST
+        $_SESSION['newGoal'] = $_POST;
+        var_dump($_SESSION); 
+        
+    }
+}
+
+
+// (GOAL CREATION) Insertion dans la BDD méthod get
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['newGoal'])) {
         // déterminer le jour actuel
         $today = date('Y-m-d');
 
-        // on crée une nouvelle tâche
+        // // // on crée une nouvelle tâche
         $goal = new Goal();
 
-        $goal->name = $name;
-        $goal->category = $category;
+        $goal->name = $_SESSION['newGoal']['goal'];
+        $goal->category = $_SESSION['newGoal']['category'];
         $goal->creation = $today;
-        $goal->due_date = $due_date;
+        $goal->due_date = $_SESSION['newGoal']['due_date'];
+        $goal->comments = $_SESSION['newGoal']['comment'];
         $goal->id_users = $_SESSION['user_id'];
 
         // on envoie les données dans la base de données
         $goal->insertGoal();
+
+        // on supprime la variable de session
+        unset($_SESSION['newGoal']);
 
         // on redirige vers la page des goals
         header('Location: controller-goals.php');
         exit;
     }
 }
+
 
 // (GOAL STATUTE) 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -100,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Reset goal
     if (isset($_POST['reset'])) {
-            $goal->editGoal($_POST['id'], $_POST['name'], $_POST['category'], $_POST['due_date']);
+            $goal->editGoal($_POST['id'], $_POST['name'], $_POST['category'], $_POST['due_date'], $_POST['comment']);
             $procrastimon->removeHp(10, $procrastimon->id);
             header('Location: controller-goals.php');
             exit;
@@ -128,14 +148,6 @@ if ($procrastimon->level == 4) {
     exit;
 }
 
-// (GAME OVER) lorsque le goal n'a pas été achieved dans les temps (get['expireGoals'])
-if (isset($_GET['expireGoals'])) {
-//    supprimer les goals expired
-
-    header('Location: controller-gameover.php');
-    exit;
-}
-
 // (GAME OVER) Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
 if ($procrastimon->hp <= 0) {
     header('Location: controller-gameover.php');
@@ -143,7 +155,7 @@ if ($procrastimon->hp <= 0) {
 }
 
 // (GOAL TROPHIES) Création des trophés en fonction du nombre de goals accomplis
-$achievedGoals = $goal->countAchievedGoals($_SESSION['user_id']);// Récupération du nombre de goals
+$achievedGoals = $goal->countAchievedGoals();// Récupération du nombre de goals
 $totalTrophies = $user->getTotalTrophies(); 
  
 if ($achievedGoals === 1 && $totalTrophies < 1) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée

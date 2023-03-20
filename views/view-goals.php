@@ -93,6 +93,12 @@
                                                     <option value="3" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>1 year</option>
                                                 </select>
                                             </div>
+                                            <label for="comment">Comment : </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text comment" id="basic-addon2"><i class="bi bi-chat-left-text"></i></span>
+                                                <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                                            </div>
+
                                             <div>
                                                 <button type="submit" class="btn btn-secondary" name="reset">Save</button>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -112,14 +118,14 @@
 
     <!-- mise en place des goals dont le due date est expiré -->
     <?php if ($expiredDate) { ?>
-        
+
         <div class="alert alert-danger" role="alert">
-            <?php 
-            foreach ($expiredDate as $expiredGoal) { 
+            <?php
+            foreach ($expiredDate as $expiredGoal) {
                 $procrastimon->removeHp(5, $procrastimon->id);
                 $goal->expiredGoal($expiredGoal['id']);
-                ?>
-                <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date']?>) !</p>
+            ?>
+                <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date'] ?>) !</p>
             <?php } ?>
             <a href="controller-goals.php?expiredGoals" class="btn btn-danger">Next</a>
         </div>
@@ -163,11 +169,46 @@
                                         <option value="3">1 year</option>
                                     </select>
                                 </div>
-                                <div>
 
+                                <label for="comment">Add a comment : </label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text comment" id="basic-addon2"><i class="bi bi-chat-left-text"></i></span>
+                                    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                                </div>
+                                <div>
                                     <button type="submit" class="btn btn-secondary" name="insert">Save</button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal de confirmation -->
+            <div class="modal fade <?= $_SESSION['newGoal'] ? 'openModal' : '' ?>" id="confirmMyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h5 class="modal-title">Confirm you new goal : </h5>
+                            <p> Description : <?= $_SESSION['newGoal']['goal'] ?></p>
+                            <p> Category : <?= $_SESSION['newGoal']['category'] ?></p>
+                            <p> Due date :
+                                <?php
+                                if ($_SESSION['newGoal']['due_date'] == 1) {
+                                    echo '1 month';
+                                } elseif ($_SESSION['newGoal']['due_date'] == 2) {
+                                    echo '6 month';
+                                } elseif ($_SESSION['newGoal']['due_date'] == 3) {
+                                    echo '1 year';
+                                }
+                                ?>
+                            </p>
+                            <p> Comment : <?= $_SESSION['newGoal']['comment'] ?></p>
+                            <div>
+                                <a href="controller-goals.php?newGoal"><button class="btn btn-secondary">Save</button> </a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -181,6 +222,16 @@
                     <div class="row <?= $success ?? '' ?>">
                         <button type="button" class="btn col-1" id="<?= $goal['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
                         <div class="col"><?= $goal['name'] ?></div>
+                        <div class="col">
+                            <?php
+                            // déterminer le nombre de jour restant jusqu'à duedate
+                            $date = new DateTime($goal['due_date']);
+                            $now = new DateTime();
+                            $interval = $date->diff($now);
+                            $days = $interval->format('%a');
+                            echo $days . ' days';
+                            ?>
+                        </div>
                         <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>
                         <!-- <button type="button" class="col-1 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?><?= $goal['category'] ?>"><i class="bi bi-pencil-fill"></i></button> -->
                         <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis"><i class="bi bi-trash3-fill"></i></button>
@@ -195,17 +246,7 @@
                                     <p>Category : <?= $goal['category'] ?></p>
                                     <p>Creation : <?= $goal['creation'] ?></p>
                                     <p>Due Date : <?= $goal['due_date'] ?></p>
-                                    <p>Time left :
-                                        <?php
-                                        // déterminer le nombre de jour restant jusqu'à duedate
-                                        $date = new DateTime($goal['due_date']);
-                                        $now = new DateTime();
-                                        $interval = $date->diff($now);
-                                        $days = $interval->format('%a');
-                                        echo $days . ' days';
-                                        ?>
-                                    </p>
-                                    <p>Comments : </p>
+                                    <p>Comments : <?= $goal['comments'] ?></p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
@@ -213,8 +254,6 @@
                             </div>
                         </div>
                     </div>
-
-
 
                     <!-- modal de confirmation checked-->
                     <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
