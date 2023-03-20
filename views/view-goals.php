@@ -324,7 +324,7 @@
 
 
     <!-- mise en place du footer -->
-    <?php include 'components/footer-task.php'; ?>
+    <?php include 'components/footer-goals.php'; ?>
 
     <script>
         // creation de l'objet openModal, nous ciblons la classe openModal

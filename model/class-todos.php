@@ -147,5 +147,27 @@ class Todo
         ]);
     }
 
+    // méthode pour récupérer les tâches complétées de l'utilisateur
+    public function getCompletedTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 1 ORDER BY due_date ASC");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // méthode pour calculer le nombre de tâches complétées par l'utilisateur
+    public function countCompletedTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT COUNT(*) FROM todolist WHERE id_users = :id_users and statute = 1");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchColumn();
+    }
+
     
 }
