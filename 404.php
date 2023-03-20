@@ -7,7 +7,7 @@
             <div class="col-12">
                 <h1 class="text-center">404</h1>
                 <h2 class="text-center">Page not found</h2>
-                <a href="index.php"><button type="button" class="btn">Return</button></a>
+                <a href="../index.php"><button type="button" class="btn">Return</button></a>
             </div>
                         
         </div>
