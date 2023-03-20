@@ -13,7 +13,7 @@
             <div class="progress-bar barPP" style="width: <?= $procrastimon->exp ?>%"></div>
         </div>
     </div>
-    <?php if (isset($_GET['history'])) { ?>
+    <?php if (isset($_GET['history']) || isset($_GET['CompletedGoals']) || isset($_GET['CompletedTodos']) || isset($_GET['MissedGoals']) || isset($_GET['MissedTodos'])) { ?>
         <div class="col">
             <button class="btn btn-outline-light">
                 <a href="../controllers/controller-trophies.php"><img src="https://img.icons8.com/ios-filled/40/FFFFFF/laurel-wreath.png" /></a>
