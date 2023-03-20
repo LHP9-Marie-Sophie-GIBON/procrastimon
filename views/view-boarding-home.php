@@ -22,7 +22,7 @@
 
                         $goal = new Goal();
                         $goal->id_users = $_SESSION['user_id'];
-                        $goalList = $goal->getGoalsHistory($goal->id_users, $oldprocrastimon['id']); 
+                        $goalList = $goal->getGoalsHistory($oldprocrastimon['id']); 
                 ?>
                         <div class="col-2">
                             <button class="btn" data-bs-toggle="modal" data-bs-target="#infoModal<?= $oldprocrastimon['id'] ?>">
@@ -39,8 +39,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <?php
-                                        
+                                        <?php 
                                         foreach ($goalList as $goal) {
                                             echo '<p>'.$goal['creation'].' : '.$goal['name'].', achieved the '.$goal['achievement_day'].'</p>';  
                                         } ?>

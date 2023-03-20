@@ -214,7 +214,7 @@ class Goal
      * @return void	
      * 
      */ 
-    public function getGoalsHistory(int $id_procrastimon) 
+    public function getGoalsHistory(int $id_procrastimon)
     {
         $query = $this->_pdo->prepare("SELECT goals.* FROM goals JOIN procrastimons ON goals.id_users = procrastimons.id_users WHERE goals.id_users = :id_users AND goals.achievement_day BETWEEN procrastimons.birthday AND procrastimons.final_evolution AND procrastimons.id = :procrastimons_id ");
         $query->execute([
