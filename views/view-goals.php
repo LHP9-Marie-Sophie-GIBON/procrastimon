@@ -122,12 +122,12 @@
         <div class="alert alert-danger" role="alert">
             <?php
             foreach ($expiredDate as $expiredGoal) {
-                $procrastimon->removeHp(5, $procrastimon->id);
+                $procrastimon->removeHp(10, $procrastimon->id);
                 $goal->expiredGoal($expiredGoal['id']);
             ?>
                 <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date'] ?>) !</p>
             <?php } ?>
-            <a href="controller-goals.php?expiredGoals" class="btn btn-danger">Next</a>
+            <a href="controller-goals.php" class="btn btn-danger">Next</a>
         </div>
     <?php } else { ?>
         <!-- mise en place du menu principal-->

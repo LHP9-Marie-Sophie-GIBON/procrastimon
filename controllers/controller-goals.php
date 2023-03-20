@@ -24,7 +24,7 @@ $goalsList = $goal->getGoals(); // affichage des goals
 $empty = empty($goal->getGoals());// s'il n'y pas de goals enregistrés
 // vérification des duedates
 $dueDay = $goal->isDueDay();//Jour J
-$expiredDate = $goal->expiredDate(); //Jour dépassé
+$expiredDate = $goal->getExpiredGoals(); //Jour dépassé
 
 
 // (GOAL CREATION) vérification du formulaire et insertion dans la BDD
@@ -185,7 +185,6 @@ elseif ($achievedGoals === 5 && $totalTrophies < 3) {
     echo "You just won a Trophy, check it out in the trophy room";
 }
 
-// (ERROR 404), 
 
 
 

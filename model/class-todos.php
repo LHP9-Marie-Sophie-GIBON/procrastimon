@@ -122,4 +122,30 @@ class Todo
             ':id' => $this->id
         ]);
     }
+
+    // méthode pour récupérer les tâches expirées de l'utilisateur
+    public function getExpiredTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 0 and due_date < :due_date ORDER BY due_date ASC");
+        $query->execute([
+            ':id_users' => $this->id_users,
+            ':due_date' => date('Y-m-d') 
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // méthode pour update la tâche en statute 2
+    public function expiredTodo($todo_id)
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE todolist SET statute = 2 WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':id' => $todo_id
+        ]);
+    }
+
+    
 }

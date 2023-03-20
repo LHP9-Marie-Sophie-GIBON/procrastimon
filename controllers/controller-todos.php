@@ -20,8 +20,10 @@ $todo = new Todo();
 // AFFICHAGE DE LA PAGE
 $user->login($user, $procrastimon, $sprite);// récupération des données de session
 $todo->id_users = $_SESSION['user_id'];
-$todolist = $todo->getTodos();
+$todolist = $todo->getTodos(); // récupération des tâches de l'utilisateur
 $empty = empty($todolist);
+$expiredTodos = $todo->getExpiredTodos(); // récupération des tâches expirées
+
 
 // Vérification du formulaire de création de Todo
 $arrayErrors = [];
@@ -52,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// (task CREATION) Insertion dans la BDD méthod get
+// (CREATION) Insertion dans la BDD de la nouvelle tâche
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['newTask'])) {
         // déterminer le jour actuel
@@ -86,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['checked'])) {
         $todo->id = $_POST['taskId']; 
         $todo->completeTodo();
-        $procrastimon->addExp(100, $procrastimon->id);
+        $procrastimon->addExp(5, $procrastimon->id);
         
 
         header('Location: controller-todos.php');
@@ -120,5 +122,16 @@ if ($procrastimon->exp >= 100) {
     header('Location: controller-todos.php');
 }
 
+// (LEVEL MAX) lorsque le procrastimon atteint le niveau 4
+if ($procrastimon->level == 4) {
+    header('Location: controller-endgame.php');
+    exit;
+}
+
+// (GAME OVER) Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
+if ($procrastimon->hp <= 0) {
+    header('Location: controller-gameover.php');
+    exit;
+}
 
 include '../views/view-todos.php';

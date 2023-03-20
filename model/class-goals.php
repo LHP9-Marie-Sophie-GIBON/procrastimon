@@ -170,7 +170,7 @@ class Goal
     /**
      * (GAME OVER - EXPIRED DATE) méthode pour récupérer les goals expirés
      */ 
-    public function expiredDate()
+    public function getExpiredGoals()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date < :due_date AND statute = 0");
         $query->execute([
