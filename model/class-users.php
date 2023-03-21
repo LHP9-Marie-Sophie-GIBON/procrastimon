@@ -117,20 +117,20 @@ class User
     }
 
     // méthode pour ajouter un trophée à un utilisateur
-    public function addTrophy($total_trophies)
+    public function addTrophy()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("UPDATE users SET $total_trophies = $total_trophies+1 WHERE id = :id");
+        $query = $this->_pdo->prepare("UPDATE users SET total_trophies = total_trophies+1 WHERE id = :id");
         $query->execute([
             ':id' => $this->id
         ]);
     }
 
     // méthode pour récupérer le nombre de trophées d'un utilisateur
-    public function getTotalTrophies($total_trophies)
+    public function getTotalTrophies()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("SELECT $total_trophies FROM users WHERE id = :id");
+        $query = $this->_pdo->prepare("SELECT total_trophies FROM users WHERE id = :id");
         $query->execute([
             ':id' => $this->id
         ]);
@@ -139,6 +139,6 @@ class User
         $data = $query->fetch(PDO::FETCH_ASSOC);
     
         // retourne la valeur de total_trophies
-        return $data[$total_trophies];
+        return $data['total_trophies'];
     }
 }
