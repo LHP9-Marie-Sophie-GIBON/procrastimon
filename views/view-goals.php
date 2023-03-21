@@ -11,111 +11,6 @@
         </div>
     <?php } else ?>
 
-    <!-- mise en place des goals ayant atteint leur due date-->
-    <!-- <?php if ($dueDay) { ?>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">It's D-day ! </h5>
-                <p class="card-text">Have you complete your goals?</p>
-                <div>
-                    <?php foreach ($dueDay as $goal) { ?>
-                        <div class="row <?= $success ?? '' ?>">
-                            <div class="col">
-                                <?= $goal['creation'] ?> : <?= $goal['name'] ?> (<?= $goal['category'] ?>) </div>
-                            <button class="col-1 btn btn-primary" data-bs-toggle="modal" data-bs-target="#successModal<?= $goal['id'] ?>">Yes</button>
-                            <button class="col-1 btn btn-danger" data-bs-toggle="modal" data-bs-target="#failModal<?= $goal['id'] ?>">No</button>
-                        </div>
-
-                        <!-- modal success-->
-                        <div class="modal fade" id="successModal<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Did you complete your goal : <?= $goal['name'] ?> ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form action="controller-goals.php" method="post">
-                                            <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
-                                            <button type="submit" name="checked" class="btn btn-primary">Yes !</button>
-                                        </form>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- modal fail -->
-                        <div class="modal fade" id="failModal<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Are you sure, your didn't complete : <?= $goal['name'] ?> ?
-                                    </div>
-                                    <div class="modal-footer">
-
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Yes ...
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <form action="controller-goals.php" method="post">
-                                                    <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
-                                                    <li><button type="submit" class="dropdown-item" name="delete">I want to delete the Goal</button></a></li>
-                                                </form>
-                                                <li><button type="button" class="dropdown-item" name="reset" data-bs-toggle="modal" data-bs-target="#resetModal<?= $goal['id'] ?>">I want to reset the Goal</button></a></li>
-                                            </ul>
-                                        </div>
-
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- modal de reset -->
-                        <div class="modal fade" id="resetModal<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <h5 class="modal-title">Reset your Goal : </h5>
-                                        <form class="container" method="post">
-                                            <p><?= $goal['name'] ?> (<?= $goal['category'] ?>)</p>
-                                            <!-- hidden input id, name et category -->
-                                            <input type="hidden" name="id" value="<?= $goal['id'] ?>">
-                                            <input type="hidden" name="name" value="<?= $goal['name'] ?>">
-                                            <input type="hidden" name="category" value="<?= $goal['category'] ?>">
-
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text duedate" id="basic-addon2"><?= $arrayErrors['due_date'] ?? '<i class="bi bi-hourglass"></i>' ?></span>
-                                                <select name="due_date" id="due_date">
-                                                    <option value="1" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>1 month</option>
-                                                    <option value="2" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>6 month</option>
-                                                    <option value="3" <?= ($goal['due_date'] == 1 ? 'selected' : '') ?>>1 year</option>
-                                                </select>
-                                            </div>
-                                            <label for="comment">Comment : </label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text comment" id="basic-addon2"><i class="bi bi-chat-left-text"></i></span>
-                                                <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-                                            </div>
-
-                                            <div>
-                                                <button type="submit" class="btn btn-secondary" name="reset">Save</button>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php } ?>
-                </div>
-
-            </div>
-        </div>
-    <?php } else ?> -->
-
     <!-- mise en place des goals dont le due date est expiré -->
     <?php if ($expiredDate) { ?>
 
@@ -232,7 +127,7 @@
                 <?php
                 foreach ($goalsList as $goal) { ?>
                     <div class="row <?= $success ?? '' ?>">
-                        <button type="button" class="btn col-1" id="<?= $goal['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
+                        <button type="button" class="btn col-1" id="<?= $goal['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $goal['id'] ?>"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
                         <div class="col"><?= $goal['name'] ?></div>
                         <div class="col">
                             <?php
@@ -245,8 +140,7 @@
                             ?>
                         </div>
                         <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>
-                        <!-- <button type="button" class="col-1 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?><?= $goal['category'] ?>"><i class="bi bi-pencil-fill"></i></button> -->
-                        <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis"><i class="bi bi-trash3-fill"></i></button>
+                        <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis<?= $goal['id'] ?>"><i class="bi bi-trash3-fill"></i></button>
                     </div>
 
                     <!-- modal d'informations -->
@@ -280,7 +174,7 @@
                     </div>
 
                     <!-- modal de confirmation checked-->
-                    <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="confirmationModal<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -298,7 +192,7 @@
                     </div>
 
                     <!-- modal de confirmation delete -->
-                    <div class="modal fade" id="confirmationModalBis" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="confirmationModalBis<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-body">

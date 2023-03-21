@@ -90,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $todo->completeTodo();
         $procrastimon->addExp(5, $procrastimon->id);
         
-
         header('Location: controller-todos.php');
     }
 

@@ -92,7 +92,7 @@
             <?php
             foreach ($todolist as $task) { ?>
                 <div class="row <?= $success ?? '' ?>">
-                    <button type="button" class="btn col-1" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
+                    <button type="button" class="btn col-1" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $task['id']?>"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
                     <div class="col"><?= $task['name'] ?></div>
                     <div class="col">
                         <?php
@@ -105,8 +105,7 @@
                         ?>
                     </div>
                     <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $task['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>
-                    <!-- <button type="button" class="col-1 btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal<?= $task['id'] ?><?= $task['task_priority_level'] ?>"><i class="bi bi-pencil-fill"></i></button> -->
-                    <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis"><i class="bi bi-trash3-fill"></i></button>
+                    <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis<?= $task['id']?>"><i class="bi bi-trash3-fill"></i></button>
                 </div>
 
                 <!-- modal d'informations -->
@@ -137,7 +136,7 @@
                 </div>
 
                 <!-- modal de confirmation checked-->
-                <div class="modal fade" id="confirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="confirmationModal<?= $task['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -155,7 +154,7 @@
                 </div>
 
                 <!-- modal de confirmation delete -->
-                <div class="modal fade" id="confirmationModalBis" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="confirmationModalBis<?= $task['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
