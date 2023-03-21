@@ -47,6 +47,17 @@ class Procrastimon
         ]);
     }
 
+    // (UPDATE) méthode pour modifier le nom du procrastimon
+    public function updateProcrastimon()
+    {
+        $query = $this->_pdo->prepare("UPDATE procrastimons SET name = :name WHERE id_users = :id_users AND id = :id");
+        $query->execute([
+            ':name' => $this->name,
+            ':id_users' => $this->id_users,
+            ':id' => $this->id
+        ]);
+    }
+
     // (HOME) méthode pour récupérer le dernier procrastimon crée
     public function getLastProcrastimon()
     {

@@ -6,7 +6,8 @@ class User
     private string $login;
     private string $mail;
     private string $password;
-    private int $total_trophies;
+    private int $total_goal_trophies;
+    private int $total_todo_trophies;
 
     private object $_pdo;
 
@@ -114,6 +115,21 @@ class User
             $sprite->id = $procrastimon->id_sprites;
             $sprite->getSpriteById();
 
+    }
+
+    // méthode pour update le profil
+    public function updateUser()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE users SET login = :login, mail = :mail, password = :password WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':login' => $this->login,
+            ':mail' => $this->mail,
+            ':password' => $this->password,
+            ':id' => $this->id
+        ]);
     }
 
     // méthode pour ajouter un trophée à un utilisateur
