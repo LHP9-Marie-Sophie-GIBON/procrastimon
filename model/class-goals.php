@@ -128,28 +128,6 @@ class Goal
     }
 
     /**
-     * (EDIT) méthode pour modifier un goal
-     * 
-     * @param int $goalId id du goal à modifier
-     * @param string $goalName du nom à modifier
-     * @param string $goalCategory de la catégorie à modifier
-     * @param string $goalDuedate de la date d'échéance à modifier
-     * @param string $goalComments des commentaires à modifier
-     * @return void
-     */
-    public function editGoal($goalId, $goalName, $goalCategory, $goalDuedate, $goalComment) : void
-    {
-        $query = $this->_pdo->prepare("UPDATE goals SET name = :name, category = :category, due_date = :due_date, comments= :comments WHERE id = :id");
-        $query->execute([
-            ':name' => $goalName,
-            ':category' => $goalCategory,
-            ':due_date' => date('Y-m-d', $goalDuedate),
-            ':comments' => $goalComment,
-            ':id' => $goalId
-        ]);
-    }
-
-    /**
      * (COMPLETE) méthode pour check un goal
      *  
      * @param int $goalID id du goal complété
@@ -194,18 +172,7 @@ class Goal
         ]);
     }
 
-    /**
-     * (GAME OVER - DUE DATE IS TODAY) méthode pour afficher un goal dont la due_date est aujourdh'ui
-     */ 
-    public function isDueDay()
-    {
-        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date = :due_date");
-        $query->execute([
-            ':id_users' => $this->id_users,
-            ':due_date' => date('Y-m-d')
-        ]);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
+
 
     /**
      * (BOARDING HOME) méthode pour afficher les goals dont la date est égale ou inférieur a evolution_day

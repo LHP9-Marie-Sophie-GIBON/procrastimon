@@ -12,7 +12,7 @@
     <?php } else ?>
 
     <!-- mise en place des goals ayant atteint leur due date-->
-    <?php if ($dueDay) { ?>
+    <!-- <?php if ($dueDay) { ?>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">It's D-day ! </h5>
@@ -114,7 +114,7 @@
 
             </div>
         </div>
-    <?php } else ?>
+    <?php } else ?> -->
 
     <!-- mise en place des goals dont le due date est expiré -->
     <?php if ($expiredDate) { ?>

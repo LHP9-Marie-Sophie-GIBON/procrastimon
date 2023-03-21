@@ -23,7 +23,6 @@ $goal->id_users = $_SESSION['user_id'];
 $goalsList = $goal->getGoals(); // affichage des goals
 $empty = empty($goal->getGoals());// s'il n'y pas de goals enregistrés
 // vérification des duedates
-$dueDay = $goal->isDueDay();//Jour J
 $expiredDate = $goal->getExpiredGoals(); //Jour dépassé
 
 
@@ -113,15 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: controller-goals.php');
         exit;
     }
-    
-    // Reset goal
-    if (isset($_POST['reset'])) {
-            $goal->editGoal($_POST['id'], $_POST['name'], $_POST['category'], $_POST['due_date'], $_POST['comment']);
-            $procrastimon->removeHp(10, $procrastimon->id);
-            header('Location: controller-goals.php');
-            exit;
-    }
- 
 }
 
 // (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
