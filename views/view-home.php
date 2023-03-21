@@ -43,7 +43,7 @@
     </div>
 
     <!-- Modal Edit Profil-->
-    <div class="modal fade" id="modalEditProfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="modalEditProfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -104,4 +104,13 @@
 
     <!-- mise en place du footer -->
     <?php include 'components/footer.php'; ?>
+
+    <script>
+    // creation de l'objet openModal, nous ciblons la classe openModal
+    let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
+        keyboard: false
+    })
+    // nous l'ouvrons avec la methode show()
+    openModal.show()
+</script>
 </body>
