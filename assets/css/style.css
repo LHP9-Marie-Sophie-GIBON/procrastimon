@@ -25,11 +25,12 @@ select {
     border-color: #acccfc00;
 }
 
-/* MAIN */
+
 /* PROGRESS BAR */
-main div.row.progressbar {
-    margin-top: 4rem !important;
-    width: 100%;
+div.row.progressbar {
+    margin-top: 1rem !important;
+    width: 80vw;
+    background: #acccfcd3;
 }
 
 .progress {
@@ -111,10 +112,5 @@ button.btn:hover {
 button.btnHome {
     /* bounce animation */
     animation: bounce 0.5s ease-in-out infinite alternate;
-}
-
-/* HEADER */
-header nav {
-    background-color: #acccfc00;
 }
 

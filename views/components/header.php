@@ -1,5 +1,5 @@
 <header>
-    <div class="row progressbar mt-3">
+    <div class="row progressbar mt-3 rounded-end-pill">
         <div class="col-1">
             <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid">
         </div>
