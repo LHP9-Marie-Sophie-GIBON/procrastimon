@@ -166,7 +166,7 @@
     </main>
 
     <!-- mise en place du footer -->
-    <?php include 'components/footer-trophies.php'; ?>
+    <?php include 'components/footer.php'; ?>
 
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

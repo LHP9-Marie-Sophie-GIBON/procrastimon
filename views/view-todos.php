@@ -192,7 +192,7 @@
 
 
 <!-- mise en place du footer -->
-<?php include 'components/footer-todos.php'; ?>
+<?php include 'components/footer.php'; ?>
 <script>
     // creation de l'objet openModal, nous ciblons la classe openModal
     let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {

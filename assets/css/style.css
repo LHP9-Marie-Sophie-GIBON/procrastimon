@@ -108,6 +108,11 @@ button.btn:hover {
     opacity: 1;
 }
 
+button.btnHome {
+    /* bounce animation */
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
 /* HEADER */
 header nav {
     background-color: #acccfc00;
