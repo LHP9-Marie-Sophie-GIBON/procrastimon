@@ -2,7 +2,7 @@
 
 <body>
     <!-- mise en place du Header -->
-    <?php include 'components/header-trophies.php'; ?>
+    <?php include 'components/header.php'; ?>
 
     <main>
         <div class="container">

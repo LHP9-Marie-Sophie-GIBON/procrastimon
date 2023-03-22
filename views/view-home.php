@@ -104,7 +104,10 @@
     </div>
 
     <!-- mise en place du footer -->
-    <?php include 'components/footer.php'; ?>
+    <footer>
+        <?php include 'components/footer.php'; ?>
+    </footer>
+    
 
     <script>
     // creation de l'objet openModal, nous ciblons la classe openModal

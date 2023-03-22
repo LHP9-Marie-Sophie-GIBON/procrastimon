@@ -78,27 +78,34 @@ div.row.character div.oval {
 
 }
 
-/* OPTIONS */
+/* FOOTER */
 
 nav.options,
 .offcanvas {
-    background-color: #acccfc;
+    background-color: #acccfcc3;
 }
-
-
 
 button.btn {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 50px;
     background: #acccfc;
-    box-shadow: 15px 15px 30px #90abd4,
-        -15px -15px 30px #c8edff;
+    /* box-shadow: 15px 15px 30px #90abd4,
+        -15px -15px 30px #c8edff; */
 }
 
 button.btn:hover {
     background-color: #de8dfb !important;
     color: #fff !important;
+}
+
+.offcanvas-body {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.offcanvas.show .offcanvas-body {
+    opacity: 1;
 }
 
 /* HEADER */

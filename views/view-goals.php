@@ -2,7 +2,7 @@
 
 <body>
     <!-- mise en place du Header -->
-    <?php include 'components/header-task.php'; ?>
+    <?php include 'components/header.php'; ?>
 
     <!-- s'il n'y a pas encore de goals -->
     <?php if ($empty) { ?>
