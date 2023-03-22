@@ -98,10 +98,10 @@ class Goal
     /**
      * (DUE DATE - TIME LEFT) méthode pour déterminer le nombre de jours restants avant l'échéance
      * 
-     * @param int $goalId id du goal visé
+     * @param float $goalId id du goal visé
      * @return void
      */ 
-    public function getRemainingDays($goalId) : void
+    public function getRemainingDays(float $goalId) 
     {
         $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE id = :id");
         $query->execute([
@@ -110,7 +110,7 @@ class Goal
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $dueDate = strtotime($result['due_date']);
         $remainingDays = ceil(($dueDate - time()) / (60 * 60 * 24));
-        echo $remainingDays;
+        return $remainingDays;
     }
 
     /**

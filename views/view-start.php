@@ -1,9 +1,15 @@
 <?php include 'components/head.php'; ?>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
+</script>
 
 <main>
     <?php if (isset($_GET['newGame'])) { ?>
         <div class="container mt-3 p-3">
-            <form action="" method="post">
+            <form action="" method="post" id="demo-form">
 
                 <!-- user part -->
                 <div class="input-group mb-3">
@@ -42,7 +48,7 @@
 
                 <!-- submit -->
                 <div>
-                    <input type="submit" class="btn btn-outline-light" value="let's go!">
+                    <input type="submit" class="btn btn-outline-light g-recaptcha" value="let's go!" data-sitekey="6Lfv6xwlAAAAAPBgq_F5vme5N36xVvFKhbLXTJVo" data-callback='onSubmit' data-action='submit'>
                     <button class="btn btn-outline-light"><a href="controller-start.php">return</a></button>
 
                 </div>
@@ -136,4 +142,5 @@
     // nous l'ouvrons avec la methode show()
     openModal.show()
 </script>
+
 </body>

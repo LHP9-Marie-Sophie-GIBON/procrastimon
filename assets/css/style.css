@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 body {
     background-image: url('../img/background.svg');
@@ -7,16 +7,16 @@ body {
     background-position: center;
     background-attachment: fixed;
 
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: 1rem !important;
 
     overflow-x: hidden;
-    
+
 }
 
 /* LOGIN */
 span.danger i {
-    color:red;
+    color: red;
 }
 
 select {
@@ -80,17 +80,20 @@ div.row.character div.oval {
 
 /* OPTIONS */
 
-nav.options {
+nav.options,
+.offcanvas {
     background-color: #acccfc;
 }
+
+
 
 button.btn {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 50px;
-    background: linear-gradient(315deg, #b8daff, #9bb8e3);
-    box-shadow:  -8px -8px 13px #8da7cf,
-                 8px 8px 13px #cbf1ff;
+    background: #acccfc;
+    box-shadow: 15px 15px 30px #90abd4,
+        -15px -15px 30px #c8edff;
 }
 
 button.btn:hover {

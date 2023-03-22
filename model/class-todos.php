@@ -34,7 +34,7 @@ class Todo
     {
         switch ($this->task_priority_level) {
             case 1:
-                $this->due_date = time() + (1 * 24 * 60 * 60); // 1 jour
+                $this->due_date = strtotime('today midnight');
                 break;
             case 2:
                 $this->due_date = time() + (3 * 24 * 60 * 60); // 3 jours
@@ -88,13 +88,11 @@ class Todo
     // Time left, méthode pour calculer le temps restant entre la création de la todo et la due-date
     public function timeLeft()
     {
-        // récupération de la date de création et la date d'échéance
-        $creation = $this->creation;
-        $due_date = $this->due_date;
+        $dueDate = strtotime($this->due_date);
 
         // calcul du temps restant
-        $time_left = $due_date - $creation;
-
+        $time_left = ceil(($dueDate - time()) / (60 * 60 * 24));
+    
         // retour du temps restant
         return $time_left;
     }

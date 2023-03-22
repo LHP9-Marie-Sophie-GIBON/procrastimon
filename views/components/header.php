@@ -1,6 +1,6 @@
 <header>
-    <div class="row progressbar">
-        <div class="col">
+    <div class="row progressbar mt-3">
+        <div class="col-1">
             <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid">
         </div>
         <div class="col-7">
@@ -14,10 +14,6 @@
                 <div class="progress-bar barPP" style="width: <?= $procrastimon->exp ?>%"></div>
             </div>
         </div>
-        <div class="col">
-            <button class="btn btn-outline-light">
-                <a href="../controllers/controller-boarding-home.php"><img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/house-with-a-garden.png" /></a>
-            </button>
-        </div>
+        
     </div>
 </header>

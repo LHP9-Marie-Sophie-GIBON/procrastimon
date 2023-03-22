@@ -114,7 +114,7 @@
                             <p> Comment : <?= $_SESSION['newGoal']['comment'] ?></p>
                             <div>
                                 <a href="controller-goals.php?newGoal"><button class="btn btn-secondary">Save</button> </a>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             </div>
                             </form>
                         </div>
@@ -136,7 +136,13 @@
                             $now = new DateTime();
                             $interval = $date->diff($now);
                             $days = $interval->format('%a');
-                            echo $days . ' days';
+                            // si $days == 0, echo "today"
+                            if ($days == 0) {
+                                echo 'today';
+                            } else {
+                                echo $days . ' days';
+                            }
+
                             ?>
                         </div>
                         <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $goal['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>

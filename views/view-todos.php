@@ -26,9 +26,9 @@
                             <span class="input-group-text task_priority_level" id="basic-addon2"><?= $arrayErrors['task_priority_level'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
                             <select name="task_priority_level" id="task_priority_level">
                                 <option value="default" selected disabled></option>
-                                <option value="1">Must do now</option>
-                                <option value="2">Should do soon</option>
-                                <option value="3">Could do later</option>
+                                <option value="1">Must do now (due today) </option>
+                                <option value="2">Should do soon (2 days)</option>
+                                <option value="3">Could do later (4 days)</option>
                             </select>
                         </div>
                         <div>
@@ -61,7 +61,7 @@
                     </p>
                     <div>
                         <a href="controller-todos.php?newTask"><button class="btn btn-secondary">Save</button> </a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                     </form>
                 </div>
@@ -101,7 +101,14 @@
                         $now = new DateTime();
                         $interval = $date->diff($now);
                         $days = $interval->format('%a');
-                        echo $days . ' days';
+
+                        // si $days == 0, echo "today"
+                        if ($days == 0) {
+                            echo 'today';
+                        } else {
+                            echo $days . ' days';
+                        }
+                        
                         ?>
                     </div>
                     <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $task['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>

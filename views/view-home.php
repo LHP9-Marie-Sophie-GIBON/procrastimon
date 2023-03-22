@@ -1,6 +1,7 @@
 <?php include 'components/head.php'; ?>
 
 <body>
+
     <!-- mise en place du Header -->
     <?php include 'components/header.php'; ?>
 

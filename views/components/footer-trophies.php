@@ -6,7 +6,7 @@
             </a>
         </button>
         <button class="btn btn-outline-light border-5" type="button">
-            <a href="../controllers/controller-todo.php">
+            <a href="../controllers/controller-todos.php">
                 <img src="https://img.icons8.com/sf-black-filled/48/FFFFFF/todo-list.png" />
             </a>
         </button>
