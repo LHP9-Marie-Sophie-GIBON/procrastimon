@@ -135,28 +135,29 @@ if ($procrastimon->hp <= 0) {
 // (TROPHIES)Création des trophés en fonction du nombre de taches réalisées
 $completeTodos = $todo->countCompletedTodos();
 $totalTrophies = $user->getTotalTrophies('total_todo_trophies'); 
-if ($completeTodos === 10 && $totalTrophies < 1) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+
+if ( $completeTodos ===10 && $totalTrophies['total_todo_trophies'] === 0 ) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Wood to-do\'s trophy');
     $user->addTrophy('total_todo_trophies');
     echo "You just won a Trophy, check it out in the trophy room";
 } 
-elseif ($completeTodos === 25 && $totalTrophies < 2) {
+elseif ($completeTodos === 25 && $totalTrophies['total_todo_trophies'] < 2) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Steel to-do\'s trophy');
     $user->addTrophy('total_todo_trophies');
     echo "You just won a Trophy, check it out in the trophy room";
 } 
-elseif ($completeTodos === 50 && $totalTrophies < 3) {
+elseif ($completeTodos === 50 && $totalTrophies['total_todo_trophies'] < 3) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Marble todo\'s trophy');
     $user->addTrophy('total_todo_trophies');
     echo "You just won a Trophy, check it out in the trophy room";
 
-} elseif ($completeTodos === 100 && $totalTrophies < 4) {
+} elseif ($completeTodos === 100 && $totalTrophies['total_todo_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy($trophy->id_users, 'Moonstone todo\'s trophy');

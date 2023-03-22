@@ -145,28 +145,28 @@ if ($procrastimon->hp <= 0) {
 $achievedGoals = $goal->countAchievedGoals();// Récupération du nombre de goals
 $totalTrophies = $user->getTotalTrophies('total_goal_trophies'); 
  
-if ($achievedGoals === 1 && $totalTrophies < 1) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Bronze goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
     echo "You just won a Trophy, check it out in the trophy room";
 } 
-elseif ($achievedGoals === 3 && $totalTrophies < 2) {
+elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Silver goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
     echo "You just won a Trophy, check it out in the trophy room";
 } 
-elseif ($achievedGoals === 5 && $totalTrophies < 3) {
+elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Gold goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
     echo "You just won a Trophy, check it out in the trophy room";
 
-} elseif ($achievedGoals === 10 && $totalTrophies < 4) {
+} elseif ($achievedGoals === 10 && $totalTrophies['total_goal_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy($trophy->id_users, 'Diamond goal\'s trophy');

@@ -29,17 +29,60 @@ select {
 /* PROGRESS BAR */
 div.row.progressbar {
     margin-top: 1rem !important;
-    width: 80vw;
+    width: 90vw;
+    height: 80px;
     background: #acccfcd3;
 }
 
+img.imgChibi {
+    width: 60px;
+    height: 60px;
+}
+
+.col-3 {
+    width: 20%;
+    height: fit-content;
+}
+
+.col-1 button {
+    margin: auto;
+}
+
+.col-1 button img {
+    margin: 0.2rem;
+}
+
+@media (min-width: 992px) {
+    div.row.progressbar {
+        width: 80vw;
+    }
+
+    .col-3 {
+        width: 6%;
+    }
+}
+
 .progress {
-    margin: 0.5rem;
+    margin: 0.2rem;
+    height: 12px;
 }
 
 div.progress-bar.barPV {
     background-color: #24f5af !important;
 }
+
+div.progress-bar.barPV.hp50 {
+    background-color: #f59e24 !important;
+}
+
+div.progress-bar.barPV.hp25 {
+    background-color: #f52424 !important;
+}
+
+div.progress-bar.barPP {
+    background-color: rgb(254, 224, 92) !important;
+}
+
 
 
 /* CHARACTER */
@@ -113,4 +156,3 @@ button.btnHome {
     /* bounce animation */
     animation: bounce 0.5s ease-in-out infinite alternate;
 }
-
