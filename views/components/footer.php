@@ -8,7 +8,7 @@
             <div class="row align-items-center justify-content-center mt-3">
 
                 <!-- Bouton 1-->
-                <div class="col-2 text-center">
+                <div class="col text-center">
                     <?php
                     $controller = basename($_SERVER['PHP_SELF'], '.php');
                     if ($controller === 'controller-goals' || $controller === 'controller-todos' || $controller === 'controller-trophies' || $controller === 'controller-boarding-home') { ?>
@@ -32,7 +32,7 @@
                 </div>
 
                 <!-- Bouton 2 -->
-                <div class="col-2 text-center ">
+                <div class="col text-center ">
                     <?php if ($controller === 'controller-todos' || $controller === 'controller-trophies' || $controller === 'controller-boarding-home') { ?>
                         <button class="btn btn-outline-light border-5" type="button">
                             <a href="../controllers/controller-goals.php">
@@ -53,7 +53,7 @@
             </div>
             <div class="row justify-content-center align-items-center">
                 <!-- Bouton 3 -->
-                <div class="col-2 text-center">
+                <div class="col text-center">
                     <?php if ($controller === 'controller-trophies' || $controller === 'controller-boarding-home') { ?>
                         <button class="btn btn-outline-light border-5" type="button">
                             <a href="../controllers/controller-todos.php">
@@ -73,7 +73,7 @@
             </div>
             <div class="row justify-content-center align-items-center">
                 <!-- Bouton 4 -->
-                <div class="col-2 text-center">
+                <div class="col text-center">
                     <?php if ($controller === 'controller-boarding-home') { ?>
                         <button class="btn btn-outline-light border-5" type="button">
                             <a href="../controllers/controller-trophies.php">
@@ -88,7 +88,7 @@
                     <label class="text-white small" for="Boarding-home">Boarding-Home</label>
                     <?php } ?>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col text-center">
                     <button class="btn btn-outline-light border-5" type="button" data-bs-toggle="modal" data-bs-target="#modalOptions">
                         <img src="https://img.icons8.com/ios-filled/48/FFFFFF/menu-2.png" />
                     </button> <br>
