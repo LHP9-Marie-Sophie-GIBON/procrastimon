@@ -172,9 +172,8 @@ button.btnHome {
 }
 
 
-/* TODOLIST */
-.container.TodoList {
-    background-color: rgba(255, 255, 255, 0.678);
+/* TODOLIST & GOALS List*/
+.container.TodoList, .container.Goallist {
     width: 90vw;
 }
 .row.tasks {   
@@ -192,10 +191,11 @@ button.btnHome {
     --bs-btn-padding-x: 0;
     --bs-btn-padding-y: 0;
     --bs-btn-focus-box-shadow: 0;
-    border: 0;
-    
+    border: 0;  
 }
-
+.row.tasks .col-2 {
+    width: 20%;
+}
 .modal-content {
     background-color: rgba(255, 255, 255, 0.8);
     color: #4b83d6;
@@ -220,3 +220,24 @@ button.btnHome {
     text-align: center;
     font-weight: bold;
 }
+
+button.btn.checked {
+    /* animation pulse */
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* GOALS LIST */

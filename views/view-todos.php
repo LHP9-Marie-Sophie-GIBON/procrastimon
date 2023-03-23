@@ -8,9 +8,10 @@
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content rounded-5 border border-light border-5">
-                <div class="modal-body">
-                    <h5 class="modal-title">Add a new task</h5>
-                    <form class="container" method="post" id="formtask">
+                <form class="container" method="post" id="formtask">
+                    <div class="modal-body">
+                        <h5 class="modal-title">Add a new task</h5>
+
 
                         <div class="row mb-1">
                             <span class="col-1 my-auto task" id="basic-addon1"> <?= $arrayErrors['task'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
@@ -26,12 +27,12 @@
                                 <option value="3">Could do later (4 days)</option>
                             </select>
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-outline-info rounded-pill" name="insert">Save</button>
-                            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-info rounded-pill" name="insert">Save</button>
+                        <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -41,7 +42,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-body">
-                    <h5 class="modal-title">Do you want to add this new task ? </h5>
+                    <h5 class="modal-title mb-2">Do you want to add this new task ? </h5>
                     <p><span class="fw-bold">Description :</span> "<?= $_SESSION['newTask']['task'] ?>"</p>
                     <p><span class="fw-bold">Task priority level :</span>
                         <?php
@@ -54,11 +55,10 @@
                         }
                         ?>
                     </p>
-                    <div>
-                        <a href="controller-todos.php?newTask" class="btn btn-outline-info rounded-pill">Yes</a>
-                        <button type="button" class="btn btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
-                    </div>
-                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="controller-todos.php?newTask" class="btn btn-outline-info rounded-pill">Yes</a>
+                    <button type="button" class="btn btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
                 </div>
             </div>
         </div>
@@ -108,7 +108,10 @@
                     if ($days == 0) {
                         $priority = "danger";
                         $timeleft = 'today';
-                    } else if ($days == 1) {
+                    } elseif ($days <= 1) {
+                        $priority = "danger";
+                        $timeleft = "$days day";
+                    } elseif ($days <= 3) {
                         $priority = "warning";
                         $timeleft = "$days days";
                     } else {
@@ -117,7 +120,7 @@
                     }
                 ?>
                     <div class="row rounded-pill tasks border border-light border-5 ">
-                        <button class="btn" value="checked" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $task['id'] ?>"><img src="https://img.icons8.com/sf-black/35/24f5af/ok.png" /></button>
+                        <button class="btn checked" value="checked" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $task['id'] ?>"><img src="https://img.icons8.com/sf-black/35/24f5af/ok.png" /></button>
                         <div class="col-2 my-auto"><span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span></div>
                         <div class="col fw-bold my-auto ">
                             <?= $task['name'] ?>
@@ -131,7 +134,7 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content rounded-5 border border-light border-5">
                                 <div class="modal-body h4">
-                                    <p><span class="fw-bold">Description :</span>  <?= $task['name'] ?></p>
+                                    <p><span class="fw-bold">Description :</span> <?= $task['name'] ?></p>
                                     <p><span class="fw-bold">Task priority level :</span>
                                         <?php
                                         if ($task['task_priority_level'] == 1) {
@@ -143,7 +146,7 @@
                                         }
                                         ?>
                                     </p>
-                                    <p><span class="fw-bold">Creation :</span>  <?= $task['creation'] ?></p>
+                                    <p><span class="fw-bold">Creation :</span> <?= $task['creation'] ?></p>
                                     <p><span class="fw-bold">Due Date :</span> <?= $task['due_date'] ?></p>
                                 </div>
                                 <div class="modal-footer">
@@ -179,6 +182,7 @@
                                 <div class="modal-body text-center">
                                     <p class="h4">Are you sure, you want to delete :</p>
                                     <p class="h3 fw-bold">"<?= $task['name'] ?>"</p>
+                                    <p class="text-muted">Your procrastimon will take damages...</p>
                                 </div>
                                 <div class="modal-footer">
                                     <form action="" method="post">
