@@ -118,15 +118,12 @@
                         $timeleft = "$days days";
                     }
                 ?>
-                    <div class="row rounded-pill tasks border border-light border-5">
-
+                    <div class="row rounded-pill tasks border border-light border-5 ">
                         <button class="btn" value="checked" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $task['id'] ?>"><img src="https://img.icons8.com/sf-black/35/24f5af/ok.png" /></button>
-
-                        <div class="col fw-bold my-auto">
+                        <div class="col-2 my-auto"><span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span></div>
+                        <div class="col fw-bold my-auto ">
                             <?= $task['name'] ?>
-                            <span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span>
                         </div>
-
                         <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $task['id'] ?>"><img src="https://img.icons8.com/sf-black-filled/35/acccfc/about.png" /></button>
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis<?= $task['id'] ?>"><img src="https://img.icons8.com/fluency/30/null/delete-forever.png" /></button>
                     </div>
