@@ -4,9 +4,6 @@
     <!-- mise en place du Header -->
     <?php include 'components/header.php'; ?>
 
-
-    <!-- mise en place du formulaire de creation de la TODO-->
-
     <!-- modal de formulaire -->
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -71,116 +68,135 @@
 
     <!-- mise en place de la page TO DO LIST -->
     <main>
+        <div class="h2 text-center text-white fw-bold m-2">TO-DO List</div>
         <?php if ($empty) { ?>
-            <div class="alert alert-danger" role="alert">
-                <p class="text-center">You don't have any task yet !</p>
+            <!-- Liste des todos vide -->
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-center">You don't have any task yet !</p>
+                </div>
             </div>
+
         <?php } elseif ($expiredTodos) { ?>
-            <div class="alert alert-danger" role="alert">
-                <p class="text-center">You have some expired tasks !</p>
-                <?php foreach ($expiredTodos as $expiredTodo) {
-                    $procrastimon->removeHp(5, $procrastimon->id);
-                    $todo->expiredTodo($expiredTodo['id']);
-                ?>
-                    <p class="text-center">Your Task : "<?= $expiredTodo['name'] ?>" is expired (due day : <?= $expiredTodo['due_date'] ?>) </p>
+            <!-- Liste des todos expirées -->
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-center">You have some expired tasks !</p>
+
+                    <?php foreach ($expiredTodos as $expiredTodo) {
+                        $procrastimon->removeHp(5, $procrastimon->id);
+                        $todo->expiredTodo($expiredTodo['id']);
+                    ?>
+
+                        <p class="text-center">Your Task : "<?= $expiredTodo['name'] ?>" is expired (due day : <?= $expiredTodo['due_date'] ?>) </p>
+
+                    <?php } ?>
+                    <a href="controller-todos.php" class="btn btn-danger">Next</a>
+                </div>
             </div>
-        <?php } ?>
-        <a href="controller-todos.php" class="btn btn-danger">Next</a>
-    <?php } else { ?>
-        <!-- Affichage des tasks -->
-        <div class="container">
-            <?php
-            foreach ($todolist as $task) { ?>
-                <div class="row <?= $success ?? '' ?>">
-                    <button type="button" class="btn col-1" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $task['id']?>"><img src="https://img.icons8.com/color-glass/28/null/checked.png" /></button>
-                    <div class="col"><?= $task['name'] ?></div>
-                    <div class="col">
-                        <?php
-                        // déterminer le nombre de jour restant jusqu'à duedate
-                        $date = new DateTime($task['due_date']);
-                        $now = new DateTime();
-                        $interval = $date->diff($now);
-                        $days = $interval->format('%a');
 
-                        // si $days == 0, echo "today"
-                        if ($days == 0) {
-                            echo 'today';
-                        } else {
-                            echo $days . ' days';
-                        }
-                        
-                        ?>
+        <?php } else { ?>
+            <!-- Affichage des tasks -->
+            <div class="container Todolist">
+                <?php
+                foreach ($todolist as $task) {
+                    // déterminer le nombre de jour restant jusqu'à duedate
+                    $date = new DateTime($task['due_date']);
+                    $now = new DateTime();
+                    $interval = $date->diff($now);
+                    $days = $interval->format('%a');
+
+                    // si $days == 0, echo "today"
+                    if ($days == 0) {
+                        $priority = "danger";
+                        $timeleft = 'today';
+                    } else if ($days == 1) {
+                        $priority = "warning";
+                        $timeleft = "$days days";
+                    } else {
+                        $priority = "info";
+                        $timeleft = "$days days";
+                    }
+                ?>
+                    <div class="row rounded-pill tasks border border-light border-5">
+
+                        <button class="btn" value="checked" id="<?= $task['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $task['id'] ?>"><img src="https://img.icons8.com/sf-black/35/24f5af/ok.png" /></button>
+
+                        <div class="col fw-bold my-auto">
+                            <?= $task['name'] ?>
+                            <span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $task['id'] ?>"><img src="https://img.icons8.com/sf-black-filled/35/acccfc/about.png" /></button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis<?= $task['id'] ?>"><img src="https://img.icons8.com/fluency/30/null/delete-forever.png" /></button>
                     </div>
-                    <button type="button" class="col-1 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal<?= $task['id'] ?>"><img src="https://img.icons8.com/ios-glyphs/20/null/visible--v1.png" /></button>
-                    <button type="button" class="col-1 btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationModalBis<?= $task['id']?>"><i class="bi bi-trash3-fill"></i></button>
-                </div>
 
-                <!-- modal d'informations -->
-                <div class="modal fade" id="modal<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <p>Description : <?= $task['name'] ?></p>
-                                <p>task_priority_level :
-                                    <?php
-                                    if ($task['task_priority_level'] == 1) {
-                                        echo 'Must Do Now';
-                                    } elseif ($task['task_priority_level'] == 2) {
-                                        echo 'Should Do Soon';
-                                    } elseif ($task['task_priority_level'] == 3) {
-                                        echo 'Could Do Later';
-                                    }
-                                    ?>
-                                </p>
-                                <p>Creation : <?= $task['creation'] ?></p>
-                                <p>Due Date : <?= $task['due_date'] ?></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                    <!-- modal d'informations -->
+                    <div class="modal fade" id="modal<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <p>Description : <?= $task['name'] ?></p>
+                                    <p>task_priority_level :
+                                        <?php
+                                        if ($task['task_priority_level'] == 1) {
+                                            echo 'Must Do Now';
+                                        } elseif ($task['task_priority_level'] == 2) {
+                                            echo 'Should Do Soon';
+                                        } elseif ($task['task_priority_level'] == 3) {
+                                            echo 'Could Do Later';
+                                        }
+                                        ?>
+                                    </p>
+                                    <p>Creation : <?= $task['creation'] ?></p>
+                                    <p>Due Date : <?= $task['due_date'] ?></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- modal de confirmation checked-->
-                <div class="modal fade" id="confirmationModal<?= $task['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                Are your sure ?
-                            </div>
-                            <div class="modal-footer">
-                                <form action="controller-todos.php" method="post">
-                                    <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
-                                    <button type="submit" name="checked" class="btn btn-primary">Yes</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- modal de confirmation delete -->
-                <div class="modal fade" id="confirmationModalBis<?= $task['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                Are your sure ?
-                            </div>
-                            <div class="modal-footer">
-                                <form action="" method="post">
-                                    <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
-                                    <button type="submit" name="delete" class="btn btn-primary">Yes</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <!-- modal de confirmation checked-->
+                    <div class="modal fade" id="confirmationModal<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Are your sure ?
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="controller-todos.php" method="post">
+                                        <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
+                                        <button type="submit" name="checked" class="btn btn-primary">Yes</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <?php } ?>
+                    <!-- modal de confirmation delete -->
+                    <div class="modal fade" id="confirmationModalBis<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Are your sure ?
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="" method="post">
+                                        <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
+                                        <button type="submit" name="delete" class="btn btn-primary">Yes</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        </div>
+                <?php } ?>
+
+            </div>
 
     </main>
 <?php } ?>

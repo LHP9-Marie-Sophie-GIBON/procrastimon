@@ -18,6 +18,7 @@ main {
     margin-bottom: 110px;
 }
 
+
 /* LOGIN */
 span.danger i {
     color: red;
@@ -43,16 +44,20 @@ img.imgChibi {
     height: 60px;
 }
 
-.col-3 {
+div.row.progressbar .col-3 {
     width: 20%;
     height: fit-content;
 }
 
-.col-1 button {
+div.row.progressbar .col-1 {
     margin: auto;
 }
 
-.col-1 button img {
+div.row.progressbar .col-1 button {
+    background: #acccfc;
+}
+
+div.row.progressbar .col-1 button img {
     margin: 0.2rem;
 }
 
@@ -89,6 +94,7 @@ div.progress-bar.barPP {
 
 
 
+
 /* CHARACTER */
 div.row.character {
     margin-top: 9rem !important;
@@ -114,7 +120,6 @@ div.row.character img {
     }
 }
 
-/* ovale under the character img */
 div.row.character div.oval {
     width: 50%;
     height: 10%;
@@ -126,25 +131,22 @@ div.row.character div.oval {
 
 }
 
+
 /* FOOTER */
-
-
-
 nav.options,
 .offcanvas {
     background-color: #acccfcc3;
 }
 
-button.btn {
+nav.options button.btn, .offcanvas button.btn {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 50px;
     background: #acccfc;
-    /* box-shadow: 15px 15px 30px #90abd4,
-        -15px -15px 30px #c8edff; */
+    
 }
 
-button.btn:hover {
+nav.options button.btn:hover, .offcanvas button.btn:hover {
     background-color: #de8dfb !important;
     color: #fff !important;
 }
@@ -159,19 +161,38 @@ button.btn:hover {
 }
 
 button.btnHome {
-    /* bounce animation */
     animation: bounce 0.5s ease-in-out infinite alternate;
 }
 
-/* HISTORY */
-.container.History {
+
+/* HISTORY / TROPHIES */
+.container.History, .container.Trophies {
     background-color: rgba(255, 255, 255, 0.678);
     width: 90vw;
 }
 
-/* TROPHIES */
-.container.Trophies {
-    background-color: rgba(255, 255, 255, 0.678);
+
+/* TODOLIST */
+.container.TodoList {
+   
     width: 90vw;
+}
+.row.tasks {   
+    background-color: rgba(255, 255, 255, 0.678);
+    padding: 0.5rem;
+    color: #4b83d6;
+    margin: auto;
+    margin-bottom: 0.5rem;
+}
+
+.row.tasks button.btn {
+    width: 35px;
+    height: auto;
+    background-color: #acccfc00;
+    --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+    --bs-btn-focus-box-shadow: 0;
+    border: 0;
     
 }
+

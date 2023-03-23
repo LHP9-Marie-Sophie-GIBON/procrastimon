@@ -23,6 +23,10 @@ $todolist = $todo->getTodos(); // récupération des tâches de l'utilisateur
 $empty = empty($todolist);
 $expiredTodos = $todo->getExpiredTodos(); // récupération des tâches expirées
 
+// déterminer le nombre de jour restant jusqu'à duedate
+
+
+
 
 // Vérification du formulaire de création de Todo
 $arrayErrors = [];
