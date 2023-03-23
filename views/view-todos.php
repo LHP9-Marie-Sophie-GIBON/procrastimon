@@ -6,31 +6,29 @@
 
     <!-- modal de formulaire -->
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-body">
                     <h5 class="modal-title">Add a new task</h5>
                     <form class="container" method="post" id="formtask">
 
-                        <label for="task">Description : </label>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text task" id="basic-addon1"> <?= $arrayErrors['task'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
-                            <input type="text" class="form-control" placeholder="" aria-label="task" aria-describedby="task" name="task">
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto task" id="basic-addon1"> <?= $arrayErrors['task'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
+                            <input type="text" class="col form-control rounded-pill" placeholder="Description" aria-label="task" aria-describedby="task" name="task">
                         </div>
 
-                        <label for="task_priority_level">Choose a priority level : </label>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text task_priority_level" id="basic-addon2"><?= $arrayErrors['task_priority_level'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
-                            <select name="task_priority_level" id="task_priority_level">
-                                <option value="default" selected disabled></option>
+                        <div class="row mb-3">
+                            <span class="col-1 my-auto task_priority_level" id="basic-addon2"><?= $arrayErrors['task_priority_level'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
+                            <select class="col form-control rounded-pill" name="task_priority_level" id="task_priority_level">
+                                <option value="default" selected disabled>Choose a priority level</option>
                                 <option value="1">Must do now (due today) </option>
                                 <option value="2">Should do soon (2 days)</option>
                                 <option value="3">Could do later (4 days)</option>
                             </select>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-secondary" name="insert">Save</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline-info rounded-pill" name="insert">Save</button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -41,11 +39,11 @@
     <!-- modal de confirmation -->
     <div class="modal fade <?= $_SESSION['newTask'] ? 'openModal' : '' ?>" id="confirmMyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-body">
-                    <h5 class="modal-title">Confirm you new task : </h5>
-                    <p> Description : <?= $_SESSION['newTask']['task'] ?></p>
-                    <p> Task priority level :
+                    <h5 class="modal-title">Do you want to add this new task ? </h5>
+                    <p><span class="fw-bold">Description :</span> "<?= $_SESSION['newTask']['task'] ?>"</p>
+                    <p><span class="fw-bold">Task priority level :</span>
                         <?php
                         if ($_SESSION['newTask']['task_priority_level'] == 1) {
                             echo 'Must Do Now (1 day)';
@@ -57,8 +55,8 @@
                         ?>
                     </p>
                     <div>
-                        <a href="controller-todos.php?newTask"><button class="btn btn-secondary">Save</button> </a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="controller-todos.php?newTask" class="btn btn-outline-info rounded-pill">Yes</a>
+                        <button type="button" class="btn btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
                     </div>
                     </form>
                 </div>
@@ -131,10 +129,10 @@
                     <!-- modal d'informations -->
                     <div class="modal fade" id="modal<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <p>Description : <?= $task['name'] ?></p>
-                                    <p>task_priority_level :
+                            <div class="modal-content rounded-5 border border-light border-5">
+                                <div class="modal-body h4">
+                                    <p><span class="fw-bold">Description :</span>  <?= $task['name'] ?></p>
+                                    <p><span class="fw-bold">Task priority level :</span>
                                         <?php
                                         if ($task['task_priority_level'] == 1) {
                                             echo 'Must Do Now';
@@ -145,11 +143,11 @@
                                         }
                                         ?>
                                     </p>
-                                    <p>Creation : <?= $task['creation'] ?></p>
-                                    <p>Due Date : <?= $task['due_date'] ?></p>
+                                    <p><span class="fw-bold">Creation :</span>  <?= $task['creation'] ?></p>
+                                    <p><span class="fw-bold">Due Date :</span> <?= $task['due_date'] ?></p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -158,16 +156,17 @@
                     <!-- modal de confirmation checked-->
                     <div class="modal fade" id="confirmationModal<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Are your sure ?
+                            <div class="modal-content rounded-5 border border-light border-5">
+                                <div class="modal-body text-center">
+                                    <p class="h4">Did you complete :</p>
+                                    <p class="h3 fw-bold">"<?= $task['name'] ?>"</p>
                                 </div>
                                 <div class="modal-footer">
                                     <form action="controller-todos.php" method="post">
                                         <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
-                                        <button type="submit" name="checked" class="btn btn-primary">Yes</button>
+                                        <button type="submit" name="checked" class="btn btn-outline-info rounded-pill">Yes</button>
                                     </form>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
                                 </div>
                             </div>
                         </div>
@@ -176,16 +175,17 @@
                     <!-- modal de confirmation delete -->
                     <div class="modal fade" id="confirmationModalBis<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Are your sure ?
+                            <div class="modal-content rounded-5 border border-light border-5">
+                                <div class="modal-body text-center">
+                                    <p class="h4">Are you sure, you want to delete :</p>
+                                    <p class="h3 fw-bold">"<?= $task['name'] ?>"</p>
                                 </div>
                                 <div class="modal-footer">
                                     <form action="" method="post">
                                         <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
-                                        <button type="submit" name="delete" class="btn btn-primary">Yes</button>
+                                        <button type="submit" name="delete" class="btn btn-outline-info rounded-pill">Yes</button>
                                     </form>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
                                 </div>
                             </div>
                         </div>

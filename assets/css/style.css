@@ -166,7 +166,7 @@ button.btnHome {
 
 
 /* HISTORY / TROPHIES */
-.container.History, .container.Trophies {
+.container.History, .container.Trophies  {
     background-color: rgba(255, 255, 255, 0.678);
     width: 90vw;
 }
@@ -196,3 +196,27 @@ button.btnHome {
     
 }
 
+.modal-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #4b83d6;
+}
+
+.btn-outline-info{
+    color: #24f5af;
+    border-color: #24f5af;
+    background-color: #ffffff;
+}
+.btn-outline-info:hover {
+    color: white;
+    border-color: #24f5af;
+    background-color: #24f5af;
+}
+
+.btn-outline-secondary{
+    background-color: #ffffff;
+}
+
+.modal-title {
+    text-align: center;
+    font-weight: bold;
+}
