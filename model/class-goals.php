@@ -51,6 +51,18 @@ class Goal
     }
 
     /**
+     * (COUNT) méthode compter le nombre d'objectifs d'un utilisateur
+     */
+    public function countGoals()
+    {
+        $query = $this->_pdo->prepare("SELECT COUNT(*) FROM goals WHERE id_users = :id_users AND statute = 0");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchColumn();
+    }
+
+    /**
      * (CREATION) méthode pour insérer un objectif dans la base de données
      */ 
     public function insertGoal()

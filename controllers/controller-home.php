@@ -18,6 +18,15 @@ if (isset($_SESSION['user_id'])) {
     $user->login($user, $procrastimon, $sprite);
 }
 
+// BADGES
+$goal = new Goal();
+$todo = new Todo();
+$goal->id_users = $_SESSION['user_id'];
+$todo->id_users = $_SESSION['user_id'];
+$numberOfGoals = $goal->countGoals(); //nombre de goals en cours
+$numberOfTodos = $todo->countTodos(); //nombre de todos en cours
+
+
 // vérification du formulaire de modification du profil
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arrayErrors = [];

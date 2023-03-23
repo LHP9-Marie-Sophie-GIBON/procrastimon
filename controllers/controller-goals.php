@@ -21,7 +21,6 @@ $user->login($user, $procrastimon, $sprite);// récupération des données de se
 $goal->id_users = $_SESSION['user_id'];
 $goalsList = $goal->getGoals(); // affichage des goals
 $empty = empty($goal->getGoals());// s'il n'y pas de goals enregistrés
-// vérification des duedates
 $expiredDate = $goal->getExpiredGoals(); //Jour dépassé
 
 

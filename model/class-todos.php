@@ -85,6 +85,17 @@ class Todo
         return $todos;
     }
 
+    // méthode pour récupérer le nombre de tâches en cours d'un utilisateur
+    public function countTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT COUNT(*) FROM todolist WHERE id_users = :id_users and statute = 0");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchColumn();
+    }
+
     // Time left, méthode pour calculer le temps restant entre la création de la todo et la due-date
     public function timeLeft()
     {

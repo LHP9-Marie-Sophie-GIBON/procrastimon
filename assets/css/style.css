@@ -92,7 +92,10 @@ div.progress-bar.barPP {
     background-color: rgb(254, 224, 92) !important;
 }
 
-
+button.btn.add:hover {
+    background-color:#de8dfb !important;
+    border-radius: 50px;
+}
 
 
 /* CHARACTER */
@@ -239,5 +242,12 @@ button.btn.checked {
         transform: scale(1);
     }
 }
+
+button.btn.checked:hover {
+    background-color: #ffffff !important;
+    border-radius: 50px;
+}
+
+
 
 /* GOALS LIST */

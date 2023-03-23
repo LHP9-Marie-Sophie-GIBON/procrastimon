@@ -1,30 +1,31 @@
 <header>
-    <div class="row resume">
-        
-    </div>
-    <div class="row progressbar mt-3 pe-2 rounded-end-pill border border-light border-5">
+    <?php 
+    $controller = basename($_SERVER['PHP_SELF'], '.php');
+    if ($controller === 'controller-home') { ?>
+        <span class="badge ms-2 mt-2 rounded-pill text-bg-primary">Goals : <?= $numberOfGoals ?> </span>
+        <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary">Todos : <?= $numberOfTodos ?> </span>
+        <?php } ?>
+    
+    <div class="row progressbar pe-2 rounded-end-pill border border-light border-5">
         <div class="col-3 rounded-end-circle bg-light border border-light border-5 p-0 m-0">
-            <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid rounded-end-circle imgChibi" >
+            <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid rounded-end-circle imgChibi">
         </div>
         <div class="col ">
             <div class="text-light fw-bold h5 mt-1 mb-0">
-                <?= $procrastimon->name ?> <span class="text-light h6">(lvl <?= $procrastimon->level ?>)</span> 
+                <?= $procrastimon->name ?> <span class="text-light h6">(lvl <?= $procrastimon->level ?>)</span>
             </div>
-            
+
             <div class="progress rounded-pill" role="progressbar" aria-label="Basic example" aria-valuenow="<?= $procrastimon->hp ?>" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar barPV" style="width: <?= $procrastimon->hp ?>%"><?= $procrastimon->hp ?>/100</div>
             </div>
-            
+
             <div class="progress rounded-pill" role="progressbar" aria-label="Info example" aria-valuenow="<?= $procrastimon->exp ?>" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar barPP" style="width: <?= $procrastimon->exp ?>%"><?= $procrastimon->exp ?>/100</div>
             </div>
         </div>
-        <?php
-        $controller = basename($_SERVER['PHP_SELF'], '.php');
-
-        if ($controller === 'controller-goals' || $controller === 'controller-todos') { ?>
+        <?php if ($controller === 'controller-goals' || $controller === 'controller-todos') { ?>
             <div class="col-1">
-                <button class="btn btn-outline-light rounded-pill p-0" type="button" name="add" data-bs-toggle="modal" data-bs-target="#myModal">
+                <button class="btn add btn-outline-light rounded-pill p-0" type="button" name="add" data-bs-toggle="modal" data-bs-target="#myModal">
                     <img src="https://img.icons8.com/sf-black/30/FFFFFF/plus-math.png" />
                 </button>
             </div>
@@ -38,7 +39,7 @@
             <?php } else { ?>
                 <div class="col-1">
                     <button class="btn btn-outline-light rounded-pill p-0">
-                        <a href="../controllers/controller-trophies.php?history=<?= $procrastimon->id_users ?>"><img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/repository.png"/></a>
+                        <a href="../controllers/controller-trophies.php?history=<?= $procrastimon->id_users ?>"><img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/repository.png" /></a>
                     </button>
                 </div>
 
