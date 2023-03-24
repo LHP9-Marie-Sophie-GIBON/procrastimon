@@ -163,7 +163,7 @@ button.btnHome {
 
 
 /* HISTORY / TROPHIES */
-.container.History, .container.Trophies  {
+.container.History, .container.Trophies, .container.boarding-home  {
     background-color: rgba(255, 255, 255, 0.678);
     width: 90vw;
 }

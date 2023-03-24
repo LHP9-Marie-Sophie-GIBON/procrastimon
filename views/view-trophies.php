@@ -166,6 +166,7 @@
                     </div>
 
                 <?php } else if ($trophiesList) { ?>
+                    <div class="h2 text-center text-white fw-bold m-2">Trophie's room</div>
                     <div class="container Trophies rounded-5 border border-light border-5 p-3 mt-4">
                         <div class="row">
                             <?php foreach ($trophiesList as $trophy) { ?>
