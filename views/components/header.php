@@ -1,10 +1,10 @@
-<header>
+<header class="fixed-top">
     <?php 
     $controller = basename($_SERVER['PHP_SELF'], '.php');
     if ($controller === 'controller-home') { ?>
         <span class="badge ms-2 mt-2 rounded-pill text-bg-primary">Goals : <?= $numberOfGoals ?> </span>
         <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary">Todos : <?= $numberOfTodos ?> </span>
-        <?php } ?>
+    <?php } ?>
     
     <div class="row progressbar pe-2 rounded-end-pill border border-light border-5">
         <div class="col-3 rounded-end-circle bg-light border border-light border-5 p-0 m-0">
