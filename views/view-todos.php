@@ -95,7 +95,7 @@
 
         <?php } else { ?>
             <!-- Affichage des tasks -->
-            <div class="container Todolist">
+            <div class="container Todolist ">
                 <?php
                 foreach ($todolist as $task) {
                     // déterminer le nombre de jour restant jusqu'à duedate
