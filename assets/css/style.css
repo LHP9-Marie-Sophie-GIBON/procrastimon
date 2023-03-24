@@ -65,16 +65,6 @@ div.row.progressbar .col-1 button img {
     margin: 0.2rem;
 }
 
-@media (min-width: 992px) {
-    div.row.progressbar {
-        width: 80vw;
-    }
-
-    div.row.progressbar .col-3 {
-        width: 7%;
-    }
-}
-
 .progress {
     margin: 0.2rem;
     height: 12px;
@@ -252,15 +242,13 @@ button.btn.checked:hover {
     border-radius: 50px;
 }
 
-
-
 /* START */
 
 .row.start {
     height: 100vh;
 }
 
-.row.start .col-3 {
+.row.start .col-7 {
     margin-bottom: 10rem;
 }
 .btnStart {
@@ -283,3 +271,28 @@ nav.options button.btn.btnML {
     background-color: #acccfc;
 }
 
+.row.newGame {
+    height: 100vh;
+    color: #4b83d6;
+}
+
+.row.newGame .card{
+ width: 90vw;
+ background-color: rgba(255, 255, 255, 0.678);
+}
+
+
+.row.newGame span.col-1{
+padding: 0;
+}
+    
+
+@media (min-width: 992px) {
+    div.row.progressbar {
+        width: 80vw;
+    }
+
+    div.row.progressbar .col-3 {
+        width: 7%;
+    }
+}
