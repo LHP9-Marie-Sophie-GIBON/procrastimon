@@ -271,7 +271,7 @@ nav.options button.btn.btnML {
     background-color: #acccfc;
 }
 
-.row.newGame {
+.row.newGame, .row.endGame {
     height: 100vh;
     color: #4b83d6;
 }
@@ -284,6 +284,17 @@ nav.options button.btn.btnML {
 
 .row.newGame span.col-1{
 padding: 0;
+}
+
+.row.endGame .card{
+    width: 90vw;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.678);
+   }
+
+.row.endGame .carousel-item {
+   height: 450px;
+ 
 }
     
 

@@ -190,7 +190,6 @@ class Goal
      * (BOARDING HOME) méthode pour afficher les goals dont la date est égale ou inférieur a evolution_day
      * 
      * @param int $id_procrastimon id du procrastimon
-     * @return void	
      * 
      */ 
     public function getGoalsHistory(int $id_procrastimon)
