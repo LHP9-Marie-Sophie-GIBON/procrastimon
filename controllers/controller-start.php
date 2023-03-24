@@ -13,12 +13,24 @@ $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 
+// BADGES
+$goal = new Goal();
+$todo = new Todo();
+if (isset($_SESSION['user_id'])) {
+    $goal->id_users = $_SESSION['user_id'];
+    $todo->id_users = $_SESSION['user_id'];
+    $numberOfGoals = $goal->countGoals(); //nombre de goals en cours
+    $numberOfTodos = $todo->countTodos(); //nombre de todos en cours
+}
+
+
 $arrayErrors = [];
 $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";
 $wrong = "<span class='danger'><i class='bi bi-x-circle-fill'></i></span>";
 
 // fonction verifyCaptcha
-class Login {
+class Login
+{
     public array $errors = [];
     public string $success = '';
 
@@ -30,7 +42,7 @@ class Login {
             $ip = $_SERVER['REMOTE_ADDR'];
             $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&response=" . $captcha . "&remoteip=" . $ip);
             $responseKeys = json_decode($response, true);
-            var_dump($responseKeys); 
+            var_dump($responseKeys);
             if ($responseKeys['score'] < 0.5) {
                 $this->errors[] = 'Veuillez cocher la case "Je ne suis pas un robot"';
             }
@@ -103,54 +115,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $Captcha = new Login();
         $Captcha->verifyCaptcha();
-        
+
 
         if (empty($login->errors)) {
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);// hachage du mot de passe
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT); // hachage du mot de passe
 
             $user = new User();
             $user->login = $login;
             $user->mail = $mail;
             $user->password = $hashedPassword;
-    
-            
+
+
             if ($user->checkLogin()) { // on vérifie si le pseudo et le mail est déjà utilisé
                 $message = " already exists";
-    
             } else { // on envoie les données dans la base de données
                 $user->insertUser();
-    
+
                 session_start(); // création d'une variable de session 
                 $_SESSION['user_id'] = $user->_pdo->lastInsertId();
-    
+
                 // vérification si l'utilisateur a été créé
                 if ($user->_pdo->lastInsertId() > 0) {
                     //    on crée un nouveau procrastimon
                     $procrastimon = new Procrastimon();
                     $procrastimon->name = $_POST['procrastimon'];
                     $procrastimon->id_users = $user->_pdo->lastInsertId();
-    
+
                     // on utilise la fonction getRandomStarter pour générer un sprite
                     $sprite = new Sprite();
                     $sprite->getRandomStarter();
                     $procrastimon->id_sprites = $sprite->id;
-    
+
                     // on envoie les données dans la base de données
                     $procrastimon->insertProcrastimon();
                 } else {
                     echo "échec de la création de l'utilisateur";
                 }
-    
+
                 header('Location: controller-home.php');
                 exit;
             }
         } else {
             $message = $login->errors[0];
-            
-        }
-        
         }
     }
+}
 
 
 if (isset($_SESSION['user_id'])) {

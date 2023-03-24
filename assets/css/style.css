@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
+html {
+    height: 100vh !important;
+}
+
 body {
     background-image: url('../img/background.svg');
     background-repeat: no-repeat;
@@ -250,4 +254,32 @@ button.btn.checked:hover {
 
 
 
-/* GOALS LIST */
+/* START */
+
+.row.start {
+    height: 100vh;
+}
+
+.row.start .col-3 {
+    margin-bottom: 10rem;
+}
+.btnStart {
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #acccfc;
+}
+.btnStart:hover {
+    background-color: #de8dfb !important;
+    color: #ffffff !important;
+}
+
+nav.options button.btn.btnML {
+    background: #acccfc00;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.row.login {
+    background-color: #acccfc;
+}
+
