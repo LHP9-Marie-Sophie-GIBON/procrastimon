@@ -3,7 +3,6 @@
 <body>
     <main>
         <div class="row endGame justify-content-center align-items-center">
-
             <div class="card rounded-5 border border-light border-5">
                 <div class="card-body">
                     <div id="carousel-gameover" class="carousel slide">
@@ -38,10 +37,6 @@
 
         </div>
     </main>
-
-
-
-
 
     <!-- Modal de creation d'un nouveau procrastimon -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
