@@ -74,7 +74,7 @@
         </div>
 
         <!-- Modal Login-->
-        <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?> " id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade <?= !empty($errorsLogin) ? 'openModal' : '' ?> " id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog  modal-dialog-centered">
 
                 <?php if (isset($_SESSION['user_id'])) { ?>
@@ -112,13 +112,13 @@
                         <form method="post" action="" id="loginForm">
                             <div class="modal-body">
                                 <div class="row mb-1">
-                                    <span class="col-1 my-auto" id="errorLogin"><?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                                    <input id="login" type="text" class="col form-control rounded-pill" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?>">
+                                    <span class="col-1 my-auto" id="errorLogin"><?= $errorsLogin['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
+                                    <input id="login" type="text" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['login-error'] ?? 'Login' ?>" aria-label="login" aria-describedby="login" name="user" value="<?= $login ?? '' ?>">
                                 </div>
 
                                 <div class="row mb-3">
-                                    <span class="col-1 my-auto" id="errorPassword"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                                    <input id="password" type="password" class="col form-control rounded-pill" placeholder="password" aria-label="password" aria-describedby="password" name="password">
+                                    <span class="col-1 my-auto" id="errorPassword"> <?= $errorsLogin['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
+                                    <input id="password" type="password" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['password-error'] ?? 'password' ?>" aria-label="password" aria-describedby="user-password" name="password">
                                 </div>
                             </div>
                             <div class="modal-footer">

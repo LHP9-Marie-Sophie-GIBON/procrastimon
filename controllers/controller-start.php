@@ -195,19 +195,20 @@ if (isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $arrayErrors = [];
+    $errorsLogin = [];
     $missing = "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";
     $wrong = "<span class='danger error-message'><i class='bi bi-x-circle-fill'></i></span>";
 
     // si les champs sont vide : echo "erreur"
-    if (empty($_POST['login']) || empty($_POST['password'])) {
-        $arrayErrors['login'] = $missing;
-        $arrayErrors['Login-errors'] = 'Login required';
-        $arrayErrors['password'] = $missing;
-        $arrayErrors['password-errors'] = 'Password required';
-    } else if (isset($_POST['login']) && isset($_POST['password'])) {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
+    if (empty($_POST['user']) || empty($_POST['user-password'])) {
+        $errorsLogin['danger'] = 'text-danger'; 
+        $errorsLogin['login'] = $missing;
+        $errorsLogin['Login-error'] = 'Login required';
+        $errorsLogin['password'] = $missing;
+        $errorsLogin['password-error'] = 'Password required';
+    } else if (isset($_POST['user']) && isset($_POST['user-password'])) {
+        $login = $_POST['user'];
+        $password = $_POST['user-password'];
 
         // Vérifier si l'utilisateur existe	
         $user = new User();
@@ -224,13 +225,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: controller-home.php');
                 exit;
             } else {
-                $arrayErrors['password'] = $wrong;
-                $arrayErrors['password-errors'] = 'Wrong password';
+                $errorsLogin['password'] = $wrong;
+                $errorsLogin['password-errors'] = 'Wrong password';
             }
         } else {
             // Authentification échouée : afficher un message d'erreur
-            $arrayErrors['login'] = $wrong;
-            $arrayErrors['password'] = $wrong;
+            $errorsLogin['login'] = $wrong;
+            $errorsLogin['password'] = $wrong;
             $success = false;
         }
     }

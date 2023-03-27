@@ -42,6 +42,8 @@ if (openModalElement) { // si openModalElement est trouvé
     openModal.show(); // nous l'ouvrons avec la methode show()
 }
 
+
+
 // CAROUSEL GAMEOVER ENDGAME
 var carousel = document.querySelector('#carousel-gameover');
 
