@@ -8,6 +8,7 @@
 
 <main>
     <?php if (isset($_GET['newGame'])) { ?>
+  
         <div class="row newGame justify-content-center align-items-center">
         
             <div class="card rounded-5 border border-light border-5">
@@ -18,31 +19,31 @@
                     <!-- user part -->
                 <div class="row mb-1">
                     <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                    <input type="text" class="col form-control rounded-pill" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?><?= $message ?? '' ?>">
+                    <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ??'' ?>" placeholder="login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?><?= $arrayErrors['login-error'] ?? '' ?>">
                 </div>
 
 
                 <div class="row mb-1">
                     <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></span>
-                    <input type="text" class="col form-control rounded-pill" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $mail ?? '' ?>">
+                    <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ??'' ?>" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $mail ?? '' ?><?= $arrayErrors['mail-error'] ?? '' ?>">
                 </div>
 
 
                 <div class="row mb-1">
                     <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                    <input type="password" class="col form-control rounded-pill" placeholder="password" aria-label="password" aria-describedby="password" name="password">
+                    <input type="password" class="col form-control rounded-pill <?= $arrayErrors['danger'] ??'' ?>" placeholder="<?= $arrayErrors['password-error'] ?? 'password' ?>" aria-label="password" aria-describedby="password" name="password">
                 </div>
 
                 <div class="row mb-1">
                     <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['confirm-password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                    <input type="password" class="col form-control rounded-pill" placeholder="confirm-password" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
+                    <input type="password" class="col form-control rounded-pill <?= $arrayErrors['danger'] ??'' ?>" placeholder="<?= $arrayErrors['confirm-password-error'] ?? 'confirm-password' ?>" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
                 </div>
 
 
                 <!-- Procrastimon part -->
                 <div class="row">
                     <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['procrastimon'] ?? '<i class="bi bi-emoji-laughing-fill"></i>' ?></span>
-                    <input type="text" class="col form-control rounded-pill" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $name ?? '' ?>">
+                    <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ??'' ?>" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $name ?? '' ?><?= $arrayErrors['procrastimon-error'] ?? '' ?>">
                 </div>
 
                 <!-- submit -->

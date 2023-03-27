@@ -330,3 +330,7 @@ span.badge.text-bg-secondary {
     font-weight: normal;
     background-color:#6197e8d5 !important;
 }
+
+input.text-danger::placeholder {
+    color: rgb(233, 1, 1); 
+}
