@@ -23,11 +23,6 @@ $todolist = $todo->getTodos(); // récupération des tâches de l'utilisateur
 $empty = empty($todolist);
 $expiredTodos = $todo->getExpiredTodos(); // récupération des tâches expirées
 
-// déterminer le nombre de jour restant jusqu'à duedate
-
-
-
-
 // Vérification du formulaire de création de Todo
 $arrayErrors = [];
 $missing =  "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";
@@ -139,35 +134,37 @@ if ($procrastimon->hp <= 0) {
 // (TROPHIES)Création des trophés en fonction du nombre de taches réalisées
 $completeTodos = $todo->countCompletedTodos();
 $totalTrophies = $user->getTotalTrophies('total_todo_trophies'); 
+$message = []; 
 
-if ( $completeTodos ===10 && $totalTrophies['total_todo_trophies'] === 0 ) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+if ($completeTodos ===10 && $totalTrophies['total_todo_trophies'] === 0 ) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Wood to-do\'s trophy');
     $user->addTrophy('total_todo_trophies');
-    echo "You just won a Trophy, check it out in the trophy room";
-} 
-elseif ($completeTodos === 25 && $totalTrophies['total_todo_trophies'] < 2) {
+    $message['trophy'] = 'OpenToast';
+} elseif ($completeTodos === 25 && $totalTrophies['total_todo_trophies'] < 2) {
+     
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Steel to-do\'s trophy');
     $user->addTrophy('total_todo_trophies');
-    echo "You just won a Trophy, check it out in the trophy room";
-} 
-elseif ($completeTodos === 50 && $totalTrophies['total_todo_trophies'] < 3) {
+    $message['trophy'] = 'OpenToast';
+} elseif ($completeTodos === 50 && $totalTrophies['total_todo_trophies'] < 3) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Marble todo\'s trophy');
     $user->addTrophy('total_todo_trophies');
-    echo "You just won a Trophy, check it out in the trophy room";
+    $message['trophy'] = 'OpenToast';
 
 } elseif ($completeTodos === 100 && $totalTrophies['total_todo_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy($trophy->id_users, 'Moonstone todo\'s trophy');
     $user->addTrophy('total_todo_trophies');
-    echo "You just won a Trophy, check it out in the trophy room";
+    $message['trophy'] = 'OpenToast';
+   
 }
+
 
 
 

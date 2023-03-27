@@ -66,7 +66,7 @@
 
     <!-- mise en place de la page TO DO LIST -->
     <main>
-        <div class="h2 text-center text-white fw-bold m-2">TO-DO List</div>
+        <div class="h2 text-center text-white fw-bold m-2">TO-DO List <?= $message['trophy'] ?? ''?></div>
         <?php if ($empty) { ?>
             <!-- Liste des todos vide -->
             <div class="container">
@@ -204,7 +204,15 @@
     </main>
 <?php } ?>
 
-
+<!-- TOAST trophé  -->
+<div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 pt-2 ps-2 ms-4 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            <p class="h6">Congrats, you just won a new trophy !</p>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
 
 
 

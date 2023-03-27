@@ -143,38 +143,37 @@ if ($procrastimon->hp <= 0) {
 // (GOAL TROPHIES) Création des trophés en fonction du nombre de goals accomplis
 $achievedGoals = $goal->countAchievedGoals();// Récupération du nombre de goals
 $totalTrophies = $user->getTotalTrophies('total_goal_trophies'); 
+$message = [];
  
 if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Bronze goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
-    $trophyToast = true; 
-    echo "You just won a Trophy, check it out in the trophy room";
-} 
-elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
+    $message['trophy'] = 'OpenToast';
+   
+} elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Silver goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
-    $trophyToast = true; 
-    echo "You just won a Trophy, check it out in the trophy room";
-} 
-elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
+    $message['trophy'] = 'OpenToast';
+   
+} elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Gold goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
-    $trophyToast = true; 
-    echo "You just won a Trophy, check it out in the trophy room";
+    $message['trophy'] = 'OpenToast';
+   
 
 } elseif ($achievedGoals === 10 && $totalTrophies['total_goal_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy($trophy->id_users, 'Diamond goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
-    $trophyToast = true; 
-    echo "You just won a Trophy, check it out in the trophy room";
+    $message['trophy'] = 'OpenToast';
+   
 }
 
 

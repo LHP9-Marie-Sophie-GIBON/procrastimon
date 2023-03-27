@@ -140,6 +140,7 @@ class User
         $query->execute([
             ':id' => $this->id
         ]);
+
     }
 
     // méthode pour récupérer le nombre de trophées d'un utilisateur
