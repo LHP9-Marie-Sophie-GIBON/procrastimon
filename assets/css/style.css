@@ -309,3 +309,24 @@ padding: 0;
         width: 7%;
     }
 }
+
+/* TOASTS */
+.toast.text-bg-primary {
+    background-color:#6197e8d5 !important;
+    margin-left: 0.5rem;
+}
+.toast.text-bg-danger {
+    background-color:#de8dfb !important;
+    margin-left: 0.5rem;
+}
+
+/* BADGE */
+span.badge.text-bg-primary {
+    font-weight: normal;
+    background-color:#de8dfb !important;
+}
+
+span.badge.text-bg-secondary {
+    font-weight: normal;
+    background-color:#6197e8d5 !important;
+}

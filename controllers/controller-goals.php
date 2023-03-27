@@ -149,6 +149,7 @@ if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) {// si le
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Bronze goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
+    $trophyToast = true; 
     echo "You just won a Trophy, check it out in the trophy room";
 } 
 elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
@@ -156,6 +157,7 @@ elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Silver goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
+    $trophyToast = true; 
     echo "You just won a Trophy, check it out in the trophy room";
 } 
 elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
@@ -163,6 +165,7 @@ elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Gold goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
+    $trophyToast = true; 
     echo "You just won a Trophy, check it out in the trophy room";
 
 } elseif ($achievedGoals === 10 && $totalTrophies['total_goal_trophies'] < 4) {
@@ -170,6 +173,7 @@ elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy($trophy->id_users, 'Diamond goal\'s trophy');
     $user->addTrophy('total_goal_trophies');
+    $trophyToast = true; 
     echo "You just won a Trophy, check it out in the trophy room";
 }
 

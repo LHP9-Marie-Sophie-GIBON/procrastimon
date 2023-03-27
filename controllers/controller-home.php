@@ -31,6 +31,7 @@ $todayGoals = $goal->getTodayGoals(); //goals du jour
 $todayTodos = $todo->getTodayTodos(); //todos du jour
 
 
+
 // vérification du formulaire de modification du profil
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arrayErrors = [];
