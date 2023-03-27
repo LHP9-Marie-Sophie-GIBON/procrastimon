@@ -8,12 +8,39 @@
     <!-- mise en place du menu -->
     <main>
 
-
         <div class="row character justify-content-center">
             <img src="<?= $sprite->sprite ?>" alt="character">
             <div class="oval"></div>
         </div>
     </main>
+
+    <!-- Toasts -->
+    <div class="toast-container position-static">
+        <!-- Toast new goals -->
+        <div class="toast <?= $todayGoals ? 'openToast' : '' ?>" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small class="text-body-secondary">just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                See? Just like this.
+            </div>
+        </div>
+        <!-- toast new todos -->
+        <div class="toast <?= $todayTodos ? 'openToast' : '' ?> " role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small class="text-body-secondary">2 seconds ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Heads up, toasts will stack automatically
+            </div>
+        </div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="modalOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,13 +132,4 @@
         <?php include 'components/footer.php'; ?>
     </footer>
 
-
-    <script>
-        // creation de l'objet openModal, nous ciblons la classe openModal
-        let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
-            keyboard: false
-        })
-        // nous l'ouvrons avec la methode show()
-        openModal.show()
-    </script>
 </body>

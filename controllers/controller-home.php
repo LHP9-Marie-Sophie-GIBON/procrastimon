@@ -26,6 +26,10 @@ $todo->id_users = $_SESSION['user_id'];
 $numberOfGoals = $goal->countGoals(); //nombre de goals en cours
 $numberOfTodos = $todo->countTodos(); //nombre de todos en cours
 
+// TOASTS
+$todayGoals = $goal->getTodayGoals(); //goals du jour
+$todayTodos = $todo->getTodayTodos(); //todos du jour
+
 
 // vérification du formulaire de modification du profil
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -106,5 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "fail";
     }
 }
+
+
 
 include '../views/view-home.php';

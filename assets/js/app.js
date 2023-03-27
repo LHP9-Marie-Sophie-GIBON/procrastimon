@@ -1,23 +1,60 @@
-// const form = document.querySelector('#formGoal');
+// CAROUSEL GAMEOVER ENDGAME
+var carousel = document.querySelector('#carousel-gameover');
 
-// form.addEventListener('submit', function(event) {
-//     event.preventDefault(); // empêcher le comportement par défaut du formulaire
+// Ajouter un écouteur d'événements sur le carousel
+carousel.addEventListener('slide.bs.carousel', function(event) {
+    console.log('woop');
 
-//     // récupérer les données du formulaire
-//     var formData = new FormData(event.target);
-//     var formAction = event.target.action;
+    // Récupérer l'index de la slide active et le nombre total de slides
+    var activeIndex = event.to;
+    var totalSlides = this.querySelectorAll('.carousel-item').length;
 
-//     // envoyer la requête AJAX
-//     var xhr = new XMLHttpRequest();
-//     xhr.open('POST', formAction);
-//     xhr.onload = function() {
-//         if (xhr.status === 200) {
-//             // la requête a réussi, faire quelque chose avec la réponse
-//             console.log(xhr.responseText);
-//         } else {
-//             // la requête a échoué, afficher une erreur
-//             console.error('Erreur: ' + xhr.statusText);
-//         }
-//     };
-//     xhr.send(formData);
-// });
+    // Vérifier si la slide active est la dernière slide
+    if (activeIndex == (totalSlides - 1)) {
+
+        // rendre le bouton next visually hidden
+        var nextButton = document.querySelector('#next');
+        nextButton.classList.add('visually-hidden');
+    }
+});
+
+// TOOLTIPS
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+// PROGRESS BAR HP
+const progressBar = document.querySelector('.progress-bar.barPV');
+console.log(progressBar.style.width);
+
+if (parseFloat(progressBar.style.width) >= 26 && parseFloat(progressBar.style.width) <= 50) {
+    if (!progressBar.classList.contains('hp50')) {
+        progressBar.classList.add('hp50');
+        console.log('Added hp50 class');
+    } else {
+        console.log('hp50 class already present');
+    }
+
+} else if (parseFloat(progressBar.style.width) >= 0 && parseFloat(progressBar.style.width) <= 25) {
+    if (!progressBar.classList.contains('hp25')) {
+        progressBar.classList.add('hp25');
+        console.log('Added hp25 class');
+    } else {
+        console.log('hp25 class already present');
+    }
+}
+
+// TOASTS
+let toastElement = document.querySelector('.toast.openToast');
+let toast = new bootstrap.Toast(toastElement, {
+    keyboard: false
+});
+toast.show();
+
+// MODAL FORMULAIRE
+let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
+    keyboard: false
+})
+openModal.show();// nous l'ouvrons avec la methode show()
+
+
+console.log('Hello World !');

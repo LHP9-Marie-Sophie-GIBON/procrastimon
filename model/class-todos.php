@@ -85,6 +85,18 @@ class Todo
         return $todos;
     }
 
+    // méthode pour récupérer les tâches de l'utilisateur à accomplir aujourd'hui
+    public function getTodayTodos()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 0 and due_date = :due_date ORDER BY due_date ASC");
+        $query->execute([
+            ':id_users' => $this->id_users,
+            ':due_date' => date('Y-m-d') 
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // méthode pour récupérer le nombre de tâches en cours d'un utilisateur
     public function countTodos()
     {

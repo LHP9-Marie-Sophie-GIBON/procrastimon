@@ -62,27 +62,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-        // Sélectionnez le carousel
-        var carousel = document.querySelector('#carousel-gameover');
-
-        // Ajouter un écouteur d'événements sur le carousel
-        carousel.addEventListener('slide.bs.carousel', function(event) {
-            console.log('woop');
-
-            // Récupérer l'index de la slide active et le nombre total de slides
-            var activeIndex = event.to;
-            var totalSlides = this.querySelectorAll('.carousel-item').length;
-
-            // Vérifier si la slide active est la dernière slide
-            if (activeIndex == (totalSlides - 1)) {
-
-                // rendre le bouton next visually hidden
-                var nextButton = document.querySelector('#next');
-                nextButton.classList.add('visually-hidden');
-            }
-        });
-    </script>
+    <script src="../assets/js/app.js"> </script>
 
 
 </body>

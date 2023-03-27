@@ -212,12 +212,5 @@
 
 <!-- mise en place du footer -->
 <?php include 'components/footer.php'; ?>
-<script>
-    // creation de l'objet openModal, nous ciblons la classe openModal
-    let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
-        keyboard: false
-    })
-    // nous l'ouvrons avec la methode show()
-    openModal.show()
-</script>
+
 </body>

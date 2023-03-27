@@ -50,6 +50,18 @@ class Goal
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    // méthode pour récupérer les objectifs de l'utilisateur à compléter aujourd'hui
+    public function getTodayGoals()
+    {
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0 AND due_date = :due_date ORDER BY due_date ASC");
+        $query->execute([
+            ':id_users' => $this->id_users,
+            ':due_date' => date('Y-m-d')
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * (COUNT) méthode compter le nombre d'objectifs d'un utilisateur
      */
@@ -183,7 +195,6 @@ class Goal
             ':id' => $goalId
         ]);
     }
-
 
 
     /**

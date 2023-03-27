@@ -145,26 +145,4 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-        // condition JS : si div.progress-bar.barPV est à 50%, add class "hp50", si 25% , add class "hp25"
-
-        const progressBar = document.querySelector('.progress-bar.barPV');
-        console.log(progressBar.style.width);
-
-        if (parseFloat(progressBar.style.width) >= 26 && parseFloat(progressBar.style.width) <= 50) {
-            if (!progressBar.classList.contains('hp50')) {
-                progressBar.classList.add('hp50');
-                console.log('Added hp50 class');
-            } else {
-                console.log('hp50 class already present');
-            }
-
-        } else if (parseFloat(progressBar.style.width) >= 0 && parseFloat(progressBar.style.width) <= 25) {
-            if (!progressBar.classList.contains('hp25')) {
-                progressBar.classList.add('hp25');
-                console.log('Added hp25 class');
-            } else {
-                console.log('hp25 class already present');
-            }
-        }
-    </script>
+    <script src="../assets/js/app.js"></script>
