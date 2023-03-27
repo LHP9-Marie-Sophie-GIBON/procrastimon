@@ -9,7 +9,7 @@
         <div class="container boarding-home rounded-5 border border-light border-5">
 
             <?php if (empty($procrastimonList)) { ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-primary rounded-5" role="alert">
                     The boarding-home is empty for now
                 </div>
                 

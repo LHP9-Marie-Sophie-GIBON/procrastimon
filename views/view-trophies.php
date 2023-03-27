@@ -31,9 +31,9 @@
                                 <p class="text-center">You didn't complete any goals yet !</p>
                             </div>
                         <?php } else { ?>
-                            <p class="h5">Goals achieved : </p>
+                            <p class="h5 fw-bold">Goals achieved : </p>
                             <?php foreach ($goalsList as $goal) { ?>
-                                <div class="mb-1"><?= $goal['creation'] ?> : Goal "<?= $goal['name'] ?>" completed the <?= $goal['achievement_day'] ?> </div>
+                                <div class="mb-1"><span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
                             <?php  }
                         }
                         // Liste des todos complétées
@@ -43,9 +43,9 @@
                             </div>
                         <?php
                         } else { ?>
-                            <p class="mt-1 h5">To-Dos completed : </p>
+                            <p class="mt-1 h5 fw-bold">To-Dos completed : </p>
                             <?php foreach ($todosList as $todo) { ?>
-                                <div class="mb-1 text-muted"><?= $todo['creation'] ?> : To-do "<?= $todo['name'] ?>" </div>
+                                <div class="mb-1">"<?= $todo['name'] ?>"</div>
                         <?php }
                         } ?>
 
@@ -72,7 +72,7 @@
                         <div class="col-12">
                             <h1 class="text-center">Achieved Goals</h1>
                             <?php foreach ($goalsList as $goal) { ?>
-                                <div class="mb-1"><?= $goal['creation'] ?> : Goal "<?= $goal['name'] ?>" completed the <?= $goal['achievement_day'] ?> </div>
+                                <div class="mb-1"><span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                         <div class="col-12">
                             <h1 class="text-center">Achieved todos</h1>
                             <?php foreach ($todosList as $todo) { ?>
-                                <div class="mb-1 text-muted"><?= $todo['creation'] ?> : To-do "<?= $todo['name'] ?>" </div>
+                                <div class="mb-1">"<?= $todo['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                         <div class="col-12">
                             <h1 class="text-center">Missed Goals</h1>
                             <?php foreach ($missedGoals as $missedGoal) { ?>
-                                <div class="mb-1"><?= $missedGoal['creation'] ?> : Goal "<?= $missedGoal['name'] ?>" </div>
+                                <div class="mb-1 text-muted">"<?= $missedGoal['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -154,14 +154,14 @@
                         <div class="col-12">
                             <h1 class="text-center">Missed todos</h1>
                             <?php foreach ($missedTodos as $missedTodo) { ?>
-                                <div class="mb-1 text-muted"><?= $missedTodo['creation'] ?> : To-do "<?= $missedTodo['name'] ?>" </div>
+                                <div class="mb-1 text-muted">"<?= $missedTodo['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>
 
 
                 <?php } else if ($empty) { ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-primary rounded-5" role="alert">
                         <p class="text-center">You don't have any trophy yet !</p>
                     </div>
 

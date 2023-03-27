@@ -72,7 +72,7 @@ div.row.progressbar .col-1 button img {
 }
 
 div.progress-bar.barPV {
-    background-color: #24f5af !important;
+    background-color: #23e8a6 !important;
 }
 
 div.progress-bar.barPV.hp50 {
@@ -167,6 +167,7 @@ button.btnHome {
 .container.History, .container.Trophies, .container.boarding-home  {
     background-color: rgba(255, 255, 255, 0.678);
     width: 90vw;
+    color: #4b83d6;
 }
 
 
@@ -195,19 +196,19 @@ button.btnHome {
     width: 20%;
 }
 .modal-content {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.749);
     color: #4b83d6;
 }
 
 .btn-outline-info{
-    color: #24f5af;
-    border-color: #24f5af;
+    color: #23e8a6;
+    border-color: #23e8a6;
     background-color: #ffffff;
 }
 .btn-outline-info:hover {
     color: white;
-    border-color: #24f5af;
-    background-color: #24f5af;
+    border-color: #23e8a6;
+    background-color: #23e8a6;
 }
 
 .btn-outline-secondary{
@@ -246,11 +247,11 @@ button.btn.checked:hover {
 /* START */
 
 .row.start {
-    height: 100vh;
+    height: 70vh;
 }
 
 .row.start .col-7 {
-    margin-bottom: 10rem;
+    margin-bottom: 2rem;
 }
 .btnStart {
     color: #ffffff;
@@ -273,7 +274,7 @@ nav.options button.btn.btnML {
 }
 
 .row.newGame, .row.endGame {
-    height: 100vh;
+    height: 70vh;
     color: #4b83d6;
 }
 

@@ -18,24 +18,25 @@
     <!-- Modal -->
     <div class="modal fade" id="modalOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Profil</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Login : <?= $user->login ?> </p>
-                    <p>Mail : <?= $user->mail ?> </p>
-                    <p>Procrastimon's name : <?= $procrastimon->name ?></p>
+                    <p><span class="fw-bold">Login :</span> <?= $user->login ?> </p>
+                    <p><span class="fw-bold">Mail :</span> <?= $user->mail ?> </p>
+                    <p><span class="fw-bold">Procrastimon's name :</span> <?= $procrastimon->name ?></p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
+                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
                         Edit your profil
                     </button>
                     <form action="../config/deconnect.php" method="post">
-                        <button type="submit" class="btn btn-outline-light">
-                            Sign out
+                        <button type="submit" class="btn">
+                            <img src="https://cdn.discordapp.com/attachments/1039537189169676388/1089815832785334292/icon-logout.png" alt="">
+
                         </button>
                     </form>
                 </div>
@@ -46,59 +47,55 @@
     <!-- Modal Edit Profil-->
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="modalEditProfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit you Profil</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
+                <form action="" method="post">
+                    <div class="modal-body">
 
                         <!-- user part -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                            <input type="text" class="form-control" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $user->login ?>">
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
+                            <input type="text" class="col form-control rounded-pill" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $user->login ?>">
                         </div>
 
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></span>
-                            <input type="text" class="form-control" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $user->mail ?>">
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></span>
+                            <input type="text" class="col form-control rounded-pill" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $user->mail ?>">
                         </div>
 
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['oldPassword'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                            <input type="password" class="form-control" placeholder="Old password" aria-label="oldPassword" aria-describedby="oldPassword" name="oldPassword">
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['oldPassword'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
+                            <input type="password" class="col form-control rounded-pill" placeholder="Old password" aria-label="oldPassword" aria-describedby="oldPassword" name="oldPassword">
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                            <input type="password" class="form-control" placeholder="New password" aria-label="password" aria-describedby="password" name="password">
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
+                            <input type="password" class="col form-control rounded-pill" placeholder="New password" aria-label="password" aria-describedby="password" name="password">
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                            <input type="password" class="form-control" placeholder="Confirm password" aria-label="password" aria-describedby="password" name="confirmPassword">
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
+                            <input type="password" class="col form-control rounded-pill" placeholder="Confirm password" aria-label="password" aria-describedby="password" name="confirmPassword">
                         </div>
 
 
                         <!-- Procrastimon part -->
-                        <div class="mb-3">
-                            <!-- <label for="procrastimon">Name your procrastimon</label> -->
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <?= $arrayErrors['procrastimon'] ?? '<i class="bi bi-emoji-laughing-fill"></i>' ?></span>
-                                <input type="text" class="form-control" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $procrastimon->name ?>">
-                            </div>
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['procrastimon'] ?? '<i class="bi bi-emoji-laughing-fill"></i>' ?></span>
+                            <input type="text" class="col form-control rounded-pill" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $procrastimon->name ?>">
                         </div>
 
-                        <!-- submit -->
-                        <div>
-                            <input type="submit" class="btn btn-outline-primary" value="Save">
-                            <input type="button" class="btn btn-outline-secondary" value="Return" data-bs-dismiss="modal" aria-label="Close">
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-outline-info rounded-pill" value="Save">
+                        <input type="button" class="btn btn-outline-secondary rounded-pill" value="Return" data-bs-dismiss="modal" aria-label="Close">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -107,14 +104,14 @@
     <footer>
         <?php include 'components/footer.php'; ?>
     </footer>
-    
+
 
     <script>
-    // creation de l'objet openModal, nous ciblons la classe openModal
-    let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
-        keyboard: false
-    })
-    // nous l'ouvrons avec la methode show()
-    openModal.show()
-</script>
+        // creation de l'objet openModal, nous ciblons la classe openModal
+        let openModal = new bootstrap.Modal(document.querySelector('.openModal'), {
+            keyboard: false
+        })
+        // nous l'ouvrons avec la methode show()
+        openModal.show()
+    </script>
 </body>

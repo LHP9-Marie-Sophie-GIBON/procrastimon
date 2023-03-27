@@ -11,7 +11,7 @@
         <div class="row newGame justify-content-center align-items-center">
         
             <div class="card rounded-5 border border-light border-5">
-                <div class="card-body p-0">
+                <div class="card-body pt-0 ps-5 pe-5">
                     <h1 class="text-center fw-bold m-1">New Player</h1>
                     <form action="" method="post" id="demo-form" class="container">
                 

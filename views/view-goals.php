@@ -101,7 +101,7 @@
         <?php if ($empty) { ?>
             <!-- Liste des goals vide -->
             <div class="container">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-primary rounded-5" role="alert">
                     <p class="text-center">You don't have any goal yet !</p>
                 </div>
             </div>
@@ -109,7 +109,7 @@
         <?php } elseif ($expiredDate) { ?>
             <!-- Liste des goals expirés -->
             <div class="container">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger rounded-5" role="alert">
                     <?php
                     foreach ($expiredDate as $expiredGoal) {
                         $procrastimon->removeHp(10, $procrastimon->id);
@@ -157,7 +157,10 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content rounded-5 border border-light border-5">
                                 <div class="modal-body h4">
-                                    <p><span class="fw-bold">Description :</span> <?= $goal['name'] ?></p>
+                                    <div class="modal-title mb-5">
+                                        <?= $goal['name'] ?>
+                                    </div>
+                                    <p><span class="fw-bold">Creation :</span><?= $goal['creation'] ?></p>
                                     <p><span class="fw-bold">Category :</span>
                                         <?php
                                         if ($goal['category'] == 1) {
@@ -171,9 +174,8 @@
                                         }
                                         ?>
                                     </p>
-                                    <p><span class="fw-bold">Creation :</span><?= $goal['creation'] ?></p>
-                                    <p><span class="fw-bold">Due-Date :</span><?= $goal['due_date'] ?></p>
-                                    <p><span class="fw-bold">Comments :</span><?= $goal['comments'] ?></p>
+                                    <p><span class="fw-bold">Due-Date : </span><span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span> <span class="text-muted small">(<?= $goal['due_date'] ?>)</span> </p>
+                                    <p><span class="fw-bold">Comments : </span><?= $goal['comments'] ?></p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
@@ -186,7 +188,7 @@
                     <div class="modal fade" id="confirmationModal<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content rounded-5 border border-light border-5">
-                            <div class="modal-body text-center">
+                                <div class="modal-body text-center">
                                     <p class="h4">Did you complete :</p>
                                     <p class="h3 fw-bold">"<?= $goal['name'] ?>"</p>
                                 </div>
@@ -205,7 +207,7 @@
                     <div class="modal fade" id="confirmationModalBis<?= $goal['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content rounded-5 border border-light border-5">
-                            <div class="modal-body text-center">
+                                <div class="modal-body text-center">
                                     <p class="h4">Are you sure, you want to delete :</p>
                                     <p class="h3 fw-bold">"<?= $goal['name'] ?>"</p>
                                     <p class="text-muted">Your procrastimon will take damages...</p>

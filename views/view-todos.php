@@ -70,7 +70,7 @@
         <?php if ($empty) { ?>
             <!-- Liste des todos vide -->
             <div class="container">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-primary rounded-5" role="alert">
                     <p class="text-center">You don't have any task yet !</p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
         <?php } elseif ($expiredTodos) { ?>
             <!-- Liste des todos expirées -->
             <div class="container">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger rounded-5" role="alert">
                     <p class="text-center">You have some expired tasks !</p>
 
                     <?php foreach ($expiredTodos as $expiredTodo) {
@@ -133,21 +133,23 @@
                     <div class="modal fade" id="modal<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content rounded-5 border border-light border-5">
+
                                 <div class="modal-body h4">
-                                    <p><span class="fw-bold">Description :</span> <?= $task['name'] ?></p>
+                                    <div class="modal-title mb-5"><?= $task['name'] ?></div>
+                                    <p><span class="fw-bold">Creation :</span> <?= $task['creation'] ?></p>
                                     <p><span class="fw-bold">Task priority level :</span>
                                         <?php
                                         if ($task['task_priority_level'] == 1) {
-                                            echo 'Must Do Now';
+                                            echo '<span class="text-danger">Must Do Now</span>';
                                         } elseif ($task['task_priority_level'] == 2) {
-                                            echo 'Should Do Soon';
+                                            echo '<span class="text-warning">Should Do Soon</span>';
                                         } elseif ($task['task_priority_level'] == 3) {
-                                            echo 'Could Do Later';
+                                            echo '<span class="text-primary">Could Do Later</span>';
                                         }
                                         ?>
                                     </p>
-                                    <p><span class="fw-bold">Creation :</span> <?= $task['creation'] ?></p>
-                                    <p><span class="fw-bold">Due Date :</span> <?= $task['due_date'] ?></p>
+
+                                    <p><span class="fw-bold">Due Date :</span> <span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span> <span class="small text-muted">(<?= $task['due_date'] ?>)</span> </p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
