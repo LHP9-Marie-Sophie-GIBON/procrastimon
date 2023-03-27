@@ -206,6 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorsLogin['Login-error'] = 'Login required';
         $errorsLogin['password'] = $missing;
         $errorsLogin['password-error'] = 'Password required';
+
     } else if (isset($_POST['user']) && isset($_POST['user-password'])) {
         $login = $_POST['user'];
         $password = $_POST['user-password'];
@@ -236,4 +237,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+
 include '../views/view-start.php';

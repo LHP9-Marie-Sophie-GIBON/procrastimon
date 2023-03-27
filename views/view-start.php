@@ -118,7 +118,7 @@
 
                                 <div class="row mb-3">
                                     <span class="col-1 my-auto" id="errorPassword"> <?= $errorsLogin['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                                    <input id="password" type="password" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['password-error'] ?? 'password' ?>" aria-label="password" aria-describedby="user-password" name="password">
+                                    <input id="password" type="password" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['password-error'] ?? 'password' ?>" aria-label="password" aria-describedby="user-password" name="user-password">
                                 </div>
                             </div>
                             <div class="modal-footer">
