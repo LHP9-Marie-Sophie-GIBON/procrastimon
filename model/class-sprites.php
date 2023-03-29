@@ -6,6 +6,8 @@ class Sprite
     private int $id;
     private string $sprite;
     private string $chibi; 
+    private string $sprite_happy;
+    private string $sprite_anger; 
     private object $_pdo;
 
     // méthode magique pour GET les attributs
@@ -43,6 +45,8 @@ class Sprite
         // hydratation de l'objet
         $this->sprite = $data['sprite'];
         $this->chibi = $data['chibi'];
+        $this->sprite_happy = $data['sprite_happy'];
+        $this->sprite_angry = $data['sprite_angry'];
     }
 
     // méthode pour afficher aléatoirement un starter à la création d'un nouveau procrastimon

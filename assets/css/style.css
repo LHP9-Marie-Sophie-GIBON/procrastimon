@@ -88,7 +88,7 @@ div.progress-bar.barPP {
 }
 
 button.btn.add:hover {
-    background-color:#de8dfb !important;
+    background-color: #de8dfb !important;
     border-radius: 50px;
 }
 
@@ -118,14 +118,75 @@ div.row.character img {
     }
 }
 
+div.row.character img.happy {
+    height: 30vh;
+    width: auto;
+    animation: happy 1s ease-in-out infinite;
+}
+@keyframes happy {
+    0% {
+        transform: translateY(0);
+      }
+      25% {
+        transform: translateY(-20px);
+      }
+      50% {
+        transform: translateY(0);
+      }
+      75% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+}
+
+
+
+div.row.character img.angry {
+    height: 30vh;
+    width: auto;
+    animation: angry 0.8s ease-in-out alternate;
+}
+@keyframes angry {
+    0% {
+        transform: scale(1);
+    }
+
+    10%,
+    20% {
+        transform: scale(0.9) rotate(-3deg);
+    }
+
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    40%,
+    60%,
+    80% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+
+
+
 div.row.character div.oval {
-    width: 50%;
-    height: 10%;
+    width: 12%;
+    height: 5%;
     background: #ebeff6;
     border-radius: 50%;
     z-index: -1;
     position: absolute;
-    bottom: 37% !important;
+    bottom: 36% !important;
 
 }
 
@@ -136,15 +197,17 @@ nav.options,
     background-color: #acccfcc3;
 }
 
-nav.options button.btn, .offcanvas button.btn {
+nav.options button.btn,
+.offcanvas button.btn {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 50px;
     background: #acccfc;
-    
+
 }
 
-nav.options button.btn:hover, .offcanvas button.btn:hover {
+nav.options button.btn:hover,
+.offcanvas button.btn:hover {
     background-color: #de8dfb !important;
     color: #fff !important;
 }
@@ -164,7 +227,9 @@ button.btnHome {
 
 
 /* HISTORY / TROPHIES */
-.container.History, .container.Trophies, .container.boarding-home  {
+.container.History,
+.container.Trophies,
+.container.boarding-home {
     background-color: rgba(255, 255, 255, 0.678);
     width: 90vw;
     color: #4b83d6;
@@ -172,10 +237,12 @@ button.btnHome {
 
 
 /* TODOLIST & GOALS List*/
-.container.TodoList, .container.Goallist {
+.container.TodoList,
+.container.Goallist {
     width: 90vw;
 }
-.row.tasks {   
+
+.row.tasks {
     background-color: rgba(255, 255, 255, 0.678);
     padding: 0.5rem;
     color: #4b83d6;
@@ -190,28 +257,31 @@ button.btnHome {
     --bs-btn-padding-x: 0;
     --bs-btn-padding-y: 0;
     --bs-btn-focus-box-shadow: 0;
-    border: 0;  
+    border: 0;
 }
+
 .row.tasks .col-2 {
     width: 20%;
 }
+
 .modal-content {
     background-color: rgba(255, 255, 255, 0.749);
     color: #4b83d6;
 }
 
-.btn-outline-info{
+.btn-outline-info {
     color: #23e8a6;
     border-color: #23e8a6;
     background-color: #ffffff;
 }
+
 .btn-outline-info:hover {
     color: white;
     border-color: #23e8a6;
     background-color: #23e8a6;
 }
 
-.btn-outline-secondary{
+.btn-outline-secondary {
     background-color: #ffffff;
 }
 
@@ -253,11 +323,13 @@ button.btn.checked:hover {
 .row.start .col-7 {
     margin-bottom: 2rem;
 }
+
 .btnStart {
     color: #ffffff;
     font-weight: bold;
     background-color: #acccfc;
 }
+
 .btnStart:hover {
     background-color: #de8dfb !important;
     color: #ffffff !important;
@@ -273,32 +345,33 @@ nav.options button.btn.btnML {
     background-color: #acccfc;
 }
 
-.row.newGame, .row.endGame {
+.row.newGame,
+.row.endGame {
     height: 70vh;
     color: #4b83d6;
 }
 
-.row.newGame .card{
- width: 90vw;
- background-color: rgba(255, 255, 255, 0.678);
+.row.newGame .card {
+    width: 90vw;
+    background-color: rgba(255, 255, 255, 0.678);
 }
 
 
-.row.newGame span.col-1{
-padding: 0;
+.row.newGame span.col-1 {
+    padding: 0;
 }
 
-.row.endGame .card{
+.row.endGame .card {
     width: 90vw;
     height: 500px;
     background-color: rgba(255, 255, 255, 0.678);
-   }
+}
 
 .row.endGame .carousel-item {
-   height: 450px;
- 
+    height: 450px;
+
 }
-    
+
 
 @media (min-width: 992px) {
     div.row.progressbar {
@@ -312,25 +385,26 @@ padding: 0;
 
 /* TOASTS */
 .toast.text-bg-primary {
-    background-color:#6197e8d5 !important;
+    background-color: #6197e8d5 !important;
     margin-left: 0.5rem;
 }
+
 .toast.text-bg-danger {
-    background-color:#de8dfb !important;
+    background-color: #de8dfb !important;
     margin-left: 0.5rem;
 }
 
 /* BADGE */
 span.badge.text-bg-primary {
     font-weight: normal;
-    background-color:#de8dfb !important;
+    background-color: #de8dfb !important;
 }
 
 span.badge.text-bg-secondary {
     font-weight: normal;
-    background-color:#6197e8d5 !important;
+    background-color: #6197e8d5 !important;
 }
 
 input.text-danger::placeholder {
-    color: rgb(233, 1, 1); 
+    color: rgb(233, 1, 1);
 }

@@ -1,6 +1,49 @@
+// INTERACTION PROCRASTIMON
+let procrastimon = document.querySelector('#myProcrastimon');
+let countClick = 0; 
+
+function changeMood () {
+    countClick++;
+    console.log(countClick); 
+    if (countClick >= 5) {
+        getAngry();
+        setTimeout(()=> countClick=0, 10000);  
+    } else {
+        getHappy();
+    }
+
+
+}
+
+function getHappy() {
+    procrastimon.src = happySprite;
+    procrastimon.classList.add('happy');
+    setTimeout(function() {
+        procrastimon.classList.remove('happy');
+        procrastimon.src = regularSprite;
+      } , 3000);
+
+}
+
+function getAngry() {
+    
+    procrastimon.src = angrySprite;
+    procrastimon.classList.add('angry');
+    setTimeout(function() {
+        procrastimon.classList.remove('angry');
+        procrastimon.src = regularSprite;
+      }, 5000);
+}
+
+
+
+
+
+
+
 // TOOLTIPS
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 // PROGRESS BAR HP
 const progressBar = document.querySelector('.progress-bar.barPV');
@@ -26,10 +69,10 @@ if (parseFloat(progressBar.style.width) >= 26 && parseFloat(progressBar.style.wi
 // TOASTS
 let toastElement = document.querySelector('.toast.openToast');
 if (toastElement) {
-  let toast = new bootstrap.Toast(toastElement, {
-    keyboard: false
-  });
-  toast.show();
+    let toast = new bootstrap.Toast(toastElement, {
+        keyboard: false
+    });
+    toast.show();
 }
 
 

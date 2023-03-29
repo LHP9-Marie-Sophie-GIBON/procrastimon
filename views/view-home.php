@@ -9,7 +9,7 @@
     <main>
 
         <div class="row character justify-content-center">
-            <img src="<?= $sprite->sprite ?>" alt="character">
+            <img src="<?= $sprite->sprite ?>" alt="character" id="myProcrastimon" onclick="changeMood()">
             <div class="oval"></div>
         </div>
     </main>
@@ -126,4 +126,9 @@
         <?php include 'components/footer.php'; ?>
     </footer>
 
+    <script>
+        let regularSprite = '<?= $sprite->sprite ?>';
+        let happySprite = '<?= $sprite->sprite_happy ?>';
+        let angrySprite = '<?= $sprite->sprite_angry ?>';
+    </script>
 </body>
