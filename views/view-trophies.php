@@ -31,9 +31,11 @@
                                 <p class="text-center">You didn't complete any goals yet !</p>
                             </div>
                         <?php } else { ?>
-                            <p class="h5 fw-bold">Goals achieved : </p>
+                            <h1 class="text-center">Achieved Goals</h1>
                             <?php foreach ($goalsList as $goal) { ?>
-                                <div class="mb-1"><span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
+                                <div class="mb-1">
+                                    <?php displayCategory($goal['category']); ?>
+                                    <span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
                             <?php  }
                         }
                         // Liste des todos complétées
@@ -43,7 +45,7 @@
                             </div>
                         <?php
                         } else { ?>
-                            <p class="mt-1 h5 fw-bold">To-Dos completed : </p>
+                            <h1 class="text-center">Achieved Todos</h1>
                             <?php foreach ($todosList as $todo) { ?>
                                 <div class="mb-1">"<?= $todo['name'] ?>"</div>
                         <?php }
@@ -72,7 +74,7 @@
                         <div class="col-12">
                             <h1 class="text-center">Achieved Goals</h1>
                             <?php foreach ($goalsList as $goal) { ?>
-                                <div class="mb-1"><span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
+                                <div class="mb-1"><?php displayCategory($goal['category']); ?> <span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -127,7 +129,7 @@
                         <div class="col-12">
                             <h1 class="text-center">Missed Goals</h1>
                             <?php foreach ($missedGoals as $missedGoal) { ?>
-                                <div class="mb-1 text-muted">"<?= $missedGoal['name'] ?>" </div>
+                                <div class="mb-1 text-muted"><?php displayCategory($missedGoal['category']); ?> "<?= $missedGoal['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>

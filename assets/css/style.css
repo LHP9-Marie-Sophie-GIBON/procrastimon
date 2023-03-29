@@ -18,6 +18,7 @@ body {
 
 }
 
+
 main {
     padding-top: 110px;
     padding-bottom: 110px;
@@ -225,6 +226,11 @@ button.btnHome {
     animation: bounce 0.5s ease-in-out infinite alternate;
 }
 
+img.banner {
+    height: 150px;
+    width: auto;
+    margin-top: 2rem;
+}
 
 /* HISTORY / TROPHIES */
 .container.History,
@@ -235,6 +241,11 @@ button.btnHome {
     color: #4b83d6;
 }
 
+a.nav-link {
+    color: #4b83d6;
+    font-weight: bold;
+    font-size: large;
+}
 
 /* TODOLIST & GOALS List*/
 .container.TodoList,
@@ -314,6 +325,30 @@ button.btn.checked:hover {
     border-radius: 50px;
 }
 
+button.btn.body {
+    background-color: #eb8cde !important;
+    border-radius: 50px;
+    border: none; 
+}
+
+button.btn.mind {
+    background-color: #8debeb !important;
+    border-radius: 50px;
+    border: none; 
+}
+
+button.btn.work {
+    background-color: #eb8d8d !important;
+    border-radius: 50px;
+    border: none; 
+}
+
+button.btn.other {
+    background-color: #bfb9b4 !important;
+    border-radius: 50px;
+    border: none; 
+}
+
 /* START */
 
 .row.start {
@@ -381,6 +416,10 @@ nav.options button.btn.btnML {
     div.row.progressbar .col-3 {
         width: 7%;
     }
+
+    .container.game {
+        margin: 5rem;
+    }
 }
 
 /* TOASTS */
@@ -408,3 +447,12 @@ span.badge.text-bg-secondary {
 input.text-danger::placeholder {
     color: rgb(233, 1, 1);
 }
+
+/* BOARDING HOME */
+img.oldProcrastimon {
+    height: 100px;
+    width: auto;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+

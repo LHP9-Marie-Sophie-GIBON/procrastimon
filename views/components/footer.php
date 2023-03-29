@@ -133,7 +133,9 @@
 
             <?php } ?>
         </div>
-
+        <div class="row justify-content-center">
+            <img src="../assets/img/banner.png" alt="Logo" class="banner" />
+        </div>
         <div class="row justify-content-center m-3">
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>

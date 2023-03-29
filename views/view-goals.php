@@ -144,7 +144,10 @@
                 ?>
                     <div class="row rounded-pill tasks border border-light border-5">
                         <button class="btn checked" value="checked" id="<?= $goal['id'] ?>" data-bs-toggle="modal" data-bs-target="#confirmationModal<?= $goal['id'] ?>"><img src="https://img.icons8.com/sf-black/35/24f5af/ok.png" /></button>
-                        <div class="col-2 my-auto"><span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span></div>
+                        <div class="col-2 my-auto">
+                            <?php displayCategory($goal['category']); ?>
+                            <span class="badge rounded-pill text-white text-bg-<?= $priority ?>"><?= $timeleft ?></span>
+                        </div>
                         <div class="col fw-bold my-auto">
                             <?= $goal['name'] ?>
                         </div>
@@ -162,15 +165,17 @@
                                     </div>
                                     <p><span class="fw-bold">Creation :</span><?= $goal['creation'] ?></p>
                                     <p><span class="fw-bold">Category :</span>
+                                        <!-- <?php displayCategory($goal['category']); ?> -->
                                         <?php
-                                        if ($goal['category'] == 1) {
-                                            echo 'Body';
-                                        } elseif ($goal['category'] == 2) {
-                                            echo 'Mind';
-                                        } elseif ($goal['category'] == 3) {
-                                            echo 'Work';
-                                        } elseif ($goal['category'] == 4) {
-                                            echo 'Other';
+                                        $category = $goal['category']; 
+                                        if ($category === 1) {
+                                            echo '<button class="btn body text-light" disabled>Body</button>';
+                                        } elseif ($category === 2) {
+                                            echo '<button class="btn mind text-light" disabled>Mind</button>';
+                                        } elseif ($category === 3) {
+                                            echo '<button class="btn work text-light" disabled>Work</button>';
+                                        } elseif ($category === 4) {
+                                            echo '<button class="btn other text-light" disabled>Other</button>'; 
                                         }
                                         ?>
                                     </p>

@@ -248,3 +248,16 @@ class Goal
        return $query->fetchAll(PDO::FETCH_ASSOC);
    }
 }
+
+// AFFICHAGE DES CATEGORIES
+function displayCategory($category) {
+    if ($category === 1) {
+        echo '<button class="btn body" disabled><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/fire-heart.png"/></button>';
+    } elseif ($category === 2) {
+        echo '<button class="btn mind" disabled><img src="https://img.icons8.com/pastel-glyph/25/FFFFFF/lotus--v1.png"/></button>';
+    } elseif ($category === 3) {
+        echo '<button class="btn work" disabled><img src="https://img.icons8.com/sf-regular-filled/25/FFFFFF/business.png"/></button>';
+    } elseif ($category === 4) {
+        echo '<button class="btn other" disabled><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/more.png"/></button>'; 
+    }
+}

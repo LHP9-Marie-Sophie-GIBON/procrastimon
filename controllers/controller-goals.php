@@ -23,7 +23,6 @@ $goalsList = $goal->getGoals(); // affichage des goals
 $empty = empty($goal->getGoals());// s'il n'y pas de goals enregistrés
 $expiredDate = $goal->getExpiredGoals(); //Jour dépassé
 
-
 // (GOAL CREATION) vérification du formulaire et insertion dans la BDD
 $arrayErrors = [];
 $missing =  "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";

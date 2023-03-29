@@ -7,12 +7,10 @@ function changeMood () {
     console.log(countClick); 
     if (countClick >= 5) {
         getAngry();
-        setTimeout(()=> countClick=0, 10000);  
+        setTimeout(()=> countClick=0, 15000);  
     } else {
         getHappy();
     }
-
-
 }
 
 function getHappy() {
@@ -25,8 +23,7 @@ function getHappy() {
 
 }
 
-function getAngry() {
-    
+function getAngry() { 
     procrastimon.src = angrySprite;
     procrastimon.classList.add('angry');
     setTimeout(function() {
