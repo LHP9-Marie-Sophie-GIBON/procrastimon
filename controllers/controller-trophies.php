@@ -40,4 +40,6 @@ $missedTodos = $todo->getMissedTodos();
 
 
 
+
+
 include '../views/view-trophies.php';

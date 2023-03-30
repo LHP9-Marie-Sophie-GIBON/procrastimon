@@ -39,7 +39,7 @@
             <?php } else { ?>
                 <div class="col-1">
                     <button class="btn btn-outline-light rounded-pill p-0">
-                        <a href="../controllers/controller-trophies.php?history=<?= $procrastimon->id_users ?>"><img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/repository.png" /></a>
+                        <a href="../controllers/controller-trophies.php?history"><img src="https://img.icons8.com/ios-glyphs/30/FFFFFF/repository.png" /></a>
                     </button>
                 </div>
 
