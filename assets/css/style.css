@@ -18,16 +18,58 @@ body {
 
 }
 
-
 main {
     padding-top: 110px;
     padding-bottom: 110px;
 }
 
-.sprite-icon {
-    height: 50px;
-    width: auto;
-}
+/* LOADER */
+.spinner-border {
+    --bs-spinner-width: 18rem;
+    --bs-spinner-height: 18rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-border-width: 0.25em;
+    --bs-spinner-animation-speed: 0.75s;
+    --bs-spinner-animation-name: spinner-border;
+    border: var(--bs-spinner-border-width) solid currentcolor;
+    border-right-color: transparent;
+  }
+  
+  
+  .loaderImg {
+    width: 250px !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .loader-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1040; /* le même que celui de la modal bootstrap */
+    background-color: rgba(0, 0, 0, 0.5); /* un fond semi-transparent pour un effet de flou */
+    backdrop-filter: blur(5px); /* ajoute un flou à l'arrière-plan */
+  }
+  .backdrop.show {
+    display: block;
+  }
+  
+  .backdrop.hide {
+    display: none;
+  }
+  
 /* LOGIN */
 span.danger i {
     color: red;
@@ -54,7 +96,7 @@ img.imgChibi {
 }
 
 div.row.progressbar .col-3 {
-    width: 20%;
+    width: 70px !important;
     height: fit-content;
 }
 
@@ -181,17 +223,28 @@ div.row.character img.angry {
 }
 
 
-
-
 div.row.character div.oval {
-    width: 12%;
+    width: 20%;
     height: 5%;
-    background: #ebeff6;
+    background: #ebeff6ca;
     border-radius: 50%;
     z-index: -1;
     position: absolute;
-    bottom: 36% !important;
+    bottom: 31% !important;
 
+}
+
+/* MEDIA QUERIES DESKTOP */
+@media (min-width: 992px) {
+    div.row.character div.oval {
+        width: 10%;
+        height: 5%;
+        background: #ebeff6c8;
+        border-radius: 50%;
+        z-index: -1;
+        position: absolute;
+        bottom: 36% !important;
+    }
 }
 
 
@@ -232,10 +285,16 @@ button.btnHome {
 img.banner {
     height: 150px;
     width: auto;
-    margin-top: 2rem;
+    margin-top: 1.7rem;
 }
 
 /* HISTORY / TROPHIES */
+
+.sprite-icon {
+    height: 50px;
+    width: auto;
+}
+
 .container.History,
 .container.Trophies,
 .container.boarding-home {
@@ -290,7 +349,7 @@ a.nav-link {
 }
 
 .modal-content {
-    background-color: rgba(255, 255, 255, 0.749);
+    background-color: rgba(255, 255, 255, 0.808);
     color: #4b83d6;
 }
 
@@ -364,13 +423,30 @@ button.btn.other {
 }
 
 /* START */
-
 .row.start {
-    height: 70vh;
+    height: 60vh;
 }
 
+.row.start img {
+    margin-top: 3rem ;
+    width: 100%;
+    
+}
+
+@media (min-width: 992px) {
+    .row.start {
+        height: 70vh;  
+    }
+    
+    .row.start img {
+        width: 45%;
+        
+    }
+}
+
+
 .row.start .col-7 {
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
 }
 
 .btnStart {
@@ -393,7 +469,9 @@ nav.options button.btn.btnML {
 .row.login {
     background-color: #acccfc;
 }
-
+.row.login img {
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
 .row.newGame,
 .row.endGame {
     height: 70vh;
@@ -428,7 +506,7 @@ nav.options button.btn.btnML {
     }
 
     div.row.progressbar .col-3 {
-        width: 7%;
+        width: 70px !important;
     }
 
     .container.game {
@@ -470,3 +548,4 @@ img.oldProcrastimon {
 }
 
 
+  

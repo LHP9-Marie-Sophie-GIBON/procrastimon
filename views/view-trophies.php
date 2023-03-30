@@ -4,6 +4,9 @@
     <!-- mise en place du Header -->
     <?php include 'components/header.php'; ?>
 
+    <!-- mise en place du loader -->
+    <?php include 'components/loader.php'; ?>
+
     <main>
         <div class="container">
             <div class="row ">

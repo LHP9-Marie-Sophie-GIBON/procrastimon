@@ -33,7 +33,20 @@ function getAngry() {
 }
 
 
+// LOADER
+const loader = document.querySelector('.loader-container');
+const backdrop = document.querySelector('.backdrop');
 
+window.addEventListener('load', () => {
+  loader.style.display = 'none';
+  backdrop.classList.remove('show');
+  backdrop.classList.add('hide'); // Ajoute la classe "hide" pour cacher le backdrop une fois le chargement terminé
+});
+
+backdrop.classList.add('show'); // Ajoute la classe "show" pour faire apparaître le backdrop en même temps que le loader
+
+
+    
 
 
 

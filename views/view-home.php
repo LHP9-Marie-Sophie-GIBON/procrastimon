@@ -5,6 +5,9 @@
     <!-- mise en place du Header -->
     <?php include 'components/header.php'; ?>
 
+    <!-- mise en place du loader -->
+    <?php include 'components/loader.php'; ?>
+
     <!-- mise en place du menu -->
     <main>
 
@@ -13,6 +16,7 @@
             <div class="oval"></div>
         </div>
     </main>
+
 
     <!-- Toasts -->
     <div class="toast-container">
@@ -130,5 +134,6 @@
         let regularSprite = '<?= $sprite->sprite ?>';
         let happySprite = '<?= $sprite->sprite_happy ?>';
         let angrySprite = '<?= $sprite->sprite_angry ?>';
+
     </script>
 </body>
