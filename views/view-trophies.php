@@ -69,6 +69,10 @@
                                 <div class="mb-1 text-muted"><i class="bi bi-emoji-frown"></i> "<?= $missedTodo['name'] ?>" </div>
                             <?php } ?>
                         <?php } ?>
+                        <div class="row justify-content-center mt-1">
+                            <img src="../assets/img/background.png" alt="" class="banner">
+                        </div>
+                        
                     </div>
 
 

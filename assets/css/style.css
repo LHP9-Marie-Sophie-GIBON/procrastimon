@@ -289,11 +289,31 @@ img.banner {
 }
 
 /* HISTORY / TROPHIES */
-
+.container.History {
+    padding-bottom: 0 !important;
+}
+.container.History img.banner {
+    height: 100px;
+    opacity: 80%;
+}
 .sprite-icon {
-    height: 50px;
+    height: 45px;
     width: auto;
 }
+
+/* media queries desktop */
+@media (min-width: 992px) {
+    .sprite-icon {
+        height: 80px !important;
+        width: auto;
+    }
+
+    .container.History img.banner {
+        height: 150px;
+        opacity: 80%;
+    }
+}
+
 
 .container.History,
 .container.Trophies,
