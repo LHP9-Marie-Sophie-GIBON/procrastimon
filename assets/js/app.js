@@ -1,13 +1,13 @@
 // INTERACTION PROCRASTIMON
 let procrastimon = document.querySelector('#myProcrastimon');
-let countClick = 0; 
+let countClick = 0;
 
-function changeMood () {
+function changeMood() {
     countClick++;
-    console.log(countClick); 
+    console.log(countClick);
     if (countClick >= 5) {
         getAngry();
-        setTimeout(()=> countClick=0, 15000);  
+        setTimeout(() => countClick = 0, 15000);
     } else {
         getHappy();
     }
@@ -16,20 +16,20 @@ function changeMood () {
 function getHappy() {
     procrastimon.src = happySprite;
     procrastimon.classList.add('happy');
-    setTimeout(function() {
+    setTimeout(function () {
         procrastimon.classList.remove('happy');
         procrastimon.src = regularSprite;
-      } , 3000);
+    }, 3000);
 
 }
 
-function getAngry() { 
+function getAngry() {
     procrastimon.src = angrySprite;
     procrastimon.classList.add('angry');
-    setTimeout(function() {
+    setTimeout(function () {
         procrastimon.classList.remove('angry');
         procrastimon.src = regularSprite;
-      }, 5000);
+    }, 5000);
 }
 
 
@@ -38,15 +38,18 @@ const loader = document.querySelector('.loader-container');
 const backdrop = document.querySelector('.backdrop');
 
 window.addEventListener('load', () => {
-  loader.style.display = 'none';
-  backdrop.classList.remove('show');
-  backdrop.classList.add('hide'); // Ajoute la classe "hide" pour cacher le backdrop une fois le chargement terminé
+    setTimeout(() => {
+        loader.style.display = 'none';
+        backdrop.classList.remove('show');
+        backdrop.classList.add('hide'); // Ajoute la classe "hide" pour cacher le backdrop une fois le chargement terminé
+    },400);
+
 });
 
 backdrop.classList.add('show'); // Ajoute la classe "show" pour faire apparaître le backdrop en même temps que le loader
 
 
-    
+
 
 
 
