@@ -31,7 +31,7 @@
                                 <p class="text-center">You didn't complete any goals yet !</p>
                             </div>
                         <?php } else { ?>
-                            <h1 class="text-center">Achieved Goals</h1>
+                            <h1 class="text-center"><img src="../assets/img/sprite07-happy.png" alt="" class="sprite-icon"> Achieved Goals <img src="../assets/img/sprite04-happy.png" alt="" class="sprite-icon"></h1>
                             <?php foreach ($goalsList as $goal) { ?>
                                 <div class="mb-1">
                                     <?php displayCategory($goal['category']); ?>
@@ -45,7 +45,7 @@
                             </div>
                         <?php
                         } else { ?>
-                            <h1 class="text-center">Achieved Todos</h1>
+                            <h1 class="text-center"><img src="../assets/img/sprite01-happy.png" alt="" class="sprite-icon"> Achieved Todos <img src="../assets/img/sprite04.png" alt="" class="sprite-icon"></h1>
                             <?php foreach ($todosList as $todo) { ?>
                                 <div class="mb-1">"<?= $todo['name'] ?>"</div>
                         <?php }
@@ -72,7 +72,7 @@
                     <!-- affichage des goals complétés -->
                     <div class="container History rounded-5 border border-light border-5 p-3">
                         <div class="col-12">
-                            <h1 class="text-center">Achieved Goals</h1>
+                        <h1 class="text-center"><img src="../assets/img/sprite07-happy.png" alt="" class="sprite-icon"> Achieved Goals <img src="../assets/img/sprite04-happy.png" alt="" class="sprite-icon"></h1>
                             <?php foreach ($goalsList as $goal) { ?>
                                 <div class="mb-1"><?php displayCategory($goal['category']); ?> <span class="fw-bold">"<?= $goal['name'] ?>"</span>  completed the <?= $goal['achievement_day'] ?> </div>
                             <?php } ?>
@@ -100,9 +100,9 @@
                     <!-- affichage des todos complétés -->
                     <div class="container History rounded-5 border border-light border-5 p-3">
                         <div class="col-12">
-                            <h1 class="text-center">Achieved todos</h1>
+                        <h1 class="text-center"><img src="../assets/img/sprite01-happy.png" alt="" class="sprite-icon"> Achieved Todos <img src="../assets/img/sprite04.png" alt="" class="sprite-icon"></h1>
                             <?php foreach ($todosList as $todo) { ?>
-                                <div class="mb-1">"<?= $todo['name'] ?>" </div>
+                                <div class="mb-1"><i class="bi bi-emoji-smile"></i>  "<?= $todo['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -127,9 +127,9 @@
                     <!-- affichage des goals manqués -->
                     <div class="container History rounded-5 border border-light border-5 p-3">
                         <div class="col-12">
-                            <h1 class="text-center">Missed Goals</h1>
+                        <h1 class="text-center"><img src="../assets/img/sprite07-angry.png" alt="" class="sprite-icon"> Missed Goals <img src="../assets/img/sprite01.png" alt="" class="sprite-icon"></h1>
                             <?php foreach ($missedGoals as $missedGoal) { ?>
-                                <div class="mb-1 text-muted"><?php displayCategory($missedGoal['category']); ?> "<?= $missedGoal['name'] ?>" </div>
+                                <div class="mb-1 text-muted"><?php displayCategory($missedGoal['category']); ?> <i class="bi bi-emoji-frown"></i> "<?= $missedGoal['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -154,9 +154,9 @@
                     <!-- affichage des todos manqués -->
                     <div class="container History rounded-5 border border-light border-5 p-3">
                         <div class="col-12">
-                            <h1 class="text-center">Missed todos</h1>
+                        <h1 class="text-center"><img src="../assets/img/sprite04-angry.png" alt="" class="sprite-icon"> Missed Todos <img src="../assets/img/sprite01-angry.png" alt="" class="sprite-icon"></h1>
                             <?php foreach ($missedTodos as $missedTodo) { ?>
-                                <div class="mb-1 text-muted">"<?= $missedTodo['name'] ?>" </div>
+                                <div class="mb-1 text-muted"><i class="bi bi-emoji-frown"></i> "<?= $missedTodo['name'] ?>" </div>
                             <?php } ?>
                         </div>
                     </div>

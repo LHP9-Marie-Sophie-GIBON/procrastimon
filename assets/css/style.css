@@ -24,7 +24,10 @@ main {
     padding-bottom: 110px;
 }
 
-
+.sprite-icon {
+    height: 50px;
+    width: auto;
+}
 /* LOGIN */
 span.danger i {
     color: red;
@@ -239,6 +242,17 @@ img.banner {
     background-color: rgba(255, 255, 255, 0.678);
     width: 90vw;
     color: #4b83d6;
+}
+
+.container.History button.btn img{
+    height: 20px !important;
+    width: auto;  
+}
+
+.container.History button.btn {
+    height: 25px !important;
+    width: 25px;
+    --bs-btn-padding-y: none;
 }
 
 a.nav-link {

@@ -27,7 +27,7 @@
             ?>
                     <div class="col-2">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#infoModal<?= $oldprocrastimon['id'] ?>">
-                            <img src="<?= $sprite->chibi ?>" class="oldProcrastimon" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
+                            <img src="<?= $sprite->sprite_happy ?>" class="oldProcrastimon" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
                         </button>
                     </div>
         </div>
