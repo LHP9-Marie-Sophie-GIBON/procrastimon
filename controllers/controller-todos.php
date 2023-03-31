@@ -111,11 +111,13 @@ if ($procrastimon->exp >= 100) {
 
     // le procrastimon monte de niveau
     $procrastimon->levelUp($procrastimon->id);
-   
-    echo '<script>lancerLoader()</script>';
-    
-     // header
-     header('Location: controller-todos.php');
+
+    // header
+     header('Location: controller-todos.php?action=levelup');
+}
+
+if (isset($_GET['action']) && isset($_GET['action']) == 'levelup') {
+    $Fonction = '<script>letsEvolve(); disabledLoader(); </script>';
 }
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4

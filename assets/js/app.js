@@ -48,14 +48,24 @@ window.addEventListener('load', () => {
 
 backdrop.classList.add('show'); // Ajoute la classe "show" pour faire apparaître le backdrop en même temps que le loader
 
+
+function disableLoader() { // fonction pour désactiver le loader
+    loader.style.display = 'none';
+    backdrop.classList.remove('show');
+    backdrop.classList.add('hide');
+}
+
 // LEVEL UP
 const lvlbackdrop = document.querySelector('#levelupBackdrop');
 const levelUp = document.querySelector('#levelupLoader');
 levelUp.style.display = 'none';
 lvlbackdrop.classList.add('hide');
 
-function lancerLoader() {
-    
+function letsEvolve() {
+    // Cacher le loader principal
+    disableLoader();
+
+    // Afficher le loader de level up
     levelUp.style.display = 'block';
     lvlbackdrop.classList.remove('hide'); 
     lvlbackdrop.classList.add('show');
@@ -63,13 +73,10 @@ function lancerLoader() {
     setTimeout(() => {
         levelUp.style.display = 'none';
         lvlbackdrop.classList.remove('show');
-        lvlbackdrop.classList.add('hide');
+        lvlbackdrop.classList.add('hide');      
     }, 3500);
 
 }
-
-
-
 
 
 

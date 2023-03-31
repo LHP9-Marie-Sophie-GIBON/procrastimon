@@ -1,5 +1,7 @@
 <?php include 'components/head.php'; ?>
+<?php if ($procrastimon->exp >= 100) { ?>
 
+<?php } ?>
 <body>
     <!-- mise en place du Header -->
     <?php include 'components/header.php'; ?>
@@ -226,5 +228,8 @@
 
 <!-- mise en place du footer -->
 <?php include 'components/footer.php'; ?>
+
+
+<?= $Fonction ?? '' ?>
 
 </body>
