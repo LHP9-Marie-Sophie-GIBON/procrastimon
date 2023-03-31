@@ -32,32 +32,76 @@ $todayTodos = $todo->getTodayTodos(); //todos du jour
 
 
 
-// vérification du formulaire de modification du profil
+// vérification des formulaires
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // MODAL EDIT PROFIL
     $arrayErrors = [];
     $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";
     $wrong = "<span class='danger'><i class='bi bi-x-circle-fill'></i></span>";
-    // Vérification du pseudo
-    if (isset($_POST['login'])) {
+
+    if (isset($_POST['login'])) { // Vérification du pseudo
         $login = $_POST['login'];
     }
-    if (empty($login)) { // Si le pseudo est vide, on envoie une erreur
+    if (empty($login)) {
         $arrayErrors['login'] = $missing;
+        $arrayErrors['login-error'] = 'Login required';
+        $arrayErrors['danger'] = 'text-danger';
     }
 
-    // Vérification du mail
-    if (isset($_POST['mail'])) {
+
+    if (isset($_POST['mail'])) { // Vérification du mail
         $mail = $_POST['mail'];
     }
-    if (empty($mail)) { // Si le mail est vide, on envoie une erreur
+    if (empty($mail)) {
         $arrayErrors['mail'] =  $missing;
+        $arrayErrors['mail-error'] = 'Mail required';
+        $arrayErrors['danger'] = 'text-danger';
+    } else if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+        $arrayErrors['mail'] = $wrong;
+        $arrayErrors['mail-error'] = 'Mail not valid';
+        $arrayErrors['danger'] = 'text-danger';
     }
+
+    if (isset($_POST['procrastimon'])) { // Vérification du nom du procrastimon
+        $name = $_POST['procrastimon'];
+    }
+    if (empty($name)) { // Si le nom du procrastimon est vide, on envoie une erreur
+        $arrayErrors['procrastimon'] = $missing;
+        $arrayErrors['procrastimon-error'] = 'Procrastimon name required';
+        $arrayErrors['danger'] = 'text-danger';
+    }
+
+    // si arrayErrors est vide, le formulaire est envoyé
+    if (empty($arrayErrors)) {
+
+        // modifier le user
+        $user->login = $login;
+        $user->mail = $mail;
+        $procrastimon->name = $name;
+
+        $user->updateUser();
+        $procrastimon->updateProcrastimon();
+
+        header('Location: controller-home.php');
+        exit;
+    } else {
+
+        echo "fail";
+    }
+
+    // MODAL EDIT PASSWORD
+    $passwordErrors = [];
+    $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";
+    $wrong = "<span class='danger'><i class='bi bi-x-circle-fill'></i></span>";
 
     // Vérification que le mot de passe correspond au mot de passe enregistré
     if (isset($_POST['oldPassword'])) {
         $oldPassword = $_POST['oldPassword'];
         if (!password_verify($oldPassword, $user->password)) {
-            $arrayErrors['oldPassword'] = $wrong;
+            $passwordErrors['oldPassword'] = $wrong;
+            $passwordErrors['oldPassword-error'] = 'Passwords do not match';
+            $passwordErrors['danger'] = 'text-danger';
         }
     }
 
@@ -65,10 +109,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['password'])) {
         $password = $_POST['password'];
         if (strlen($password) < 8) { // Si le mot de passe a moins de 8 caractères, on envoie une erreur
-            $arrayErrors['password'] = $wrong;
+            $passwordErrors['password'] = $wrong;
+            $passwordErrors['password-error'] = 'Password must contain 8 characters';
+            $passwordErrors['danger'] = 'text-danger';
         } else if (!preg_match('/[A-Za-z]/', $password) || !preg_match('/\d/', $password)) { // Si le mot de passe ne contient pas au moins une lettre et un chiffre, on envoie une erreur
-            $arrayErrors['password'] = $wrong;
+            $passwordErrors['password'] = $wrong;
+            $passwordErrors['password-error'] = 'Password must contain one letter and one number';
+            $passwordErrors['danger'] = 'text-danger';
         }
+    }
+    if (empty($password)) { // Si le mot de passe est vide, on envoie une erreur
+        $passwordErrors['password'] = $missing;
+        $passwordErrors['password-error'] = 'new password required';
+        $passwordErrors['danger'] = 'text-danger';
     }
 
     // Vérification de la confirmation de mot de passe
@@ -76,41 +129,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $confirmPassword = $_POST['confirmPassword'];
         // vérification que confirm-password est identique à password
         if ($confirmPassword !== $password) {
-            $arrayErrors['confirm-password'] = $wrong;
+            $passwordErrors['confirm-password'] = $wrong;
+            $passwordErrors['confirm-password-error'] = 'Passwords do not match';
+            $passwordErrors['danger'] = 'text-danger';
         }
     }
 
-
-    // Vérification du nom du procrastimon
-    if (isset($_POST['procrastimon'])) {
-        $name = $_POST['procrastimon'];
-    }
-    if (empty($name)) { // Si le nom du procrastimon est vide, on envoie une erreur
-        $arrayErrors['procrastimon'] = $missing;
-    }
-
-    // si arrayErrors est vide, le formulaire est envoyé
-    if (empty($arrayErrors)) {
+    if (empty($passwordErrors)) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT); // hachage du mot de passe
 
         // modifier le user
-        $user->login = $login;
-        $user->mail = $mail;
         $user->password = $hashedPassword;
-        $user->updateUser();
-
-        // modifier le procrastimon
-        $procrastimon->name = $name;
-        $procrastimon->updateProcrastimon();
+        $user->updatePassword();
 
         header('Location: controller-home.php');
         exit;
-
     } else {
 
         echo "fail";
     }
 }
+
 
 
 

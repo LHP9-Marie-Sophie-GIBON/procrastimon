@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($arrayErrors) && isset($_POST['insert'])) {
         // Créer une variable de session newGoal avec les données de $_POST
         $_SESSION['newGoal'] = $_POST;
+        $Fonction = '<script>disableLoader(); </script>';
         
     }
 }
@@ -89,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit;
     }
 }
+
 
 // (GOAL STATUTE) 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -124,9 +126,12 @@ if ($procrastimon->exp >= 100) {
     // le procrastimon monte de niveau
     $procrastimon->levelUp($procrastimon->id);
 
-    $Fonction = '<script>lancerLoader()</script>';
-    
-    // header('Location: controller-todos.php');
+    // header
+    header('Location: controller-todos.php?action=levelup');
+}
+
+if (isset($_GET['action']) && isset($_GET['action']) == 'levelup') {
+    $Fonction = '<script>letsEvolve(); disabledLoader(); </script>';
 }
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4

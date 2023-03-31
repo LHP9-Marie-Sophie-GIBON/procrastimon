@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Profil-->
     <div class="modal fade" id="modalOptions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-5 border border-light border-5">
@@ -57,6 +57,9 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
                         Edit your profil
+                    </button>
+                    <button type="button" class="btn btn-outline-primary rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
+                        Change your password
                     </button>
                     <form action="../config/deconnect.php" method="post">
                         <button type="submit" class="btn">
@@ -83,36 +86,56 @@
                         <!-- user part -->
                         <div class="row mb-1">
                             <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                            <input type="text" class="col form-control rounded-pill" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $user->login ?>">
+                            <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $user->login ?><?= $arrayErrors['login-error'] ?? '' ?>">
                         </div>
 
 
                         <div class="row mb-1">
                             <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['mail'] ?? '<i class="bi bi-envelope-fill"></i>' ?></span>
-                            <input type="text" class="col form-control rounded-pill" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $user->mail ?>">
-                        </div>
-
-
-                        <div class="row mb-1">
-                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['oldPassword'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                            <input type="password" class="col form-control rounded-pill" placeholder="Old password" aria-label="oldPassword" aria-describedby="oldPassword" name="oldPassword">
-                        </div>
-
-                        <div class="row mb-1">
-                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                            <input type="password" class="col form-control rounded-pill" placeholder="New password" aria-label="password" aria-describedby="password" name="password">
-                        </div>
-
-                        <div class="row mb-1">
-                            <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                            <input type="password" class="col form-control rounded-pill" placeholder="Confirm password" aria-label="password" aria-describedby="password" name="confirmPassword">
+                            <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="Mail" aria-label="mail" aria-describedby="mail" name="mail" value="<?= $user->mail ?><?= $arrayErrors['mail-error'] ?? '' ?>">
                         </div>
 
 
                         <!-- Procrastimon part -->
                         <div class="row mb-1">
                             <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['procrastimon'] ?? '<i class="bi bi-emoji-laughing-fill"></i>' ?></span>
-                            <input type="text" class="col form-control rounded-pill" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $procrastimon->name ?>">
+                            <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>"" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $procrastimon->name ?><?= $arrayErrors['procrastimon-error'] ?? '' ?>">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-outline-info rounded-pill" value="Save">
+                        <input type="button" class="btn btn-outline-secondary rounded-pill" value="Return" data-bs-dismiss="modal" aria-label="Close">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Password-->
+    <div class="modal fade <?= !empty($passwordErrors) ? 'openModal' : '' ?>" id="modalEditPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-5 border border-light border-5">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit you Profil</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="post">
+                    <div class="modal-body">
+
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $passwordErrors['oldPassword'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
+                            <input type="password" class="col form-control rounded-pill <?= $passwordErrors['danger'] ?? '' ?>" placeholder="<?= $passwordErrors['oldPassword-error'] ?? 'Old password' ?>" aria-label="oldPassword" aria-describedby="oldPassword" name="oldPassword">
+                        </div>
+
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $passwordErrors['password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
+                            <input type="password" class="col form-control rounded-pill <?= $passwordErrors['danger'] ?? '' ?>" placeholder="<?= $passwordErrors['password-error'] ?? 'New password' ?>" aria-label="password" aria-describedby="password" name="password">
+                        </div>
+
+                        <div class="row mb-1">
+                            <span class="col-1 my-auto" id="basic-addon1"> <?= $passwordErrors['confirm-password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
+                            <input type="password" class="col form-control rounded-pill <?= $passwordErrors['danger'] ?? '' ?>" placeholder="<?= $passwordErrors['confirm-password-error'] ?? 'Confirm password' ?>" aria-label="password" aria-describedby="password" name="confirmPassword">
                         </div>
 
                     </div>

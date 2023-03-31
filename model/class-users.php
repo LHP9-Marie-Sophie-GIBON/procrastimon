@@ -121,17 +121,29 @@ class User
     public function updateUser()
     {
         // préparation de la requête
-        $query = $this->_pdo->prepare("UPDATE users SET login = :login, mail = :mail, password = :password WHERE id = :id");
+        $query = $this->_pdo->prepare("UPDATE users SET login = :login, mail = :mail WHERE id = :id");
 
         // exécution de la requête
         $query->execute([
             ':login' => $this->login,
             ':mail' => $this->mail,
-            ':password' => $this->password,
             ':id' => $this->id
         ]);
     }
 
+    // méthode pour update le password
+    public function updatePassword()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("UPDATE users SET password = :password WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':password' => $this->password,
+            ':id' => $this->id
+        ]);
+    }
+    
     // méthode pour ajouter un trophée à un utilisateur
     public function addTrophy($total_trophies)
     {
