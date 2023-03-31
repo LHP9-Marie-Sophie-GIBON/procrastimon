@@ -12,7 +12,7 @@
     <main>
 
         <div class="row character justify-content-center">
-            <img src="<?= $sprite->sprite ?>" alt="character" id="myProcrastimon" onclick="changeMood()">
+            <img src="<?= $sprite->sprite ?>" alt="character" id="myProcrastimon" onclick="changeMood()" >
             <div class="oval"></div>
         </div>
     </main>

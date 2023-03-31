@@ -70,6 +70,60 @@ main {
     display: none;
   }
   
+
+  /* LEVEL UP */
+
+  .spinner-grow {
+    --bs-spinner-width: 16rem;
+    --bs-spinner-height: 16rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-animation-speed: 0.75s;
+    --bs-spinner-animation-name: spinner-grow;
+    background-color: currentcolor;
+    opacity: 0;
+}
+
+.levelUpImg {
+    width: 250px !important;
+  position: relative;
+  top: 50%;
+  
+  transform: translate(-50%, -50%);
+  animation: zoomInAndShake 2s ease-in-out forwards;
+  }
+
+  @keyframes zoomInAndShake {
+    0% {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    75% {
+      transform: scale(0.95) rotate(-2deg);
+    }
+    85% {
+      transform: scale(1.2) rotate(2deg);
+    }
+    95% {
+      transform: scale(2) rotate(-2deg);
+    }
+    100% {
+      transform: scale(1.5) rotate(0deg);
+    }
+  }
+  
+ 
+  /* media queries desktop */
+    @media screen and (min-width: 768px) {
+        .levelUpImg {
+        left: 15%; 
+        }
+    }
+  
+
 /* LOGIN */
 span.danger i {
     color: red;

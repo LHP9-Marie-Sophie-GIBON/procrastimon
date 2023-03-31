@@ -42,12 +42,31 @@ window.addEventListener('load', () => {
         loader.style.display = 'none';
         backdrop.classList.remove('show');
         backdrop.classList.add('hide'); // Ajoute la classe "hide" pour cacher le backdrop une fois le chargement terminé
-    },400);
+    }, 400);
 
 });
 
 backdrop.classList.add('show'); // Ajoute la classe "show" pour faire apparaître le backdrop en même temps que le loader
 
+// LEVEL UP
+const lvlbackdrop = document.querySelector('#levelupBackdrop');
+const levelUp = document.querySelector('#levelupLoader');
+levelUp.style.display = 'none';
+lvlbackdrop.classList.add('hide');
+
+function lancerLoader() {
+    
+    levelUp.style.display = 'block';
+    lvlbackdrop.classList.remove('hide'); 
+    lvlbackdrop.classList.add('show');
+
+    setTimeout(() => {
+        levelUp.style.display = 'none';
+        lvlbackdrop.classList.remove('show');
+        lvlbackdrop.classList.add('hide');
+    }, 3500);
+
+}
 
 
 

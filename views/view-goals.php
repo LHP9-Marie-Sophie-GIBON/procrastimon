@@ -7,6 +7,9 @@
     <!-- mise en place du loader -->
     <?php include 'components/loader.php'; ?>
 
+     <!-- mise en place du  levelup  -->
+     <?php include 'components/levelup.php'; ?>
+
     <!-- modal de formulaire -->
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

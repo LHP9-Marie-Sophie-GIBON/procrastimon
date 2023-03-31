@@ -124,6 +124,8 @@ if ($procrastimon->exp >= 100) {
     // le procrastimon monte de niveau
     $procrastimon->levelUp($procrastimon->id);
 
+    echo '<script>lancerLoader()</script>';
+    
     header('Location: controller-todos.php');
 }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require('../model/class-users.php');
 require('../model/class-procrastimons.php');
@@ -14,10 +14,10 @@ $user = new User();
 $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 $todo = new Todo();
- 
+
 
 // AFFICHAGE DE LA PAGE
-$user->login($user, $procrastimon, $sprite);// récupération des données de session
+$user->login($user, $procrastimon, $sprite); // récupération des données de session
 $todo->id_users = $_SESSION['user_id'];
 $todolist = $todo->getTodos(); // récupération des tâches de l'utilisateur
 $empty = empty($todolist);
@@ -47,8 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($arrayErrors) && isset($_POST['insert'])) {
         // Créer une variable de session newtask avec les données de $_POST
         $_SESSION['newTask'] = $_POST;
-       
-        
     }
 }
 
@@ -75,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // on redirige vers la page des tasks
         header('Location: controller-todos.php');
         exit;
-        
     }
 }
 
@@ -84,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Complete todo
     if (isset($_POST['checked'])) {
-        $todo->id = $_POST['taskId']; 
+        $todo->id = $_POST['taskId'];
         $todo->completeTodo();
         $procrastimon->addExp(5, $procrastimon->id);
-        
+
         header('Location: controller-todos.php');
     }
 
@@ -100,23 +97,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: controller-todos.php');
         exit;
     }
- 
 }
 
 // (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
 if ($procrastimon->exp >= 100) {
-    $procrastimon->level ++;
+    $procrastimon->level++;
     $procrastimon->exp = 0;
 
     // le sprite prend + 1 tant que l'on est strictement inférieur au level 4
     if ($procrastimon->level < 4) {
-        $procrastimon->id_sprites ++;
+        $procrastimon->id_sprites++;
     }
 
     // le procrastimon monte de niveau
     $procrastimon->levelUp($procrastimon->id);
-    // header
-    header('Location: controller-todos.php');
+   
+    echo '<script>lancerLoader()</script>';
+    
+     // header
+     header('Location: controller-todos.php');
 }
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4
@@ -133,17 +132,17 @@ if ($procrastimon->hp <= 0) {
 
 // (TROPHIES)Création des trophés en fonction du nombre de taches réalisées
 $completeTodos = $todo->countCompletedTodos();
-$totalTrophies = $user->getTotalTrophies('total_todo_trophies'); 
-$message = []; 
+$totalTrophies = $user->getTotalTrophies('total_todo_trophies');
+$message = [];
 
-if ($completeTodos ===10 && $totalTrophies['total_todo_trophies'] === 0 ) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+if ($completeTodos === 10 && $totalTrophies['total_todo_trophies'] === 0) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Wood to-do\'s trophy');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
 } elseif ($completeTodos === 25 && $totalTrophies['total_todo_trophies'] < 2) {
-     
+
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy('Steel to-do\'s trophy');
@@ -155,14 +154,12 @@ if ($completeTodos ===10 && $totalTrophies['total_todo_trophies'] === 0 ) {// si
     $trophy->insertTrophy('Marble todo\'s trophy');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
-
 } elseif ($completeTodos === 100 && $totalTrophies['total_todo_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
     $trophy->insertTrophy($trophy->id_users, 'Moonstone todo\'s trophy');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
-   
 }
 
 
