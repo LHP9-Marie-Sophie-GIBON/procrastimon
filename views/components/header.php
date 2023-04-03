@@ -1,3 +1,4 @@
+
 <header class="fixed-top">
     <?php
     $controller = basename($_SERVER['PHP_SELF'], '.php');
@@ -47,4 +48,8 @@
             <?php } ?>
         <?php } ?>
     </div>
+
+    <button class="btn btnStart mt-3 rounded-pill position-absolute top-0 start-0 translate-middle" id="mute-button"><img src="https://img.icons8.com/ios-glyphs/18/FFFFFF/musical-notes.png"/></button>
+
 </header>
+

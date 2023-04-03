@@ -1,4 +1,54 @@
+// musique de fond 
+var audio = new Audio(
+    "../assets/music/soundtrack.mp3"
+);
+let muteButton = document.querySelector('#mute-button')
+
+function playMusic() {
+// Vérifie si la lecture automatique est autorisée
+const playPromise = audio.play();
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // La lecture a démarré avec succès
+        })
+            .catch(error => {
+                document.addEventListener('click', () => {
+                    audio.play();
+                });
+            });
+    }
+}
+
+
+// Ajoute un événement de clic au bouton mute
+muteButton.addEventListener('click', () => {
+    // Vérifie si le son est activé ou désactivé
+    if (audio.muted ) {
+        // Active le son
+        audio.play();
+        audio.muted = false;
+        muteButton.innerHTML = '<img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/15/FFFFFF/external-volume-muted-with-a-crossed-sign-logotype-music-bold-tal-revivo.png"/>';
+    } else {
+        // Désactive le son
+        audio.pause();
+        audio.muted = true;
+        muteButton.innerHTML = '<img src="https://img.icons8.com/ios-glyphs/18/FFFFFF/musical-notes.png"/>';
+    }
+});
+
 // INTERACTION PROCRASTIMON
+var happySound = new Audio(
+    "../assets/music/happy.mp3"
+);
+
+var angrySound = new Audio(
+    "../assets/music/angry.mp3"
+);
+var levelUpSound = new Audio(
+    "../assets/music/levelup.mp3"
+);
+
+
 let procrastimon = document.querySelector('#myProcrastimon');
 let countClick = 0;
 
@@ -14,18 +64,19 @@ function changeMood() {
 }
 
 function getHappy() {
+    happySound.play();
     procrastimon.src = happySprite;
     procrastimon.classList.add('happy');
     setTimeout(function () {
         procrastimon.classList.remove('happy');
         procrastimon.src = regularSprite;
     }, 3000);
-
 }
 
 function getAngry() {
     procrastimon.src = angrySprite;
     procrastimon.classList.add('angry');
+    angrySound.play();
     setTimeout(function () {
         procrastimon.classList.remove('angry');
         procrastimon.src = regularSprite;
@@ -37,16 +88,20 @@ function getAngry() {
 const loader = document.querySelector('.loader-container');
 const backdrop = document.querySelector('.backdrop');
 
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        loader.style.display = 'none';
-        backdrop.classList.remove('show');
-        backdrop.classList.add('hide'); // Ajoute la classe "hide" pour cacher le backdrop une fois le chargement terminé
-    }, 400);
+if (loader) {
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loader.style.display = 'none';
+            backdrop.classList.remove('show');
+            backdrop.classList.add('hide'); // Ajoute la classe "hide" pour cacher le backdrop une fois le chargement terminé
+        }, 400);
 
-});
+    });
 
-backdrop.classList.add('show'); // Ajoute la classe "show" pour faire apparaître le backdrop en même temps que le loader
+    backdrop.classList.add('show'); // Ajoute la classe "show" pour faire apparaître le backdrop en même temps que le loader
+}
+
+
 
 
 function disableLoader() { // fonction pour désactiver le loader
@@ -70,7 +125,7 @@ if (progressBar) {
         } else {
             console.log('hp50 class already present');
         }
-    
+
     } else if (parseFloat(progressBar.style.width) >= 0 && parseFloat(progressBar.style.width) <= 25) {
         if (!progressBar.classList.contains('hp25')) {
             progressBar.classList.add('hp25');
@@ -104,7 +159,7 @@ if (openModalElement) { // si openModalElement est trouvé
 // LEVEL UP
 const lvlbackdrop = document.querySelector('#levelupBackdrop');
 const levelUp = document.querySelector('#levelupLoader');
-if (levelUp){
+if (levelUp) {
     levelUp.style.display = 'none';
     lvlbackdrop.classList.add('hide');
 }
@@ -115,13 +170,13 @@ function letsEvolve() {
 
     // Afficher le loader de level up
     levelUp.style.display = 'block';
-    lvlbackdrop.classList.remove('hide'); 
+    lvlbackdrop.classList.remove('hide');
     lvlbackdrop.classList.add('show');
 
     setTimeout(() => {
         levelUp.style.display = 'none';
         lvlbackdrop.classList.remove('show');
-        lvlbackdrop.classList.add('hide');      
+        lvlbackdrop.classList.add('hide');
     }, 3500);
 
 }
@@ -131,7 +186,7 @@ var carousel = document.querySelector('#carousel-gameover');
 
 // Ajouter un écouteur d'événements sur le carousel
 if (carousel) {
-    carousel.addEventListener('slide.bs.carousel', function(event) {
+    carousel.addEventListener('slide.bs.carousel', function (event) {
         console.log('woop');
 
         // Récupérer l'index de la slide active et le nombre total de slides
@@ -147,3 +202,5 @@ if (carousel) {
         }
     });
 }
+
+

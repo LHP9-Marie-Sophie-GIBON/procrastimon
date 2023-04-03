@@ -6,6 +6,9 @@
     }
 </script>
 
+<button class="btn btnStart rounded-pill position-absolute top-0 start-0 translate-middle" id="mute-button"><img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/15/FFFFFF/external-volume-muted-with-a-crossed-sign-logotype-music-bold-tal-revivo.png" /></button>
+
+
 <main>
     <div class="container start">
         <?php if (isset($_GET['newGame'])) { ?>
@@ -142,12 +145,63 @@
 
 <footer>
     <nav class="navbar start options fixed-bottom justify-content-center" tabindex="1">
-        <button type="button" class="btn btnML text-light">Mentions légales</button>
+        <button type="button" class="btn btnML text-light" data-bs-toggle="modal" data-bs-target="#modalML">Mentions légales</button>
     </nav>
 </footer>
+
+<!-- mentions légales -->
+<div class="modal modal-xl fade" id="modalML" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">MENTIONS LEGALES</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Responsable de la publication : GIBON Marie-Sophie <br>
+                    Email : mariesophie.gb@gmail.com <br>
+                    Téléphone : / </p>
+
+                <p>
+                    HÉBERGEMENT <br>
+                    Le site web "Procrastimon" est hébergé par Mounlight <br>
+                    Adresse : [Adresse de l'hébergeur] <br>
+                    Email : [Adresse email de l'hébergeur] <br>
+                    Téléphone : [Numéro de téléphone de l'hébergeur] <br>
+                </p>
+
+                <p>
+                    PROPRIÉTÉ INTELLECTUELLE <br>
+                    Le site web "Procrastimon" ainsi que son contenu sont la propriété exclusive de école de la MANU et sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle. Toute reproduction ou représentation, intégrale ou partielle, du site ou de son contenu est interdite sans l'autorisation expresse et préalable de [Nom de l'entreprise].<br>
+                </p>
+                <p>
+                    DONNÉES PERSONNELLES<br>
+                    Les données personnelles collectées sur le site "Procrastimon" sont destinées à école de la MANU et ne seront pas transmises à des tiers. Conformément à la loi "Informatique et Libertés" du 6 janvier 1978, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Vous pouvez exercer ce droit en nous contactant à l'adresse email [Adresse email de l'entreprise].<br>
+                </p>
+                <p>
+                    COOKIES <br>
+                    Le site web "Procrastimon" utilise des cookies pour améliorer l'expérience utilisateur et proposer des services adaptés à vos centres d'intérêts. Vous pouvez désactiver l'utilisation de cookies en modifiant les paramètres de votre navigateur. <br>
+                </p>
+                <p>
+                    LIMITATION DE RESPONSABILITÉ <br>
+                    L'école de la MANU ne pourra être tenue responsable des dommages directs ou indirects résultant de l'utilisation du site web "Procrastimon". Nous nous réservons le droit de modifier, de suspendre ou de supprimer le site web et son contenu à tout moment et sans préavis. <br>
+                </p>
+                <p>
+                    DROIT APPLICABLE ET JURIDICTION COMPÉTENTE <br>
+                    Les présentes mentions légales sont régies par le droit français. Tout litige relatif au site web "Procrastimon" sera soumis à la compétence exclusive des tribunaux français. <br>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary rounded-pill border-5 fw-bold" data-bs-dismiss="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="../assets/js/app.js"></script>
+<script>playMusic(); </script>
+
 
 </body>

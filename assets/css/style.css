@@ -540,6 +540,11 @@ button.btn.other {
     color: #ffffff !important;
 }
 
+.btnStart.position-absolute {
+    left : 94% !important; 
+    top : 4% !important; 
+}
+
 nav.options button.btn.btnML {
     background: #acccfc00;
     padding: 0.5rem;
