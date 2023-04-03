@@ -35,6 +35,8 @@ $todayTodos = $todo->getTodayTodos(); //todos du jour
 // vérification des formulaires
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // OPENTOAST
+    $toast = []; 
     // MODAL EDIT PROFIL
     $arrayErrors = [];
     $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";
@@ -83,10 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user->updateUser();
         $procrastimon->updateProcrastimon();
 
-        header('Location: controller-home.php');
+        
+        header('Location: controller-home.php?action=editprofil');
         exit;
-    } else {
 
+    } else {
         echo "fail";
     }
 
@@ -137,12 +140,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($passwordErrors)) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT); // hachage du mot de passe
+        $toast = 'openToast'; 
 
         // modifier le user
         $user->password = $hashedPassword;
         $user->updatePassword();
 
-        header('Location: controller-home.php');
+        header('Location: controller-home.php?action=editpassword');
         exit;
     } else {
 
@@ -150,7 +154,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
-
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] === 'editprofil') {
+            $toast['profil'] = 'openToast';
+        } else if ($_GET['action'] === 'editpassword') {
+            $toast['password'] = 'openToast';
+        }
+    }
+}
 
 include '../views/view-home.php';

@@ -38,6 +38,24 @@
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
+        <!-- Toast modification password-->
+        <div class="toast <?= $toast['password'] ?? '' ?> rounded-5 align-items-center text-bg-info text-light fw-bold  border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <p class="h6">Password updated !</p>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <!-- Toast modification profil-->
+        <div class="toast <?= $toast['profil'] ?? '' ?> rounded-5 align-items-center text-bg-info text-light fw-bold border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <p class="h6">Profil updated !</p>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Profil-->

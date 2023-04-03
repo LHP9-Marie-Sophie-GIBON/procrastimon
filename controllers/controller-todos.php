@@ -22,6 +22,7 @@ $todo->id_users = $_SESSION['user_id'];
 $todolist = $todo->getTodos(); // récupération des tâches de l'utilisateur
 $empty = empty($todolist);
 $expiredTodos = $todo->getExpiredTodos(); // récupération des tâches expirées
+$message = [];
 
 // Vérification du formulaire de création de Todo
 $arrayErrors = [];
@@ -73,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // on redirige vers la page des tasks
         header('Location: controller-todos.php');
         exit;
+    } else {
+        unset($_SESSION['newTask']);
     }
 }
 
@@ -136,7 +139,7 @@ if ($procrastimon->hp <= 0) {
 // (TROPHIES)Création des trophés en fonction du nombre de taches réalisées
 $completeTodos = $todo->countCompletedTodos();
 $totalTrophies = $user->getTotalTrophies('total_todo_trophies');
-$message = [];
+
 
 if ($completeTodos === 10 && $totalTrophies['total_todo_trophies'] === 0) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
