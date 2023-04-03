@@ -1,11 +1,11 @@
 <header class="fixed-top">
-    <?php 
+    <?php
     $controller = basename($_SERVER['PHP_SELF'], '.php');
     if ($controller === 'controller-home') { ?>
         <span class="badge ms-2 mt-2 rounded-pill text-bg-primary">Goals : <?= $numberOfGoals ?> </span>
         <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary">Todos : <?= $numberOfTodos ?> </span>
     <?php } ?>
-    
+
     <div class="row progressbar pe-2 rounded-end-pill border border-light border-5">
         <div class="col-3 rounded-end-circle bg-light border border-light border-5 p-0 m-0">
             <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid rounded-end-circle imgChibi">
@@ -16,11 +16,12 @@
             </div>
 
             <div class="progress rounded-pill" role="progressbar" aria-label="Basic example" aria-valuenow="<?= $procrastimon->hp ?>" aria-valuemin="0" aria-valuemax="100">
+            <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/null/external-heart-100-most-used-icons-flaticons-flat-flat-icons-2.png"/>
                 <div class="progress-bar barPV" style="width: <?= $procrastimon->hp ?>%"><?= $procrastimon->hp ?>/100</div>
             </div>
 
             <div class="progress rounded-pill" role="progressbar" aria-label="Info example" aria-valuenow="<?= $procrastimon->exp ?>" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar barPP" style="width: <?= $procrastimon->exp ?>%"><?= $procrastimon->exp ?>/100</div>
+            <img src="https://img.icons8.com/emoji/48/null/glowing-star.png"/><div class="progress-bar barPP" style="width: <?= $procrastimon->exp ?>%"><?= $procrastimon->exp ?>/100</div>
             </div>
         </div>
         <?php if ($controller === 'controller-goals' || $controller === 'controller-todos') { ?>

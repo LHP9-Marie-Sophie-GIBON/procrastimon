@@ -1,7 +1,4 @@
 <?php include 'components/head.php'; ?>
-<?php if ($procrastimon->exp >= 100) { ?>
-
-<?php } ?>
 
 <body>
     <!-- mise en place du Header -->
@@ -98,7 +95,7 @@
                         <p class="text-center">Your Task : "<?= $expiredTodo['name'] ?>" is expired (due day : <?= $expiredTodo['due_date'] ?>) </p>
 
                     <?php } ?>
-                    <a href="controller-todos.php" class="btn btn-danger rounded-pill">Next</a>
+                    <a href="controller-todos.php?removehp" class="btn btn-danger rounded-pill">Next</a>
                 </div>
             </div>
 
@@ -215,9 +212,9 @@
 
 
 <!-- Toasts -->
-<div class="toast-container">
+<div class="toast-container position-fixed top-50 start-0 translate-middle-y p-3">
     <!-- Toat new trophy -->
-    <div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 pt-2 ps-2 ms-4 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
                 <p class="h6">Congrats, you just won a new trophy !</p>
@@ -225,7 +222,28 @@
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
+    <!-- Toast addExp -->
+    <div class="toast addexp <?= $message['addexp'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <p class="h6"><img src="https://img.icons8.com/emoji/28/null/glowing-star.png"/>  <?= $procrastimon->name ?> won some exp !</p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <!-- Toast removeHP -->
+    <div class="toast removehp <?= $message['removehp'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0 top-0 start-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <p class="h6"><img src="https://img.icons8.com/color/28/null/bandage.png" />  <?= $procrastimon->name ?> got hurt ... </p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
 </div>
+
+
+
 
 
 

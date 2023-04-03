@@ -7,8 +7,8 @@
     <!-- mise en place du loader -->
     <?php include 'components/loader.php'; ?>
 
-     <!-- mise en place du  levelup  -->
-     <?php include 'components/levelup.php'; ?>
+    <!-- mise en place du  levelup  -->
+    <?php include 'components/levelup.php'; ?>
 
     <!-- modal de formulaire -->
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <!--ise en place de la page GOALS LIST -->
+    <!--mise en place de la page GOALS LIST -->
     <main>
         <div class="h2 text-center text-white fw-bold m-2">GOALS List</div>
         <?php if ($empty) { ?>
@@ -123,7 +123,7 @@
                     ?>
                         <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date'] ?>) !</p>
                     <?php } ?>
-                    <a href="controller-goals.php" class="btn btn-danger">Next</a>
+                    <a href="controller-goals.php?removehp" class="btn btn-danger">Next</a>
                 </div>
             </div>
 
@@ -173,7 +173,7 @@
                                     <p><span class="fw-bold">Category :</span>
                                         <!-- <?php displayCategory($goal['category']); ?> -->
                                         <?php
-                                        $category = $goal['category']; 
+                                        $category = $goal['category'];
                                         if ($category === 1) {
                                             echo '<button class="btn body text-light" disabled>Body</button>';
                                         } elseif ($category === 2) {
@@ -181,7 +181,7 @@
                                         } elseif ($category === 3) {
                                             echo '<button class="btn work text-light" disabled>Work</button>';
                                         } elseif ($category === 4) {
-                                            echo '<button class="btn other text-light" disabled>Other</button>'; 
+                                            echo '<button class="btn other text-light" disabled>Other</button>';
                                         }
                                         ?>
                                     </p>
@@ -241,17 +241,40 @@
     </main>
 <?php } ?>
 
-<!-- TOAST trophé  -->
-<div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 pt-2 ps-2 ms-4 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-        <div class="toast-body">
-            <p class="h6">Congrats, you just won a new trophy !</p>
+<!-- TOASTS  -->
+<div class="toast-container position-fixed top-50 start-0 translate-middle-y p-3">
+    <!-- toast trophés -->
+    <div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <p class="h6">Congrats, you just won a new trophy !</p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <!-- Toast addExp -->
+    <div class="toast addexp <?= $message['addexp'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <p class="h6"><img src="https://img.icons8.com/emoji/28/null/glowing-star.png" /> <?= $procrastimon->name ?> won some exp !</p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <!-- Toast removeHP -->
+    <div class="toast removehp <?= $message['removehp'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0 top-0 start-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <p class="h6"><img src="https://img.icons8.com/color/28/null/bandage.png" /> <?= $procrastimon->name ?> got hurt ... </p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
     </div>
 </div>
+
 
 <!-- mise en place du footer -->
 <?php include 'components/footer.php'; ?>
 
+<?= $Fonction ?? '' ?>
 </body>

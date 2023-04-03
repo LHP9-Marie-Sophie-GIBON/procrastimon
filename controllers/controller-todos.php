@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $todo->completeTodo();
         $procrastimon->addExp(5, $procrastimon->id);
 
-        header('Location: controller-todos.php');
+        header('Location: controller-todos.php?addexp');
     }
 
     // Delete todo 
@@ -98,8 +98,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $todo->deleteTodo();
         $procrastimon->removeHp(2, $procrastimon->id);
 
-        header('Location: controller-todos.php');
+        header('Location: controller-todos.php?removehp');
         exit;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    
+    if (isset($_GET['addexp'])) {
+        $message['addexp'] = 'openToast';
+    } else
+
+    if (isset($_GET['removehp'])) {
+        $message['removehp'] = 'openToast'; 
     }
 }
 
@@ -120,7 +131,7 @@ if ($procrastimon->exp >= 100) {
      header('Location: controller-todos.php?action=levelup');
 }
 
-if (isset($_GET['action']) && isset($_GET['action']) == 'levelup') {
+if (isset($_GET['action']) && isset($_GET['action']) === 'levelup') {
     $Fonction = '<script>letsEvolve(); disabledLoader(); </script>';
 }
 

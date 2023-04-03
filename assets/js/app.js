@@ -62,7 +62,6 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 
 // PROGRESS BAR HP
 const progressBar = document.querySelector('.progress-bar.barPV');
-
 if (progressBar) {
     if (parseFloat(progressBar.style.width) >= 26 && parseFloat(progressBar.style.width) <= 50) {
         if (!progressBar.classList.contains('hp50')) {
