@@ -368,7 +368,11 @@ img.banner {
     }
 }
 
-
+.row.banner img {
+    height: 80px;
+    width: auto;
+    margin-top: 1.7rem;
+}
 .container.History,
 .container.Trophies,
 .container.boarding-home {
@@ -562,16 +566,6 @@ nav.options button.btn.btnML {
     padding: 0;
 }
 
-.row.endGame .card {
-    width: 90vw;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.678);
-}
-
-.row.endGame .carousel-item {
-    height: 450px;
-
-}
 
 
 @media (min-width: 992px) {
@@ -621,5 +615,32 @@ img.oldProcrastimon {
     animation: bounce 0.5s ease-in-out infinite alternate;
 }
 
+/* GAMEOVER ENDGAME */
 
-  
+.row.endGame .card {
+    width: 90vw;
+    height: 450px;
+    background-color: rgba(255, 255, 255, 0.678);
+    margin-bottom: 1rem;
+}
+
+.row.endGame .card-body {
+    padding: 0;
+}
+
+.row.endGame .carousel-item {
+    height: 450px;
+}
+.row.endGame .h3 {
+    margin-top: 5rem;
+}
+
+.row.endGame img.procrastimon {
+    height: 200px;
+    margin: 1.5rem;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+.row.endGame .card.congrats {
+    background-image: url(../img/confetti.svg);
+}

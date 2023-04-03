@@ -87,7 +87,7 @@
             <!-- Liste des todos expirées -->
             <div class="container">
                 <div class="alert alert-danger rounded-5" role="alert">
-                    <p class="text-center">You have some expired tasks !</p>
+                    <p class="text-center h5 fw-bold">You have some expired tasks !</p>
 
                     <?php foreach ($expiredTodos as $expiredTodo) {
                         $procrastimon->removeHp(5, $procrastimon->id);
@@ -97,7 +97,7 @@
                         <p class="text-center">Your Task : "<?= $expiredTodo['name'] ?>" is expired (due day : <?= $expiredTodo['due_date'] ?>) </p>
 
                     <?php } ?>
-                    <a href="controller-todos.php" class="btn btn-danger">Next</a>
+                    <a href="controller-todos.php" class="btn btn-danger rounded-pill">Next</a>
                 </div>
             </div>
 

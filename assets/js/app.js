@@ -55,30 +55,6 @@ function disableLoader() { // fonction pour désactiver le loader
     backdrop.classList.add('hide');
 }
 
-// LEVEL UP
-const lvlbackdrop = document.querySelector('#levelupBackdrop');
-const levelUp = document.querySelector('#levelupLoader');
-levelUp.style.display = 'none';
-lvlbackdrop.classList.add('hide');
-
-function letsEvolve() {
-    // Cacher le loader principal
-    disableLoader();
-
-    // Afficher le loader de level up
-    levelUp.style.display = 'block';
-    lvlbackdrop.classList.remove('hide'); 
-    lvlbackdrop.classList.add('show');
-
-    setTimeout(() => {
-        levelUp.style.display = 'none';
-        lvlbackdrop.classList.remove('show');
-        lvlbackdrop.classList.add('hide');      
-    }, 3500);
-
-}
-
-
 
 // TOOLTIPS
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -86,24 +62,26 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 
 // PROGRESS BAR HP
 const progressBar = document.querySelector('.progress-bar.barPV');
-console.log(progressBar.style.width);
 
-if (parseFloat(progressBar.style.width) >= 26 && parseFloat(progressBar.style.width) <= 50) {
-    if (!progressBar.classList.contains('hp50')) {
-        progressBar.classList.add('hp50');
-        console.log('Added hp50 class');
-    } else {
-        console.log('hp50 class already present');
-    }
-
-} else if (parseFloat(progressBar.style.width) >= 0 && parseFloat(progressBar.style.width) <= 25) {
-    if (!progressBar.classList.contains('hp25')) {
-        progressBar.classList.add('hp25');
-        console.log('Added hp25 class');
-    } else {
-        console.log('hp25 class already present');
+if (progressBar) {
+    if (parseFloat(progressBar.style.width) >= 26 && parseFloat(progressBar.style.width) <= 50) {
+        if (!progressBar.classList.contains('hp50')) {
+            progressBar.classList.add('hp50');
+            console.log('Added hp50 class');
+        } else {
+            console.log('hp50 class already present');
+        }
+    
+    } else if (parseFloat(progressBar.style.width) >= 0 && parseFloat(progressBar.style.width) <= 25) {
+        if (!progressBar.classList.contains('hp25')) {
+            progressBar.classList.add('hp25');
+            console.log('Added hp25 class');
+        } else {
+            console.log('hp25 class already present');
+        }
     }
 }
+
 
 // TOASTS
 let toastElement = document.querySelector('.toast.openToast');
@@ -124,14 +102,37 @@ if (openModalElement) { // si openModalElement est trouvé
     openModal.show(); // nous l'ouvrons avec la methode show()
 }
 
+// LEVEL UP
+const lvlbackdrop = document.querySelector('#levelupBackdrop');
+const levelUp = document.querySelector('#levelupLoader');
+if (levelUp){
+    levelUp.style.display = 'none';
+    lvlbackdrop.classList.add('hide');
+}
 
+function letsEvolve() {
+    // Cacher le loader principal
+    disableLoader();
+
+    // Afficher le loader de level up
+    levelUp.style.display = 'block';
+    lvlbackdrop.classList.remove('hide'); 
+    lvlbackdrop.classList.add('show');
+
+    setTimeout(() => {
+        levelUp.style.display = 'none';
+        lvlbackdrop.classList.remove('show');
+        lvlbackdrop.classList.add('hide');      
+    }, 3500);
+
+}
 
 // CAROUSEL GAMEOVER ENDGAME
 var carousel = document.querySelector('#carousel-gameover');
 
 // Ajouter un écouteur d'événements sur le carousel
 if (carousel) {
-    carousel.addEventListener('slide.bs.carousel', function (event) {
+    carousel.addEventListener('slide.bs.carousel', function(event) {
         console.log('woop');
 
         // Récupérer l'index de la slide active et le nombre total de slides
@@ -147,5 +148,3 @@ if (carousel) {
         }
     });
 }
-
-

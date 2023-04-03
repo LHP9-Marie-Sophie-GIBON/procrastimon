@@ -1,27 +1,34 @@
 <?php include 'components/head.php'; ?>
 
 <body>
+    <?php include 'components/loader.php'; ?>
     <main>
+
         <div class="row endGame justify-content-center align-items-center">
-            <div class="card rounded-5 border border-light border-5">
-                <div class="card-body">
+            <div class="card rounded-5 border border-light border-5 congrats">
+                <div class="card-body ">
                     <div id="carousel-gameover" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active text-center ">
-                                <img src="" alt="" class="img-fluid">
+                                <img src="<?= $sprite->sprite_happy ?>" alt="procrastimon" class="procrastimon">
                                 <h1><?= $procrastimon->name ?> is a full grown up now !</h1>
                                 <div class="h6">Time for him to go on a retrait well deserved !</div>
                             </div>
                             <div class="carousel-item text-center">
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
                                 <div class="h3">Don't worry, you can always visit him at the boarding home </div>
-                                <img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" alt="icon Boarding-home">
+                                <span class="badge text-bg-info rounded-pill"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" alt="icon Boarding-home"></span>
                             </div>
                             <div class="carousel-item text-center">
                                 <div class="h3">Now, you can take care of a new procratimon, let's keep motivated !</div>
-                                <img src="" alt="">
-                                <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Of course !</button>
-                                <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">I'll do my best !</button>
-
+                                <img src="../assets/img/background1.png" alt="" class="d-lg-none w-100 mt-5">
+                                <div class="mt-5">
+                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Of course !</button>
+                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">I'll do my best !</button>
+                                </div>
                             </div>
                         </div>
                     </div>

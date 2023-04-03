@@ -8,15 +8,15 @@
     <?php include 'components/loader.php'; ?>
 
     <main>
-    <div class="h2 text-center text-white fw-bold m-2">Boarding Home</div>
+        <div class="h2 text-center text-white fw-bold m-2">Boarding Home</div>
         <div class="container boarding-home rounded-5 border border-light border-5">
 
             <?php if (empty($procrastimonList)) { ?>
                 <div class="alert alert-primary rounded-5" role="alert">
                     The boarding-home is empty for now
                 </div>
-                
-            <?php } else { 
+
+                <?php } else {
                 // sinon, afficher les procrastimons
                 foreach ($procrastimonList as $oldprocrastimon) {
 
@@ -27,13 +27,14 @@
                     $goal = new Goal();
                     $goal->id_users = $_SESSION['user_id'];
                     $goalList = $goal->getGoalsHistory($oldprocrastimon['id']);
-            ?>
+                ?>
                     <div class="col-2">
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#infoModal<?= $oldprocrastimon['id'] ?>">
                             <img src="<?= $sprite->sprite_happy ?>" class="oldProcrastimon" alt="..." data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $oldprocrastimon['name'] ?>">
                         </button>
                     </div>
         </div>
+
         <!-- Modal -->
         <div class="modal fade" id="infoModal<?= $oldprocrastimon['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -43,10 +44,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <?php
-                        foreach ($goalList as $goal) {
-                            echo '<p>' . $goal['creation'] . ' : ' . $goal['name'] . ', achieved the ' . $goal['achievement_day'] . '</p>';
-                        } ?>
+                        <?php foreach ($goalList as $goal) { ?>
+                            <div class="mb-1">
+                                <?php displayCategory($goal['category']); ?>
+                                <span class="fw-bold">"<?= $goal['name'] ?>"</span> completed the <?= $goal['achievement_day'] ?>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary rounded-pill fw-bold" data-bs-dismiss="modal">Cancel</button>

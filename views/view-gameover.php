@@ -1,6 +1,7 @@
 <?php include 'components/head.php'; ?>
 
 <body>
+    <?php include 'components/loader.php'; ?>
     <main>
         <div class="row endGame justify-content-center align-items-center">
             <div class="card rounded-5 border border-light border-5">
@@ -8,18 +9,23 @@
                     <div id="carousel-gameover" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active text-center">
-                                <img src="https://new-game-plus.fr/wp-content/uploads/2019/07/Game-Freak-Pikachu-KO.jpg" alt="" class="w-25">
+                                <img src="../assets/img/sprite-dead.png" alt="">
                                 <h1>Oh no, <?= $procrastimon->name ?> is KO</h1>
                             </div>
                             <div class="carousel-item text-center">
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
                                 <div class="h3">Don't worry <?= $procrastimon->name ?> is in a better place ...</div>
                             </div>
                             <div class="carousel-item text-center">
                                 <div class="h3">Take care of your new procratimon and keep motivated !</div>
-                                <img src="" alt="">
-                                <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Of course !</button>
-                                <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">I'll do my best ...</button>
-
+                                <img class="w-100 mt-5 d-lg-none" src="../assets/img/background1.png" alt="">
+                                <div class="mt-5">
+                                    <button type="button" class="btn btn-outline-info rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">Of course !</button>
+                                    <button type="button" class="btn btn-outline-info rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">I'll do my best ...</button>
+                                </div>
                             </div>
                         </div>
                     </div>
