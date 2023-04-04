@@ -84,19 +84,24 @@
                 <?php } else if ($trophiesList) { ?>
                     <div class="h2 text-center text-white fw-bold m-2">Trophie's room</div>
                     <div class="container Trophies rounded-5 border border-light border-5 p-3 mt-4">
-                        <div class="row">
+                        <div class="row justify-content-around">
                             <?php foreach ($trophiesList as $trophy) { ?>
-                                <div class="col-2 text-center">
-                                    <img src="https://img.icons8.com/fluency/48/null/trophy.png" />
-                                    <p><?= $trophy['title'] ?></p>
-                                    <p>(<?= $trophy['creation'] ?>)</p>
+                                <div class="col-2 text-center m-1">
+                                    <button type="button" class="btn" 
+                                            data-bs-toggle="popover" data-bs-placement="bottom" 
+                                            data-bs-trigger="focus"
+                                            data-bs-custom-class="custom-popover"
+                                            data-bs-title="<?= $trophy['title'] ?>"
+                                            data-bs-content= "obtained the <?= $trophy['creation'] ?>">
+                                        <img src="<?= $trophy['image'] ?>" class="trophies" />
+                                    </button>
                                 </div>
                             <?php } ?>
                         </div>
                         <div class="row banner justify-content-center">
                             <img src="../assets/img/background2.png" alt="">
                         </div>
-                        
+
                     </div>
 
                 <?php } ?>
@@ -107,5 +112,9 @@
     <!-- mise en place du footer -->
     <?php include 'components/footer.php'; ?>
 
+    <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    </script>
 
 </body>

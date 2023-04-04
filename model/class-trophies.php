@@ -3,6 +3,7 @@
 class Trophy {
     private int $id; 
     private string $title; 
+    private string $image; 
     private string $creation;
     private int $id_users;
 
@@ -37,15 +38,16 @@ class Trophy {
     }
 
     // (CREATION) méthode pour insérer un trophée dans la base de données
-    public function insertTrophy($title)
+    public function insertTrophy($title, $image)
     {
         $this->creation = date('Y-m-d');
 
         // préparation de la requête
-        $query = $this->_pdo->prepare("INSERT INTO trophies (creation, title, id_users) VALUES (:creation, :title, :id_users)");
+        $query = $this->_pdo->prepare("INSERT INTO trophies (creation, title, image, id_users) VALUES (:creation, :title, :image, :id_users)");
         $query->execute([
             ':creation' => $this->creation,
             ':title' => $title,
+            ':image' => $image,
             ':id_users' => $this->id_users,
         ]);
     }

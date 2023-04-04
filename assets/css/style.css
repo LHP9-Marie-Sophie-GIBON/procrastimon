@@ -345,6 +345,54 @@ img.banner {
 }
 
 /* HISTORY / TROPHIES */
+.container.Trophies .col-2 {
+    width: 100px !important;
+    padding: 0;
+
+}
+
+.popover.custom-popover {
+ border: 0;
+ border-radius : 20px; 
+
+}
+
+
+h3.popover-header {
+    background-color: #acccfc;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    
+}
+
+.popover-body {
+    color: #4b83d6;
+}
+
+img.trophies {
+    height: 50px;
+    width: auto;
+    animation: bounce 1s ease-in-out infinite alternate;
+}
+
+/* media queries desktop*/
+@media (min-width: 992px) {
+    .container.Trophies .col-2 {
+        width: 130px !important;
+        padding: 0;
+    
+    }
+    
+    img.trophies {
+        height: 100px;
+        width: auto;
+        margin-top: 1.7rem;
+        animation: bounce 1s ease-in-out infinite alternate;
+    }
+
+}
+
 .container.History {
     padding-bottom: 0 !important;
 }

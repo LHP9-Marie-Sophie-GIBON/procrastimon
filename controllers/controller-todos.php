@@ -155,26 +155,42 @@ $totalTrophies = $user->getTotalTrophies('total_todo_trophies');
 if ($completeTodos === 10 && $totalTrophies['total_todo_trophies'] === 0) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('Wood to-do\'s trophy');
+    $trophy->insertTrophy('10 todo\'s trophy', '../assets/img/trophies/todo_trophy01.webp');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
-} elseif ($completeTodos === 25 && $totalTrophies['total_todo_trophies'] < 2) {
 
+} elseif ($completeTodos === 25 && $totalTrophies['total_todo_trophies'] < 2) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('Steel to-do\'s trophy');
+    $trophy->insertTrophy('25 todo\'s trophy', '../assets/img/trophies/todo_trophy02.webp');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
+
 } elseif ($completeTodos === 50 && $totalTrophies['total_todo_trophies'] < 3) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('Marble todo\'s trophy');
+    $trophy->insertTrophy('50 todo\'s trophy', '../assets/img/trophies/todo_trophy03.webp');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
+
 } elseif ($completeTodos === 100 && $totalTrophies['total_todo_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy($trophy->id_users, 'Moonstone todo\'s trophy');
+    $trophy->insertTrophy('100 todo\'s trophy', '../assets/img/trophies/todo_trophy04.webp');
+    $user->addTrophy('total_todo_trophies');
+    $message['trophy'] = 'OpenToast';
+
+} elseif ($completeTodos === 200 && $totalTrophies['total_todo_trophies'] < 5) {
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy('200 todo\'s trophy', '../assets/img/trophies/todo_trophy05.webp');
+    $user->addTrophy('total_todo_trophies');
+    $message['trophy'] = 'OpenToast';
+    
+} elseif ($completeTodos === 500 && $totalTrophies['total_todo_trophies'] < 6) {
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy('500 todo\'s trophy', '../assets/img/trophies/todo_trophy06.webp');
     $user->addTrophy('total_todo_trophies');
     $message['trophy'] = 'OpenToast';
 }

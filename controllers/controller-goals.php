@@ -165,21 +165,21 @@ $totalTrophies = $user->getTotalTrophies('total_goal_trophies');
 if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) {// si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('Bronze goal\'s trophy');
+    $trophy->insertTrophy('1st goal\'s trophy', '../assets/img/trophies/goal_trophy01.jpg');
     $user->addTrophy('total_goal_trophies');
     $message['trophy'] = 'OpenToast';
    
 } elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('Silver goal\'s trophy');
+    $trophy->insertTrophy('3 goal\'s trophy', '../assets/img/trophies/goal_trophy02.jpg');
     $user->addTrophy('total_goal_trophies');
     $message['trophy'] = 'OpenToast';
    
 } elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('Gold goal\'s trophy');
+    $trophy->insertTrophy('5 goal\'s trophy', '../assets/img/trophies/goal_trophy03.jpg');
     $user->addTrophy('total_goal_trophies');
     $message['trophy'] = 'OpenToast';
    
@@ -187,11 +187,18 @@ if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) {// si le
 } elseif ($achievedGoals === 10 && $totalTrophies['total_goal_trophies'] < 4) {
     $trophy = new Trophy();
     $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy($trophy->id_users, 'Diamond goal\'s trophy');
+    $trophy->insertTrophy('10 goal\'s trophy', '../assets/img/trophies/goal_trophy04.jpg');
     $user->addTrophy('total_goal_trophies');
     $message['trophy'] = 'OpenToast';
    
-}
+} elseif ($achievedGoals === 20 && $totalTrophies['total_goal_trophies'] < 5) {
+    $trophy = new Trophy();
+    $trophy->id_users = $_SESSION['user_id'];
+    $trophy->insertTrophy('20 goal\'s trophy', '../assets/img/trophies/goal_trophy05.jpg');
+    $user->addTrophy('total_goal_trophies');
+    $message['trophy'] = 'OpenToast';
+
+} 
 
 
 
