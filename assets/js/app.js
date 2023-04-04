@@ -21,20 +21,23 @@ const playPromise = audio.play();
 
 
 // Ajoute un événement de clic au bouton mute
-muteButton.addEventListener('click', () => {
-    // Vérifie si le son est activé ou désactivé
-    if (audio.muted ) {
-        // Active le son
-        audio.play();
-        audio.muted = false;
-        muteButton.innerHTML = '<img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/15/FFFFFF/external-volume-muted-with-a-crossed-sign-logotype-music-bold-tal-revivo.png"/>';
-    } else {
-        // Désactive le son
-        audio.pause();
-        audio.muted = true;
-        muteButton.innerHTML = '<img src="https://img.icons8.com/ios-glyphs/18/FFFFFF/musical-notes.png"/>';
-    }
-});
+if(muteButton) {
+    muteButton.addEventListener('click', () => {
+        // Vérifie si le son est activé ou désactivé
+        if (audio.muted ) {
+            // Active le son
+            audio.play();
+            audio.muted = false;
+            muteButton.innerHTML = '<img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/15/FFFFFF/external-volume-muted-with-a-crossed-sign-logotype-music-bold-tal-revivo.png"/>';
+        } else {
+            // Désactive le son
+            audio.pause();
+            audio.muted = true;
+            muteButton.innerHTML = '<img src="https://img.icons8.com/ios-glyphs/18/FFFFFF/musical-notes.png"/>';
+        }
+    });
+}
+
 
 // INTERACTION PROCRASTIMON
 var happySound = new Audio(

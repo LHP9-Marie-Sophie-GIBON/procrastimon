@@ -63,7 +63,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <a href="controller-todos.php?newTask" class="btn btn-outline-info rounded-pill">Yes</a>
+                    <a href="todos.php?newTask" class="btn btn-outline-info rounded-pill">Yes</a>
                     <button type="button" class="btn btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                         <p class="text-center">Your Task : "<?= $expiredTodo['name'] ?>" is expired (due day : <?= $expiredTodo['due_date'] ?>) </p>
 
                     <?php } ?>
-                    <a href="controller-todos.php?removehp" class="btn btn-danger rounded-pill">Next</a>
+                    <a href="todos.php?removehp" class="btn btn-danger rounded-pill">Next</a>
                 </div>
             </div>
 
@@ -173,7 +173,7 @@
                                     <p class="h3 fw-bold">"<?= $task['name'] ?>"</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="controller-todos.php" method="post">
+                                    <form action="todos.php" method="post">
                                         <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
                                         <button type="submit" name="checked" class="btn btn-outline-info rounded-pill">Yes</button>
                                     </form>

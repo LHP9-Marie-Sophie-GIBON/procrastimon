@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         unset($_SESSION['newGoal']);
 
         // on redirige vers la page des goals
-        header('Location: controller-goals.php');
+        header('Location: goals.php');
         exit;
     }
 }
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $goal->completeGoal($_POST['goalId']);
         $procrastimon->addExp(10, $procrastimon->id);
 
-        header('Location: controller-goals.php?addexp');
+        header('Location: goals.php?addexp');
     }
 
     // Delete goal 
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $goal->deleteGoal($_POST['goalId']);
         $procrastimon->removeHp(5, $procrastimon->id);
 
-        header('Location: controller-goals.php?removehp');
+        header('Location: goals.php?removehp');
         exit;
     }
 }
@@ -139,7 +139,7 @@ if ($procrastimon->exp >= 100) {
     $procrastimon->levelUp($procrastimon->id);
 
     // header
-    header('Location: controller-todos.php?action=levelup');
+    header('Location: todos.php?action=levelup');
 }
 
 if (isset($_GET['action']) && isset($_GET['action']) == 'levelup') {
@@ -148,13 +148,14 @@ if (isset($_GET['action']) && isset($_GET['action']) == 'levelup') {
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4
 if ($procrastimon->level == 4) {
-    header('Location: controller-endgame.php');
+    $procrastimon->setEvolutionDay($_SESSION['user_id'], $procrastimon->id);
+    header('Location: endgame.php');
     exit;
 }
 
-// (GAME OVER) Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
+// (GAME OVER) Lorsque le procrastimon est KO, rediriger vers gameover.php
 if ($procrastimon->hp <= 0) {
-    header('Location: controller-gameover.php');
+    header('Location: gameover.php');
     exit;
 }
 

@@ -1,2 +1,14 @@
 RewriteEngine on
-ErrorDocument 404 /404.php
+
+RewriteRule ^start.php$ controllers/controller-start.php
+RewriteRule ^home.php$ controllers/controller-home.php
+RewriteRule ^todos.php$ controllers/controller-todos.php
+RewriteRule ^goals.php$ controllers/controller-goals.php
+RewriteRule ^trophies.php$ controllers/controller-trophies.php
+RewriteRule ^boarding-home.php$ controllers/controller-boarding-home.php
+RewriteRule ^endgame.php$ controllers/controller-endgame.php
+RewriteRule ^gameover.php$ controllers/controller-gameover.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /404.php [L,QSA]
+Options -Indexes

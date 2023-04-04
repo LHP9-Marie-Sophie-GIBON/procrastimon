@@ -11,6 +11,7 @@
 
 <main>
     <div class="container start">
+        <h1 class="text-light fw-bold position-absolute top-50 start-50 translate-middle">PROCRASTIMON</h1>
         <?php if (isset($_GET['newGame'])) { ?>
 
             <div class="row newGame justify-content-center align-items-center">
@@ -53,7 +54,7 @@
                             <!-- submit -->
                             <div class="text-center m-3">
                                 <input type="submit" class="btn btn-outline-info fw-bold rounded-pill g-recaptcha" value="let's go!" data-sitekey="6Lfv6xwlAAAAAPBgq_F5vme5N36xVvFKhbLXTJVo" data-callback='onSubmit' data-action='submit'>
-                                <a href="controller-start.php" class="btn btn-outline-secondary fw-bold rounded-pill ">Cancel</a>
+                                <a href="start.php" class="btn btn-outline-secondary fw-bold rounded-pill ">Cancel</a>
 
                             </div>
                         </form>
@@ -66,14 +67,13 @@
         <?php } else { ?>
 
             <div class="row start justify-content-center align-items-end">
-                <img src="../assets/img/banner.png" alt="">
                 <div class="col-7 text-center">
                     <!-- Bouton LOAD GAME -->
                     <button class="btn btnStart rounded-pill border border-light border-5 m-1" data-bs-toggle="modal" data-bs-target="#modalLogin">
                         LOAD GAME
                     </button>
                     <!-- Bouton NEW GAME -->
-                    <a href="controller-start.php?newGame" class="btn btnStart  rounded-pill border border-light border-5 m-1">
+                    <a href="start.php?newGame" class="btn btnStart  rounded-pill border border-light border-5 m-1">
                         NEW GAME
                     </a>
                 </div>
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer pt-2">
-                                <a href="controller-home.php" class="btn btn-outline-info rounded-pill ">Let's go</a>
+                                <a href="home.php" class="btn btn-outline-info rounded-pill ">Let's go</a>
                                 <button type="button" class="btn btn-outline-secondary rounded-pill fw-bold" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>

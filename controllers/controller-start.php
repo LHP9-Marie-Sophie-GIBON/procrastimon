@@ -178,7 +178,7 @@ class Login
                         echo "échec de la création de l'utilisateur";
                     }
 
-                    header('Location: controller-home.php');
+                    header('Location: home.php');
                     exit;
                 }
             } else {
@@ -223,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Authentification réussie : enregistrer l'utilisateur dans la session et rediriger vers la page privée
                 $_SESSION['user_id'] = $user->id;
 
-                header('Location: controller-home.php');
+                header('Location: home.php');
                 exit;
             } else {
                 $errorsLogin['password'] = $wrong;

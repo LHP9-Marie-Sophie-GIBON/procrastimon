@@ -14,7 +14,7 @@ $procrastimon = new Procrastimon();
 $sprite = new Sprite();
 
 $user->login($user, $procrastimon, $sprite);
-$procrastimon->setEvolutionDay($_SESSION['user_id'], $procrastimon->id);
+$evolution = $procrastimon->setEvolutionDay($procrastimon->id);
 
 $arrayErrors = [];
 $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";
@@ -45,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // on envoie les données dans la base de données
         $procrastimon->insertProcrastimon();
 
-        // on redirige vers controller-home.php
-        header('Location: controller-home.php');
+        // on redirige vers home.php
+        header('Location: home.php');
     }
 }
 

@@ -14,16 +14,16 @@
                     <!-- mise en place du menu -->
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link <?= empty($goalsList) ? "disabled" : "" ?>" href="controller-trophies.php?history">Achieved Goals</a>
+                            <a class="nav-link <?= empty($goalsList) ? "disabled" : "" ?>" href="trophies.php?history">Achieved Goals</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= empty($todosList) ? "disabled" : "" ?>" href="controller-trophies.php?history=completedtodos">Achieved todos</a>
+                            <a class="nav-link <?= empty($todosList) ? "disabled" : "" ?>" href="trophies.php?history=completedtodos">Achieved todos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= empty($missedGoals) ? "disabled" : "" ?>" href="controller-trophies.php?history=missedgoals">Missed Goals</a>
+                            <a class="nav-link <?= empty($missedGoals) ? "disabled" : "" ?>" href="trophies.php?history=missedgoals">Missed Goals</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= empty($missedTodos) ? "disabled" : "" ?>" href="controller-trophies.php?history=missedtodos">Missed todos</a>
+                            <a class="nav-link <?= empty($missedTodos) ? "disabled" : "" ?>" href="trophies.php?history=missedtodos">Missed todos</a>
                         </li>
                     </ul>
 

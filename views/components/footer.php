@@ -1,4 +1,10 @@
-<?php $controller = basename($_SERVER['PHP_SELF'], '.php'); ?>
+<?php
+// Obtenir le chemin d'URL actuel
+$currentURL = $_SERVER['REQUEST_URI'];
+
+// Extraire le nom de la page à partir de l'URL
+$currentPage = basename(parse_url($currentURL, PHP_URL_PATH), ".php");
+?>
 <nav class="navbar navbar-expand-lg options fixed-bottom justify-content-center" tabindex="1">
     <button type="button" class="btn btn-outline-light rounded-5 border-5 fw-bold fs-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Menu</button>
 </nav>
@@ -7,14 +13,14 @@
     <div class="offcanvas-body small align-items-between">
         <div class="container-fluid text-center">
 
-            <?php if ($controller === 'controller-home') {
+            <?php if ($currentPage === 'home') {
             ?>
                 <div class="row align-items-center justify-content-center mt-3">
 
                     <!-- Bouton 1-->
                     <div class="col text-center">
                         <button class="btn btn-outline-light border-5" type="button">
-                            <a href="../controllers/controller-goals.php">
+                            <a href="goals.php">
                                 <img src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/48/FFFFFF/external-achievement-award-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto-2.png" />
                             </a>
                         </button> <br>
@@ -24,7 +30,7 @@
                     <!-- Bouton 2 -->
                     <div class="col text-center ">
                         <button class="btn btn-outline-light border-5" type="button">
-                            <a href="../controllers/controller-todos.php">
+                            <a href="todos.php">
                                 <img src="https://img.icons8.com/sf-black-filled/48/FFFFFF/todo-list.png" />
                             </a>
                         </button> <br>
@@ -36,7 +42,7 @@
                     <!-- Bouton 3 -->
                     <div class="col text-center">
                         <button class="btn btn-outline-light border-5" type="button">
-                            <a href="../controllers/controller-trophies.php">
+                            <a href="trophies.php">
                                 <img src="https://img.icons8.com/ios-filled/48/FFFFFF/laurel-wreath.png" />
                             </a>
                         </button> <br>
@@ -47,7 +53,7 @@
                     <!-- Bouton 4 -->
                     <div class="col text-center">
                         <button class="btn btn-outline-light border-5">
-                            <a href="../controllers/controller-boarding-home.php"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" /></a>
+                            <a href="boarding-home.php"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" /></a>
                         </button> <br>
                         <label class="text-white small" for="Boarding-home">Boarding-Home</label>
                     </div>
@@ -67,7 +73,7 @@
                     <!-- Bouton 1-->
                     <div class="col text-center">
                         <button class="btn btn-outline-light border-5 btnHome" type="button">
-                            <a href="../controllers/controller-home.php">
+                            <a href="home.php">
                                 <img src="https://img.icons8.com/sf-black/48/FFFFFF/u-turn-to-left.png" />
                             </a>
                         </button><br>
@@ -76,16 +82,16 @@
 
                     <!-- Bouton 2 -->
                     <div class="col text-center ">
-                        <?php if ($controller === 'controller-todos' || $controller === 'controller-trophies' || $controller === 'controller-boarding-home') { ?>
+                        <?php if ($currentPage === 'todos' || $currentPage === 'trophies' || $currentPage === 'boarding-home') { ?>
                             <button class="btn btn-outline-light border-5" type="button">
-                                <a href="../controllers/controller-goals.php">
+                                <a href="goals.php">
                                     <img src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/48/FFFFFF/external-achievement-award-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto-2.png" />
                                 </a>
                             </button> <br>
                             <label class="text-white small" for="goals">Goals</label>
                         <?php } else { ?>
                             <button class="btn btn-outline-light border-5" type="button">
-                                <a href="../controllers/controller-todos.php">
+                                <a href="todos.php">
                                     <img src="https://img.icons8.com/sf-black-filled/48/FFFFFF/todo-list.png" />
                                 </a>
                             </button> <br>
@@ -96,16 +102,16 @@
                 <div class="row justify-content-center align-items-center">
                     <!-- Bouton 3 -->
                     <div class="col text-center">
-                        <?php if ($controller === 'controller-trophies' || $controller === 'controller-boarding-home') { ?>
+                        <?php if ($currentPage === 'trophies' || $currentPage === 'boarding-home') { ?>
                             <button class="btn btn-outline-light border-5" type="button">
-                                <a href="../controllers/controller-todos.php">
+                                <a href="todos.php">
                                     <img src="https://img.icons8.com/sf-black-filled/48/FFFFFF/todo-list.png" />
                                 </a>
                             </button> <br>
                             <label class="text-white small" for="todolist">To-do list</label>
                         <?php } else { ?>
                             <button class="btn btn-outline-light border-5" type="button">
-                                <a href="../controllers/controller-trophies.php">
+                                <a href="trophies.php">
                                     <img src="https://img.icons8.com/ios-filled/48/FFFFFF/laurel-wreath.png" />
                                 </a>
                             </button> <br>
@@ -115,16 +121,16 @@
 
                     <!-- Bouton 4 -->
                     <div class="col text-center">
-                        <?php if ($controller === 'controller-boarding-home') { ?>
+                        <?php if ($currentPage === 'boarding-home') { ?>
                             <button class="btn btn-outline-light border-5" type="button">
-                                <a href="../controllers/controller-trophies.php">
+                                <a href="trophies.php">
                                     <img src="https://img.icons8.com/ios-filled/48/FFFFFF/laurel-wreath.png" />
                                 </a>
                             </button> <br>
                             <label class="text-white small" for="Trophies">Trophies</label>
                         <?php } else { ?>
                             <button class="btn btn-outline-light border-5">
-                                <a href="../controllers/controller-boarding-home.php"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" /></a>
+                                <a href="boarding-home.php"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" /></a>
                             </button> <br>
                             <label class="text-white small" for="Boarding-home">Boarding-Home</label>
                         <?php } ?>

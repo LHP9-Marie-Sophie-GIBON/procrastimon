@@ -94,7 +94,7 @@
                     <p><span class="fw-bold">Comment :</span><?= $_SESSION['newGoal']['comment'] ?></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="controller-goals.php?newGoal" class="btn btn-outline-info rounded-pill">Yes</a>
+                    <a href="goals.php?newGoal" class="btn btn-outline-info rounded-pill">Yes</a>
                     <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No</button>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     ?>
                         <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date'] ?>) !</p>
                     <?php } ?>
-                    <a href="controller-goals.php?removehp" class="btn btn-danger">Next</a>
+                    <a href="goals.php?removehp" class="btn btn-danger">Next</a>
                 </div>
             </div>
 
@@ -204,7 +204,7 @@
                                     <p class="h3 fw-bold">"<?= $goal['name'] ?>"</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="controller-goals.php" method="post">
+                                    <form action="goals.php" method="post">
                                         <input type="hidden" name="goalId" value="<?= $goal['id'] ?>">
                                         <button type="submit" name="checked" class="btn btn-outline-info rounded-pill">Yes</button>
                                     </form>

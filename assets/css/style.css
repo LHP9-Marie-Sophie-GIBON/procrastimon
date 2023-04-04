@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 html {
     height: 100vh !important;
@@ -551,6 +552,31 @@ button.btn.other {
 }
 
 /* START */
+.container.start {
+    background-image: url('../img/banner.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+}
+
+.container.start h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 48px !important;
+    top : 28% !important; 
+    text-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(123, 166, 246, 0.19) -20px 20px ;
+}
+
+/* media queries desktop */
+@media (min-width: 992px) {
+    .container.start h1 {
+        font-family: 'Righteous', cursive;
+        font-size: 70px !important;
+        top : 20% !important; 
+        text-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(123, 166, 246, 0.19) -20px 20px ;
+    }
+}
+
+
 .row.start {
     height: 60vh;
 }
@@ -573,9 +599,9 @@ button.btn.other {
 }
 
 
-.row.start .col-7 {
-    margin-bottom: 5rem;
-}
+/* .row.start .col-7 {
+    margin-bottom: 1rem;
+} */
 
 .btnStart {
     color: #ffffff;

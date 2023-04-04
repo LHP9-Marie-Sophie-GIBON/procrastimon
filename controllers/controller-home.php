@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $procrastimon->updateProcrastimon();
 
         
-        header('Location: controller-home.php?action=editprofil');
+        header('Location: home.php?action=editprofil');
         exit;
 
     } else {
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user->password = $hashedPassword;
         $user->updatePassword();
 
-        header('Location: controller-home.php?action=editpassword');
+        header('Location: home.php?action=editpassword');
         exit;
     } else {
 

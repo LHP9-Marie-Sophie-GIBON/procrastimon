@@ -46,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // on envoie les données dans la base de données
         $procrastimon->insertProcrastimon();
 
-        // on redirige vers controller-home.php
-        header('Location: controller-home.php');
+        // on redirige vers home.php
+        header('Location: home.php');
     }
 }
 

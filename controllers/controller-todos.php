@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         unset($_SESSION['newTask']);
 
         // on redirige vers la page des tasks
-        header('Location: controller-todos.php');
+        header('Location: todos.php');
         exit;
     } else {
         unset($_SESSION['newTask']);
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $todo->completeTodo();
         $procrastimon->addExp(5, $procrastimon->id);
 
-        header('Location: controller-todos.php?addexp');
+        header('Location: todos.php?addexp');
     }
 
     // Delete todo 
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $todo->deleteTodo();
         $procrastimon->removeHp(2, $procrastimon->id);
 
-        header('Location: controller-todos.php?removehp');
+        header('Location: todos.php?removehp');
         exit;
     }
 }
@@ -128,7 +128,7 @@ if ($procrastimon->exp >= 100) {
     $procrastimon->levelUp($procrastimon->id);
 
     // header
-     header('Location: controller-todos.php?action=levelup');
+     header('Location: todos.php?action=levelup');
 }
 
 if (isset($_GET['action']) && isset($_GET['action']) === 'levelup') {
@@ -137,13 +137,13 @@ if (isset($_GET['action']) && isset($_GET['action']) === 'levelup') {
 
 // (LEVEL MAX) lorsque le procrastimon atteint le niveau 4
 if ($procrastimon->level == 4) {
-    header('Location: controller-endgame.php');
+    header('Location: endgame.php');
     exit;
 }
 
-// (GAME OVER) Lorsque le procrastimon est KO, rediriger vers controller-gameover.php
+// (GAME OVER) Lorsque le procrastimon est KO, rediriger vers gameover.php
 if ($procrastimon->hp <= 0) {
-    header('Location: controller-gameover.php');
+    header('Location: gameover.php');
     exit;
 }
 
