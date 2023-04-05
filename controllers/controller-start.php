@@ -173,7 +173,7 @@ class Login
                         $procrastimon->id_sprites = $sprite->id;
 
                         // on envoie les données dans la base de données
-                        $procrastimon->insertProcrastimon();
+                        $procrastimon->insertProcrastimon(); 
                     } else {
                         echo "échec de la création de l'utilisateur";
                     }
@@ -186,7 +186,6 @@ class Login
             }
         }
     }
-
 
 
 if (isset($_SESSION['user_id'])) {

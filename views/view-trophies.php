@@ -32,8 +32,8 @@
 
                         <!-- liste des GOALS -->
                         <?php if (empty($goalsList) && $_GET['history'] == '') { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <p class="text-center">You didn't complete any goals yet !</p>
+                            <div class="alert alert-danger rounded-5" role="alert">
+                                <p class="text-center fw-bold my-auto">You didn't complete any goals yet !</p>
                             </div>
                         <?php } elseif ($goalsList && $_GET['history'] == '') { ?>
                             <h1 class="text-center"><img src="../assets/img/sprite07-happy.png" alt="" class="sprite-icon"> Achieved Goals <img src="../assets/img/sprite04-happy.png" alt="" class="sprite-icon"></h1>
@@ -76,8 +76,9 @@
 
 
                 <?php } else if ($empty) { ?>
-                    <div class="alert alert-primary rounded-5" role="alert">
-                        <p class="text-center h5 fw-bold">You don't have any trophy yet !</p>
+                    <div class="h2 text-center text-white fw-bold m-2">Trophie's room</div>
+                    <div class="alert alert-danger rounded-5 border-5" role="alert">
+                        <p class="text-center fw-bold my-auto">You don't have any trophy yet !</p>
                     </div>
 
                     <!-- Liste des trophés -->
@@ -87,12 +88,7 @@
                         <div class="row justify-content-around">
                             <?php foreach ($trophiesList as $trophy) { ?>
                                 <div class="col-2 text-center m-1">
-                                    <button type="button" class="btn" 
-                                            data-bs-toggle="popover" data-bs-placement="bottom" 
-                                            data-bs-trigger="focus"
-                                            data-bs-custom-class="custom-popover"
-                                            data-bs-title="<?= $trophy['title'] ?>"
-                                            data-bs-content= "obtained the <?= $trophy['creation'] ?>">
+                                    <button type="button" class="btn" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-trigger="focus" data-bs-custom-class="custom-popover" data-bs-title="<?= $trophy['title'] ?>" data-bs-content="obtained the <?= $trophy['creation'] ?>">
                                         <img src="<?= $trophy['image'] ?>" class="trophies" />
                                     </button>
                                 </div>

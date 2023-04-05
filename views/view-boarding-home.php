@@ -9,19 +9,19 @@
 
     <main>
         <div class="h2 text-center text-white fw-bold m-2">Boarding Home</div>
-        <div class="container boarding-home rounded-5 border border-light border-5">
-            <div class="row">
+        <?php if (empty($procrastimonList)) { ?>
+            <div class="container">
+                <div class="alert alert-primary rounded-5 border-5" role="alert">
+                    <p class="text-center my-auto">The boarding home is empty for now</p>
+                </div>
+            </div>
 
+        <?php } else { ?>
 
+            <div class="container boarding-home rounded-5 border border-light border-5">
+                <div class="row">
 
-                <?php if (empty($procrastimonList)) { ?>
-                    <div class="alert alert-primary rounded-5" role="alert">
-                        The boarding-home is empty for now
-                    </div>
-
-                    <?php } else {
-                    // sinon, afficher les procrastimons
-                    foreach ($procrastimonList as $oldprocrastimon) {
+                    <?php foreach ($procrastimonList as $oldprocrastimon) {
 
                         $sprite = new Sprite();
                         $sprite->id = $oldprocrastimon['id_sprites'];
@@ -65,8 +65,8 @@
                     }
                 }
                 ?>
+                </div>
             </div>
-        </div>
 
 
     </main>

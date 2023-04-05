@@ -76,8 +76,8 @@
         <?php if ($empty) { ?>
             <!-- Liste des todos vide -->
             <div class="container">
-                <div class="alert alert-primary rounded-5" role="alert">
-                    <p class="text-center">You don't have any task yet !</p>
+                <div class="alert alert-primary rounded-5 border-5" role="alert">
+                    <p class="text-center my-auto">You don't have any task yet !</p>
                 </div>
             </div>
 
