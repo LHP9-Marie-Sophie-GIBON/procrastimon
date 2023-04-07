@@ -61,7 +61,6 @@ class User
         $this->login = $data['login'];
         $this->mail = $data['mail'];
         $this->password = $data['password'];
-        
     }
 
     // méthode pour récupérer un utilisateur par son login
@@ -82,7 +81,6 @@ class User
         $this->id = $data['id'];
         $this->mail = $data['mail'];
         $this->password = $data['password'];
-        
     }
 
     // méthode pour vérifier que le login et le mail n'existe pas déja
@@ -106,29 +104,28 @@ class User
     // méthode pour se connecter à son compte
     public function login($user, $procrastimon, $sprite)
     {
-            $user->id = $_SESSION['user_id'];
-            $user->getUserById();
-        
-            $procrastimon->id_users = $_SESSION['user_id'];
-            $procrastimon->getLastProcrastimon();
-        
-            $sprite->id = $procrastimon->id_sprites;
-            $sprite->getSpriteById();
+        $user->id = $_SESSION['user_id'];
+        $user->getUserById();
 
+        $procrastimon->id_users = $_SESSION['user_id'];
+        $procrastimon->getLastProcrastimon();
+
+        $sprite->id = $procrastimon->id_sprites;
+        $sprite->getSpriteById();
     }
 
-    // méthode pour update le profil
     public function updateUser()
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("UPDATE users SET login = :login, mail = :mail WHERE id = :id");
 
+        // binding des paramètres
+        $query->bindValue(':login', $this->login, PDO::PARAM_STR);
+        $query->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+
         // exécution de la requête
-        $query->execute([
-            ':login' => $this->login,
-            ':mail' => $this->mail,
-            ':id' => $this->id
-        ]);
+        $query->execute();
     }
 
     // méthode pour update le password
@@ -143,7 +140,7 @@ class User
             ':id' => $this->id
         ]);
     }
-    
+
     // méthode pour ajouter un trophée à un utilisateur
     public function addTrophy($total_trophies)
     {
@@ -152,7 +149,6 @@ class User
         $query->execute([
             ':id' => $this->id
         ]);
-
     }
 
     // méthode pour récupérer le nombre de trophées d'un utilisateur
@@ -163,9 +159,8 @@ class User
         $query->execute([
             ':id' => $this->id
         ]);
-    
+
         // récupération des données
         return $query->fetch(PDO::FETCH_ASSOC);
-
     }
 }

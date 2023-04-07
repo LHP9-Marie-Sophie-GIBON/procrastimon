@@ -147,7 +147,7 @@ class Login
 
                 $user = new User();
                 $user->login = $login;
-                $user->mail = $mail;
+                $user->mail = htmlspecialchars($mail);
                 $user->password = $hashedPassword;
 
 

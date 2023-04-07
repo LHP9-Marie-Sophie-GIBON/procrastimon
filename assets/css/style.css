@@ -3,6 +3,9 @@
 
 html {
     height: 100vh !important;
+
+    overflow-x: hidden;
+
 }
 
 body {
@@ -17,6 +20,11 @@ body {
 
     overflow-x: hidden;
 
+}
+
+main.start {
+    padding-top: 50px;
+    padding-bottom: 110px;
 }
 
 main {
@@ -34,48 +42,51 @@ main {
     --bs-spinner-animation-name: spinner-border;
     border: var(--bs-spinner-border-width) solid currentcolor;
     border-right-color: transparent;
-  }
-  
-  
-  .loaderImg {
+}
+
+
+.loaderImg {
     width: 250px !important;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-  .loader-container {
+.loader-container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999;
-  }
+}
 
-  .backdrop {
+.backdrop {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1040; /* le même que celui de la modal bootstrap */
-    background-color: rgba(0, 0, 0, 0.5); /* un fond semi-transparent pour un effet de flou */
-    backdrop-filter: blur(5px); /* ajoute un flou à l'arrière-plan */
-  }
-  
-  .backdrop.show {
+    z-index: 1040;
+    /* le même que celui de la modal bootstrap */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* un fond semi-transparent pour un effet de flou */
+    backdrop-filter: blur(5px);
+    /* ajoute un flou à l'arrière-plan */
+}
+
+.backdrop.show {
     display: block;
-  }
-  
-  .backdrop.hide {
+}
+
+.backdrop.hide {
     display: none;
-  }
-  
+}
 
-  /* LEVEL UP */
 
-  .spinner-grow {
+/* LEVEL UP */
+
+.spinner-grow {
     --bs-spinner-width: 16rem;
     --bs-spinner-height: 16rem;
     --bs-spinner-vertical-align: -0.125em;
@@ -87,44 +98,49 @@ main {
 
 .levelUpImg {
     width: 250px !important;
-  position: relative;
-  top: 50%;
-  
-  transform: translate(-50%, -50%);
-  animation: zoomInAndShake 2s ease-in-out forwards;
-  }
+    position: relative;
+    top: 50%;
 
-  @keyframes zoomInAndShake {
+    transform: translate(-50%, -50%);
+    animation: zoomInAndShake 2s ease-in-out forwards;
+}
+
+@keyframes zoomInAndShake {
     0% {
-      opacity: 0;
-      transform: scale(0.1);
+        opacity: 0;
+        transform: scale(0.1);
     }
+
     50% {
-      opacity: 1;
-      transform: scale(1.1);
+        opacity: 1;
+        transform: scale(1.1);
     }
+
     75% {
-      transform: scale(0.95) rotate(-2deg);
+        transform: scale(0.95) rotate(-2deg);
     }
+
     85% {
-      transform: scale(1.2) rotate(2deg);
+        transform: scale(1.2) rotate(2deg);
     }
+
     95% {
-      transform: scale(2) rotate(-2deg);
+        transform: scale(2) rotate(-2deg);
     }
+
     100% {
-      transform: scale(1.5) rotate(0deg);
+        transform: scale(1.5) rotate(0deg);
     }
-  }
-  
- 
-  /* media queries desktop */
-    @media screen and (min-width: 768px) {
-        .levelUpImg {
-        left: 15%; 
-        }
+}
+
+
+/* media queries desktop */
+@media screen and (min-width: 768px) {
+    .levelUpImg {
+        left: 15%;
     }
-  
+}
+
 
 /* LOGIN */
 span.danger i {
@@ -226,22 +242,27 @@ div.row.character img.happy {
     width: auto;
     animation: happy 1s ease-in-out infinite;
 }
+
 @keyframes happy {
     0% {
         transform: translateY(0);
-      }
-      25% {
+    }
+
+    25% {
         transform: translateY(-20px);
-      }
-      50% {
+    }
+
+    50% {
         transform: translateY(0);
-      }
-      75% {
+    }
+
+    75% {
         transform: translateY(-10px);
-      }
-      100% {
+    }
+
+    100% {
         transform: translateY(0);
-      }
+    }
 }
 
 
@@ -251,6 +272,7 @@ div.row.character img.angry {
     width: auto;
     animation: angry 0.8s ease-in-out alternate;
 }
+
 @keyframes angry {
     0% {
         transform: scale(1);
@@ -342,7 +364,7 @@ button.btnHome {
 img.banner {
     height: 150px;
     width: auto;
-    
+
 }
 
 /* HISTORY / TROPHIES */
@@ -353,8 +375,8 @@ img.banner {
 }
 
 .popover.custom-popover {
- border: 0;
- border-radius : 20px; 
+    border: 0;
+    border-radius: 20px;
 
 }
 
@@ -364,7 +386,7 @@ h3.popover-header {
     color: #fff;
     font-size: 1.2rem;
     font-weight: 600;
-    
+
 }
 
 .popover-body {
@@ -382,9 +404,9 @@ img.trophies {
     .container.Trophies .col-2 {
         width: 130px !important;
         padding: 0;
-    
+
     }
-    
+
     img.trophies {
         height: 100px;
         width: auto;
@@ -397,10 +419,12 @@ img.trophies {
 .container.History {
     padding-bottom: 0 !important;
 }
+
 .container.History img.banner {
     height: 100px;
     opacity: 80%;
 }
+
 .sprite-icon {
     height: 45px;
     width: auto;
@@ -424,6 +448,7 @@ img.trophies {
     width: auto;
     margin-top: 1.7rem;
 }
+
 .container.History,
 .container.Trophies,
 .container.boarding-home {
@@ -432,9 +457,9 @@ img.trophies {
     color: #4b83d6;
 }
 
-.container.History button.btn img{
+.container.History button.btn img {
     height: 20px !important;
-    width: auto;  
+    width: auto;
 }
 
 .container.History button.btn {
@@ -530,25 +555,25 @@ button.btn.checked:hover {
 button.btn.body {
     background-color: #eb8cde !important;
     border-radius: 50px;
-    border: none; 
+    border: none;
 }
 
 button.btn.mind {
     background-color: #8debeb !important;
     border-radius: 50px;
-    border: none; 
+    border: none;
 }
 
 button.btn.work {
     background-color: #eb8d8d !important;
     border-radius: 50px;
-    border: none; 
+    border: none;
 }
 
 button.btn.other {
     background-color: #bfb9b4 !important;
     border-radius: 50px;
-    border: none; 
+    border: none;
 }
 
 /* START */
@@ -556,14 +581,14 @@ button.btn.other {
     background-image: url('../img/banner.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:contain;
+    background-size: contain;
 }
 
 .container.start h1 {
     font-family: 'Righteous', cursive;
     font-size: 48px !important;
-    top : 28% !important; 
-    text-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(123, 166, 246, 0.19) -20px 20px ;
+    top: 28% !important;
+    text-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(123, 166, 246, 0.19) -20px 20px;
 }
 
 /* media queries desktop */
@@ -571,8 +596,8 @@ button.btn.other {
     .container.start h1 {
         font-family: 'Righteous', cursive;
         font-size: 70px !important;
-        top : 20% !important; 
-        text-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(123, 166, 246, 0.19) -20px 20px ;
+        top: 20% !important;
+        text-shadow: rgba(55, 28, 255, 0.199) -10px 10px, rgba(123, 166, 246, 0.19) -20px 20px;
     }
 }
 
@@ -582,19 +607,19 @@ button.btn.other {
 }
 
 .row.start img {
-    margin-top: 3rem ;
+    margin-top: 3rem;
     width: 100%;
-    
+
 }
 
 @media (min-width: 992px) {
     .row.start {
-        height: 70vh;  
+        height: 70vh;
     }
-    
+
     .row.start img {
         width: 45%;
-        
+
     }
 }
 
@@ -615,8 +640,8 @@ button.btn.other {
 }
 
 .btnStart.position-absolute {
-    left : 94% !important; 
-    top : 4% !important; 
+    left: 94% !important;
+    top: 4% !important;
 }
 
 nav.options button.btn.btnML {
@@ -628,9 +653,11 @@ nav.options button.btn.btnML {
 .row.login {
     background-color: #acccfc;
 }
+
 .row.login img {
     animation: bounce 0.5s ease-in-out infinite alternate;
 }
+
 .row.newGame,
 .row.endGame {
     height: 70vh;
@@ -639,7 +666,7 @@ nav.options button.btn.btnML {
 
 .row.newGame .card {
     width: 90vw;
-    background-color: rgba(255, 255, 255, 0.678);
+    background-color: rgb(255 255 255 / 86%);
 }
 
 
@@ -666,7 +693,7 @@ nav.options button.btn.btnML {
 /* TOASTS */
 
 .toast-container.top-50 {
-    top: 18% !important; 
+    top: 18% !important;
 }
 
 .toast.text-bg-primary {
@@ -727,6 +754,7 @@ img.oldProcrastimon {
 .row.endGame .carousel-item {
     height: 450px;
 }
+
 .row.endGame .h3 {
     margin-top: 5rem;
 }

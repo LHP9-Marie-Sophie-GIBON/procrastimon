@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // OPENTOAST
     $toast = []; 
+    
     // MODAL EDIT PROFIL
     $arrayErrors = [];
     $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";

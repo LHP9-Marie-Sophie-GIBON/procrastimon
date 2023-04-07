@@ -4,10 +4,10 @@ class Todo
     private $id;
     private string $name;
     private int $task_priority_level;
-    private string $creation; 
+    private string $creation;
     private string $due_date;
     private int $statute;
- 
+
 
     private object $_pdo;
 
@@ -54,17 +54,16 @@ class Todo
         $query = $this->_pdo->prepare("INSERT INTO todolist (name, task_priority_level, creation, due_date, id_users) VALUES (:name, :task_priority_level, :creation, :due_date, :id_users)");
 
         //calcule de la date d'échéance
-        
         $this->setDueDate();
 
         // exécution de la requête
-        $query->execute([
-            ':name' => $this->name,
-            ':task_priority_level' => $this->task_priority_level,
-            ':creation' => $this->creation,
-            ':due_date' => date('Y-m-d', $this->due_date), // conversion en format de date MySQL
-            ':id_users' => $this->id_users
-        ]);
+        $query->bindValue(':name', $this->name);
+        $query->bindValue(':task_priority_level', $this->task_priority_level);
+        $query->bindValue(':creation', $this->creation);
+        $query->bindValue(':due_date', date('Y-m-d', $this->due_date));
+        $query->bindValue(':id_users', $this->id_users);
+
+        $query->execute();
     }
 
     // méthode pour récupérer les tâches d'un utilisateur
@@ -74,9 +73,8 @@ class Todo
         $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 0 ORDER BY due_date ASC");
 
         // exécution de la requête
-        $query->execute([
-            ':id_users' => $this->id_users
-        ]);
+        $query->bindValue(':id_users', $this->id_users);
+        $query->execute();
 
         // récupération des données
         $todos = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -85,15 +83,19 @@ class Todo
         return $todos;
     }
 
+
     // méthode pour récupérer les tâches de l'utilisateur à accomplir aujourd'hui
     public function getTodayTodos()
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 0 and due_date = :due_date ORDER BY due_date ASC");
-        $query->execute([
-            ':id_users' => $this->id_users,
-            ':due_date' => date('Y-m-d') 
-        ]);
+        
+        // exécution de la requête
+        $query->bindValue(':id_users', $this->id_users); 
+        $query->bindValue(':due_date', date('Y-m-d'));
+        $query->execute();
+
+        // récupération des données
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -102,9 +104,12 @@ class Todo
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("SELECT COUNT(*) FROM todolist WHERE id_users = :id_users and statute = 0");
-        $query->execute([
-            ':id_users' => $this->id_users
-        ]);
+        
+        // exécution de la requête
+        $query->bindValue(':id_users', $this->id_users); 
+        $query->execute();
+        
+        // récupération des données
         return $query->fetchColumn();
     }
 
@@ -115,7 +120,7 @@ class Todo
 
         // calcul du temps restant
         $time_left = ceil(($dueDate - time()) / (60 * 60 * 24));
-    
+
         // retour du temps restant
         return $time_left;
     }
@@ -127,9 +132,9 @@ class Todo
         $query = $this->_pdo->prepare("DELETE FROM todolist WHERE id = :id");
 
         // exécution de la requête
-        $query->execute([
-            ':id' => $this->id
-        ]);
+        $query->bindValue(':id', $this->id); 
+        $query->execute();
+        
     }
 
     // méthode pour compléter une tache
@@ -139,9 +144,8 @@ class Todo
         $query = $this->_pdo->prepare("UPDATE todolist SET statute = 1 WHERE id = :id");
 
         // exécution de la requête
-        $query->execute([
-            ':id' => $this->id
-        ]);
+        $query->bindValue(':id', $this->id); 
+        $query->execute();
     }
 
     // méthode pour récupérer les tâches expirées de l'utilisateur
@@ -149,10 +153,13 @@ class Todo
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 0 and due_date < :due_date ORDER BY due_date ASC");
-        $query->execute([
-            ':id_users' => $this->id_users,
-            ':due_date' => date('Y-m-d') 
-        ]);
+        
+        // exécution de la requête 
+        $query->bindValue(':id_users', $this->id_users);
+        $query->bindValue(':due_date', date('Y-m-d')); 
+        $query->execute();
+        
+        // récupération des données
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -163,9 +170,9 @@ class Todo
         $query = $this->_pdo->prepare("UPDATE todolist SET statute = 2 WHERE id = :id");
 
         // exécution de la requête
-        $query->execute([
-            ':id' => $todo_id
-        ]);
+        $query->bindValue(':id', $todo_id); 
+        $query->execute();
+        
     }
 
     // méthode pour récupérer les tâches complétées de l'utilisateur
@@ -173,9 +180,12 @@ class Todo
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users and statute = 1 ORDER BY due_date ASC");
-        $query->execute([
-            ':id_users' => $this->id_users
-        ]);
+        
+        // exécution de la requête
+        $query->bindValue(':id_users', $this->id_users);
+        $query->execute();
+        
+        // récupération des données
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -184,9 +194,11 @@ class Todo
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("SELECT COUNT(*) FROM todolist WHERE id_users = :id_users and statute = 1");
-        $query->execute([
-            ':id_users' => $this->id_users
-        ]);
+        
+        // exécution de la requête
+        $query->bindValue(':id_users', $this->id_users);
+        $query->execute();
+        
         return $query->fetchColumn();
     }
 
@@ -195,10 +207,12 @@ class Todo
     {
         // préparation de la requête
         $query = $this->_pdo->prepare("SELECT * FROM todolist WHERE id_users = :id_users AND statute = 2 ORDER BY due_date ASC");
-        $query->execute([
-            ':id_users' => $this->id_users
-        ]);
+        
+        // exécution de la requête
+        $query->bindValue(':id_users', $this->id_users);
+        $query->execute();
+
+        // récupération des données
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    
 }

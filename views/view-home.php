@@ -95,7 +95,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit you Profil</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit your Profil</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="" method="post">
@@ -135,7 +135,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-5 border border-light border-5">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit you Profil</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change your password</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="" method="post">

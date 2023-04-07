@@ -16,7 +16,7 @@ class Goal
 
     /**
      * (GET) méthode magique pour GET les attributs
-     */ 
+     */
     public function __get($attribut)
     {
         return $this->$attribut;
@@ -24,7 +24,7 @@ class Goal
 
     /**
      * (SET) méthode magique pour SET les attributs
-     */ 
+     */
     public function __set($attribut, $value)
     {
         $this->$attribut = $value;
@@ -32,29 +32,32 @@ class Goal
 
     /**
      * (PDO) constructeur pour instancier la connexion PDO
-     */ 
+     */
     public function __construct()
     {
         $this->_pdo = Database::connect();
     }
 
     /**
-     * (DISPLAY) méthode pour récupérer tous les objectifs d'un utilisateur
-     */ 
+     * (DISPLAY) méthode pour afficher les objectifs d'un utilisateur
+     */
     public function getGoals()
     {
-        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0 ORDER BY due_date ASC");
-        $query->execute([
-            ':id_users' => $this->id_users
-        ]);
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users
+        AND statute = 0 ORDER BY due_date ASC");
+        $query->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
+        $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
-    // méthode pour récupérer les objectifs de l'utilisateur à compléter aujourd'hui
+    /**
+     * (GET) méthode pour récupérer les goals arrivés à échéance
+     */
     public function getTodayGoals()
     {
-        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 0 AND due_date = :due_date ORDER BY due_date ASC");
+        $query = $this->_pdo->prepare("SELECT name FROM goals WHERE id_users = :id_users 
+        AND statute = 0 AND due_date = :due_date ORDER BY due_date ASC");
         $query->execute([
             ':id_users' => $this->id_users,
             ':due_date' => date('Y-m-d')
@@ -76,30 +79,30 @@ class Goal
 
     /**
      * (CREATION) méthode pour insérer un objectif dans la base de données
-     */ 
+     */
     public function insertGoal()
     {
 
         // préparation de la requête
-        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, creation, due_date, comments, id_users) VALUES (:name, :category, :creation, :due_date, :comments, :id_users)");
+        $query = $this->_pdo->prepare("INSERT INTO goals (name, category, creation, due_date, comments, id_users) 
+        VALUES (:name, :category, :creation, :due_date, :comments, :id_users)");
 
         // appel de la méthode setDueDate pour calculer la date d'échéance
         $this->setDueDate();
 
-        $query->execute([
-            ':name' => $this->name,
-            ':category' => $this->category,
-            ':creation' => date('Y-m-d', strtotime($this->creation)),
-            ':due_date' => date('Y-m-d', $this->due_date), 
-            ':comments' => $this->comments, 
-            ':id_users' => $this->id_users,
+        $query->bindValue(':name', $this->name);
+        $query->bindValue(':category', $this->category);
+        $query->bindValue(':creation', date('Y-m-d', strtotime($this->creation)));
+        $query->bindValue(':due_date', date('Y-m-d', $this->due_date));
+        $query->bindValue(':comments', $this->comments);
+        $query->bindValue(':id_users', $this->id_users);
 
-        ]);
+        $query->execute();
     }
 
     /**
      * (DUE DATE) méthode pour définir la date d'échéance en fonction du niveau de priorité
-     */ 
+     */
     public function setDueDate()
     {
         switch ($this->due_date) {
@@ -124,8 +127,8 @@ class Goal
      * 
      * @param float $goalId id du goal visé
      * @return void
-     */ 
-    public function getRemainingDays(float $goalId) 
+     */
+    public function getRemainingDays(float $goalId)
     {
         $query = $this->_pdo->prepare("SELECT due_date FROM goals WHERE id = :id");
         $query->execute([
@@ -142,13 +145,12 @@ class Goal
      * 
      * @param int $goalId id du goal à supprimer
      * @return void 
-     */ 
-    public function deleteGoal($goalId) : void
+     */
+    public function deleteGoal($goalId): void
     {
         $query = $this->_pdo->prepare("DELETE FROM goals WHERE id = :id");
-        $query->execute([
-            ':id' => $goalId
-        ]);
+        $query->bindValue(':id', $goalId, PDO::PARAM_INT);
+        $query->execute();
     }
 
     /**
@@ -156,8 +158,8 @@ class Goal
      *  
      * @param int $goalID id du goal complété
      * @return void 
-     */ 
-    public function completeGoal(int $goalId) : void
+     */
+    public function completeGoal(int $goalId): void
     {
         // set le jour de l'accomplissement du goal
         $this->achievement_day = date('Y-m-d');
@@ -171,7 +173,7 @@ class Goal
 
     /**
      * (GAME OVER - EXPIRED DATE) méthode pour récupérer les goals expirés
-     */ 
+     */
     public function getExpiredGoals()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND due_date < :due_date AND statute = 0");
@@ -187,8 +189,8 @@ class Goal
      * 
      * @param int $goalId id du goal à modifier
      * @return void
-     */ 
-    public function expiredGoal($goalId) : void
+     */
+    public function expiredGoal($goalId): void
     {
         $query = $this->_pdo->prepare("UPDATE goals SET statute = 2 WHERE id = :id");
         $query->execute([
@@ -202,7 +204,7 @@ class Goal
      * 
      * @param int $id_procrastimon id du procrastimon
      * 
-     */ 
+     */
     public function getGoalsHistory(int $id_procrastimon)
     {
         $query = $this->_pdo->prepare("SELECT goals.* FROM goals JOIN procrastimons ON goals.id_users = procrastimons.id_users WHERE goals.id_users = :id_users AND goals.achievement_day BETWEEN procrastimons.birthday AND procrastimons.final_evolution AND procrastimons.id = :procrastimons_id ");
@@ -215,7 +217,7 @@ class Goal
 
     /**
      * (TROPHY) méthode récupérant le nombre de goals accomplis par l'utilisateur
-     */ 
+     */
     public function countAchievedGoals()
     {
         $query = $this->_pdo->prepare("SELECT COUNT(*) FROM goals WHERE id_users = :id_users AND statute = 1");
@@ -227,7 +229,7 @@ class Goal
 
     /**
      * (TROPHY) méthode récupérant les goals accomplis par l'utilisateur
-     */ 
+     */
     public function getAchievedGoals()
     {
         $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 1");
@@ -237,20 +239,21 @@ class Goal
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-   // méthode pour récupérer les tâches manquées de l'utilisateur
-   public function getMissedGoals()
-   {
-       // préparation de la requête
-       $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 2 ORDER BY due_date ASC");
-       $query->execute([
-           ':id_users' => $this->id_users
-       ]);
-       return $query->fetchAll(PDO::FETCH_ASSOC);
-   }
+    // méthode pour récupérer les tâches manquées de l'utilisateur
+    public function getMissedGoals()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM goals WHERE id_users = :id_users AND statute = 2 ORDER BY due_date ASC");
+        $query->execute([
+            ':id_users' => $this->id_users
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 // AFFICHAGE DES CATEGORIES
-function displayCategory($category) {
+function displayCategory($category)
+{
     if ($category === 1) {
         echo '<button class="btn body" disabled><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/fire-heart.png"/></button>';
     } elseif ($category === 2) {
@@ -258,6 +261,6 @@ function displayCategory($category) {
     } elseif ($category === 3) {
         echo '<button class="btn work" disabled><img src="https://img.icons8.com/sf-regular-filled/25/FFFFFF/business.png"/></button>';
     } elseif ($category === 4) {
-        echo '<button class="btn other" disabled><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/more.png"/></button>'; 
+        echo '<button class="btn other" disabled><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/more.png"/></button>';
     }
 }

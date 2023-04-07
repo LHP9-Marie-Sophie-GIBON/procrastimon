@@ -9,7 +9,7 @@
 <button class="btn btnStart rounded-pill position-absolute top-0 start-0 translate-middle" id="mute-button"><img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/15/FFFFFF/external-volume-muted-with-a-crossed-sign-logotype-music-bold-tal-revivo.png" /></button>
 
 
-<main>
+<main class="start">
     <div class="container start">
         <h1 class="text-light fw-bold position-absolute top-50 start-50 translate-middle">PROCRASTIMON</h1>
         <?php if (isset($_GET['newGame'])) { ?>

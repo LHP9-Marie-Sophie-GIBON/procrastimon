@@ -21,13 +21,13 @@
 
                         <div class="row mb-1">
                             <span class="col-1 my-auto goal" id="basic-addon1"> <?= $arrayErrors['goal'] ?? '<i class="bi bi-star-fill"></i>' ?></span>
-                            <input type="text" class="col form-control rounded-pill" placeholder="Description" aria-label="goal" aria-describedby="goal" name="goal">
+                            <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="<?= $arrayErrors['goal-missing'] ?? 'Description' ?>" aria-label="goal" aria-describedby="goal" name="goal">
                         </div>
 
                         <div class="row mb-1">
                             <span class="col-1 my-auto category" id="basic-addon2"><?= $arrayErrors['category'] ?? '<i class="bi bi-filter-circle"></i>' ?></span>
-                            <select class="col form-control rounded-pill" name="category" id="category">
-                                <option value="default" selected disabled>Choose a category</option>
+                            <select class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?> " name="category" id="category">
+                                <option value="default" selected disabled><?= $arrayErrors['category-missing'] ?? 'Choose a category' ?></option>
                                 <option value="1">Body</option>
                                 <option value="2">Mind</option>
                                 <option value="3">Work</option>
@@ -37,8 +37,8 @@
 
                         <div class="row mb-1">
                             <span class="col-1 my-auto duedate" id="basic-addon2"><?= $arrayErrors['due_date'] ?? '<i class="bi bi-hourglass"></i>' ?></span>
-                            <select class="col form-control rounded-pill" name="due_date" id="due_date">
-                                <option value="default" selected disabled>Choose a due date</option>
+                            <select class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?> " name="due_date" id="due_date">
+                                <option value="default" selected disabled ><?= $arrayErrors['duedate-missing'] ?? 'Choose a due date' ?></option>
                                 <option value="1">1 month</option>
                                 <option value="2">6 month</option>
                                 <option value="3">1 year</option>
