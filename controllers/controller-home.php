@@ -79,9 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($arrayErrors)) {
 
         // modifier le user
-        $user->login = $login;
-        $user->mail = $mail;
-        $procrastimon->name = $name;
+        $user->login = htmlspecialchars($login);
+        $user->mail = htmlspecialchars($mail);
+        $procrastimon->name = htmlspecialchars($name);
 
         $user->updateUser();
         $procrastimon->updateProcrastimon();
