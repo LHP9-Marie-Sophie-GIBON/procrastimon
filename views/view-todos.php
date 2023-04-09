@@ -108,7 +108,7 @@
                     $date = new DateTime($task['due_date']);
                     $now = new DateTime();
                     $interval = $date->diff($now);
-                    $days = $interval->format('%a');
+                    $days = ($interval->format('%a')) + 1;
 
                     // si $days == 0, echo "today"
                     if ($days == 0) {
