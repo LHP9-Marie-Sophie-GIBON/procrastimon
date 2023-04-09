@@ -12,6 +12,8 @@
 <main class="start">
     <div class="container start">
         <h1 class="text-light fw-bold position-absolute top-50 start-50 translate-middle">PROCRASTIMON</h1>
+
+        <!-- formulaire new game -->
         <?php if (isset($_GET['newGame'])) { ?>
 
             <div class="row newGame justify-content-center align-items-center">

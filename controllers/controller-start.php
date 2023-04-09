@@ -178,7 +178,7 @@ class Login
                         echo "échec de la création de l'utilisateur";
                     }
 
-                    header('Location: home.php');
+                    header('Location: home.php?tutorial');
                     exit;
                 }
             } else {

@@ -141,6 +141,18 @@ class User
         ]);
     }
 
+    // méthode pour supprimer l'utilisateur
+    public function deleteUser()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("DELETE FROM users WHERE id = :id");
+
+        // exécution de la requête
+        $query->execute([
+            ':id' => $this->id
+        ]);
+    }
+
     // méthode pour ajouter un trophée à un utilisateur
     public function addTrophy($total_trophies)
     {

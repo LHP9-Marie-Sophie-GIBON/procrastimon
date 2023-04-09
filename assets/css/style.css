@@ -3,7 +3,6 @@
 
 html {
     height: 100vh !important;
-
     overflow-x: hidden;
 
 }
@@ -331,8 +330,11 @@ div.row.character div.oval {
 nav.options,
 .offcanvas {
     background-color: #acccfcc3;
+    
 }
-
+.offcanvas-body {
+    padding: 0; 
+}
 nav.options button.btn,
 .offcanvas button.btn {
     margin-top: 1rem;
@@ -365,6 +367,26 @@ img.banner {
     height: 150px;
     width: auto;
 
+}
+
+.row.profil button.btn-outline-primary {
+    border-color: #4b83d6;
+    color:  #4b83d6;
+}
+
+.row.profil button.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #4b83d6 !important;
+}
+
+.row.profil button.btn-outline-danger {
+    border-color:rgb(233, 1, 1);
+    color:rgb(233, 1, 1);
+}
+
+.row.profil button.btn-outline-danger:hover {
+    color: #fff;
+    background-color: rgb(233, 1, 1) !important;
 }
 
 /* HISTORY / TROPHIES */

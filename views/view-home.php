@@ -12,7 +12,7 @@
     <main>
 
         <div class="row character justify-content-center">
-            <img src="<?= $sprite->sprite ?>" alt="character" id="myProcrastimon" onclick="changeMood()" >
+            <img src="<?= $sprite->sprite ?>" alt="character" id="myProcrastimon" onclick="changeMood()">
             <div class="oval"></div>
         </div>
     </main>
@@ -72,13 +72,19 @@
                     <p><span class="fw-bold">Procrastimon's name :</span> <?= $procrastimon->name ?></p>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
+                <div class="row justify-content-center profil">
+                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold col-6 m-1" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
                         Edit your profil
                     </button>
-                    <button type="button" class="btn btn-outline-primary rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
+                    <button type="button" class="btn btn-outline-primary bg-white rounded-pill fw-bold col-6 m-1" data-bs-toggle="modal" data-bs-target="#modalEditPassword">
                         Change your password
                     </button>
+                    <button type="button" class="btn btn-outline-danger bg-white rounded-pill fw-bold col-6 m-1" data-bs-toggle="modal" data-bs-target="#modalDeleteAccount">
+                        Delete your account
+                    </button>
+                </div>
+                <div class="modal-footer">
+
                     <form action="../config/deconnect.php" method="post">
                         <button type="submit" class="btn">
                             <img src="https://cdn.discordapp.com/attachments/1039537189169676388/1089815832785334292/icon-logout.png" alt="">
@@ -117,7 +123,7 @@
                         <!-- Procrastimon part -->
                         <div class="row mb-1">
                             <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['procrastimon'] ?? '<i class="bi bi-emoji-laughing-fill"></i>' ?></span>
-                            <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>"" placeholder="Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $procrastimon->name ?><?= $arrayErrors['procrastimon-error'] ?? '' ?>">
+                            <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>"" placeholder=" Procrastimon's name" aria-label="procrastimon" aria-describedby="procrastimon" name="procrastimon" value="<?= $procrastimon->name ?><?= $arrayErrors['procrastimon-error'] ?? '' ?>">
                         </div>
 
                     </div>
@@ -166,6 +172,67 @@
         </div>
     </div>
 
+    <!-- Modal Delete Account-->
+    <div class="modal fade" id="modalDeleteAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-5 border border-light border-5">
+                <form action="" method="post">
+                    <div class="modal-body">
+                        <p class="fw-bold h5 text-danger">Are you sure you want to delete your account?</p>
+                        <p class="small text-danger">Deletion is irreversible.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-outline-info rounded-pill" value="Yes" name="deleteAccount">
+                        <input type="button" class="btn btn-outline-secondary rounded-pill" value="No" data-bs-dismiss="modal" aria-label="Close">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal tutorial -->
+    <div class="modal fade <?= $openModal ?? '' ?>" id="modalTutorial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-5 border border-light border-5">
+
+                <div class="modal-body">
+
+                    <div id="carousel-gameover" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active text-center ">
+                                <img src="<?= $sprite->sprite_happy ?>" alt="procrastimon" class="procrastimon">
+                                <h1><?= $procrastimon->name ?> is a full grown up now !</h1>
+                                <div class="h6">Time for him to go on a retrait well deserved !</div>
+                            </div>
+                            <div class="carousel-item text-center">
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
+                                <div class="h3">Don't worry, you can always visit him at the boarding home </div>
+                                <span class="badge text-bg-info rounded-pill"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" alt="icon Boarding-home"></span>
+                            </div>
+                            <div class="carousel-item text-center">
+                                <div class="h3">Now, you can take care of a new procratimon, let's keep motivated !</div>
+                                <img src="../assets/img/background1.png" alt="" class="d-lg-none w-100 mt-5">
+                                <div class="mt-5">
+                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Of course !</button>
+                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">I'll do my best !</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="next" class="btn btn-outline-secondary rounded-pill border-5 fw-bold" data-bs-target="#carousel-gameover" data-bs-slide="next"> next
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- mise en place du footer -->
     <footer>
         <?php include 'components/footer.php'; ?>
@@ -175,6 +242,5 @@
         let regularSprite = '<?= $sprite->sprite ?>';
         let happySprite = '<?= $sprite->sprite_happy ?>';
         let angrySprite = '<?= $sprite->sprite_angry ?>';
-
     </script>
 </body>
