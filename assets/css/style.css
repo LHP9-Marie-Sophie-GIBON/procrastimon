@@ -31,6 +31,10 @@ main {
     padding-bottom: 110px;
 }
 
+.tutorial_logo {
+    font-family: 'Righteous', cursive;
+}
+
 /* LOADER */
 .spinner-border {
     --bs-spinner-width: 18rem;

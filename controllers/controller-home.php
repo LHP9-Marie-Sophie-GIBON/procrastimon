@@ -31,13 +31,12 @@ $todayGoals = $goal->getTodayGoals(); //goals du jour
 $todayTodos = $todo->getTodayTodos(); //todos du jour
 
 
-
 // vérification des formulaires
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // OPENTOAST
-    $toast = []; 
-    
+    $toast = [];
+
     // MODAL EDIT PROFIL
     $arrayErrors = [];
     $missing =  "<span class='danger'><i class='bi bi-exclamation-circle-fill'></i></span>";
@@ -86,10 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user->updateUser();
         $procrastimon->updateProcrastimon();
 
-        
+
         header('Location: home.php?action=editprofil');
         exit;
-
     } else {
         echo "fail";
     }
@@ -141,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($passwordErrors)) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT); // hachage du mot de passe
-        $toast = 'openToast'; 
+        $toast = 'openToast';
 
         // modifier le user
         $user->password = $hashedPassword;
@@ -165,4 +163,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
+// MODAL DELETE ACCOUNT
+if (isset($_POST['deleteAccount'])) {
+    $user->deleteUser();
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+    exit;
+}
+
+// MODAL TUTORIAL 
+if (isset($_GET['tutorial'])) {
+    $openModal = "openModal"; 
+}
 include '../views/view-home.php';

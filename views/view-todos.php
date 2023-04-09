@@ -29,8 +29,8 @@
                             <select class="col form-control rounded-pill" name="task_priority_level" id="task_priority_level">
                                 <option value="default" selected disabled>Choose a priority level</option>
                                 <option value="1">Must do now (due today) </option>
-                                <option value="2">Should do soon (2 days)</option>
-                                <option value="3">Could do later (4 days)</option>
+                                <option value="2">Should do soon (3 days)</option>
+                                <option value="3">Could do later (5 days)</option>
                             </select>
                         </div>
                     </div>
@@ -108,10 +108,11 @@
                     $date = new DateTime($task['due_date']);
                     $now = new DateTime();
                     $interval = $date->diff($now);
+                    $today = $interval->format('%a'); 
                     $days = ($interval->format('%a')) + 1;
 
                     // si $days == 0, echo "today"
-                    if ($days == 0) {
+                    if ($today == 0) {
                         $priority = "danger";
                         $timeleft = 'today';
                     } elseif ($days <= 1) {

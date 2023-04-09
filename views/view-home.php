@@ -1,12 +1,13 @@
 <?php include 'components/head.php'; ?>
 
 <body>
+    <!-- mise en place du loader -->
+    <?php include 'components/loader.php'; ?>
 
     <!-- mise en place du Header -->
     <?php include 'components/header.php'; ?>
 
-    <!-- mise en place du loader -->
-    <?php include 'components/loader.php'; ?>
+
 
     <!-- mise en place du menu -->
     <main>
@@ -73,6 +74,9 @@
 
                 </div>
                 <div class="row justify-content-center profil">
+                    <a href="home.php?tutorial" type="button" class="btn btn-outline-success bg-white rounded-pill fw-bold col-6 m-1">
+                        Show tutorial
+                    </a>
                     <button type="button" class="btn btn-outline-info rounded-pill fw-bold col-6 m-1" data-bs-toggle="modal" data-bs-target="#modalEditProfil">
                         Edit your profil
                     </button>
@@ -191,46 +195,86 @@
     </div>
 
     <!-- Modal tutorial -->
-    <div class="modal fade <?= $openModal ?? '' ?>" id="modalTutorial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+    <div class="modal fade <?= $openModal ?? '' ?>" id="modalTutorial" data-bs-backdrop="static" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content rounded-5 border border-light border-5">
 
                 <div class="modal-body">
 
                     <div id="carousel-gameover" class="carousel slide">
                         <div class="carousel-inner">
-                            <div class="carousel-item active text-center ">
-                                <img src="<?= $sprite->sprite_happy ?>" alt="procrastimon" class="procrastimon">
-                                <h1><?= $procrastimon->name ?> is a full grown up now !</h1>
-                                <div class="h6">Time for him to go on a retrait well deserved !</div>
+                            <div class="carousel-item active">
+                                <h3>Welcome to <span class="tutorial_logo">Procrastimon</span> !</h3>
+                                <p class="mb-0"> This website is designed to help you stay productive by gamifying your to-do list and goals. In this tutorial, we'll go over the features of Procrastimon and how to use them effectively.</p>
+                            <div class="text-center">
+                                <img src="../assets/img/background1.png" alt="" class="w-100">
                             </div>
-                            <div class="carousel-item text-center">
-                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
-                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
-                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
-                                <img src="https://img.icons8.com/external-victoruler-flat-victoruler/64/null/external-stars-christmas-victoruler-flat-victoruler.png" />
-                                <div class="h3">Don't worry, you can always visit him at the boarding home </div>
-                                <span class="badge text-bg-info rounded-pill"><img src="https://img.icons8.com/ios-glyphs/48/FFFFFF/house-with-a-garden.png" alt="icon Boarding-home"></span>
                             </div>
-                            <div class="carousel-item text-center">
-                                <div class="h3">Now, you can take care of a new procratimon, let's keep motivated !</div>
-                                <img src="../assets/img/background1.png" alt="" class="d-lg-none w-100 mt-5">
-                                <div class="mt-5">
-                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Of course !</button>
-                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">I'll do my best !</button>
+                            <div class="carousel-item">
+                                <div class="text-center mb-2">
+                                    <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary"><img src="https://img.icons8.com/sf-black-filled/48/FFFFFF/todo-list.png" /></span>
+                                </div>
+                                <p> <span class="fw-bold h5">The Todolist</span> is where you can add and manage your daily tasks. <br>
+                                    To create a new task, simply click on
+                                    <span class="badge rounded-pill text-bg-secondary"><img src="https://img.icons8.com/sf-black/18/FFFFFF/plus-math.png" /></span>
+                                    and enter the details. You can also set a priority level for each task. <br>
+                                    Once you've completed a task, make sure to check it off your list by clicking on <img src="https://img.icons8.com/sf-black/35/24f5af/ok.png"> next to the task.
+                                </p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center mb-2">
+                                    <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary"><img src="https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/48/FFFFFF/external-achievement-award-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto-2.png" /></span>
+                                </div>
+                                <p><span class="fw-bold h5">The Goals</span> is where you can set long-term goals for yourself. <br>
+                                    To create a new goal, click on
+                                    <span class="badge rounded-pill text-bg-secondary"><img src="https://img.icons8.com/sf-black/18/FFFFFF/plus-math.png" /></span>
+                                    and enter the details. You can set a deadline for each goal and add subtasks to help you break down the goal into manageable steps. <br>
+                                    Once you've completed a goal, make sure to check it off your list by clicking on <img src="https://img.icons8.com/sf-black/35/24f5af/ok.png"> next to the goal.
+                                </p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center mb-2">
+                                    <img src="<?= $sprite->sprite ?>" alt="character" style="height : 80px; ">
+                                </div>
+                                <p><span class="fw-bold h5">The Procrastimon</span> is a virtual pet that <span class="text-success">gains experience points</span> when you complete tasks and goals. 
+                                However, if you don't or if you abandon (elete) one, your Procrastimon <span class="text-danger">will take damages</span> . <br>
+                                    As your Procrastimon gains experience points, it will <span class="fw-bold">level up</span>  and unlock new features. <br>
+                                 </p>
+                                <p>When your Procrastimon reaches its maximum level, it will be sent to <span class="fw-bold h5">the Boarding Home</span><span class="badge rounded-pill text-bg-secondary"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/house-with-a-garden.png" /></span>
+                                    where you can access the history of all the goals you've completed with it.</p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center mb-2">
+                                    <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary"><img src="https://img.icons8.com/ios-filled/48/FFFFFF/laurel-wreath.png" /></span>
+                                </div>
+                                <p>As you complete tasks and goals, you'll earn <span class="fw-bold h5">trophies</span> that will be displayed in the trophies room. These rewards are a way to track your progress and motivate you to keep going. </p>
+                                <p>In the Trophies room, you can also access <span class="fw-bold h5">the game's history</span> 
+                                    <span class="badge rounded-pill text-bg-secondary"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/repository.png"></span>.
+                                    This feature allows you to review your progress, see the goals you've completed, and identify any patterns in your productivity. <br>
+                                    Use this information to make adjustments and improve your workflow in the future.
+                                </p>
+                            </div>
+                            <div class="carousel-item">
+                                <p class="h5 mt-3">Now that you know the basics of Procrastimon, it's time to get started! Make sure to add your tasks and goals regularly to keep your Procrastimon healthy and happy. Good luck!</p>
+                                <div class="text-center">
+                                <img src="../assets/img/background2.png" alt="" class="w-100">
+                            </div>
+                                <div class="mt-5 text-center">
+                                    <button type="button" class="btn btn-outline-info rounded-pill fw-bold" data-bs-dismiss="modal" aria-label="Close">let's play ! </button>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="modal-footer p-0">
+                        <button type="button" id="next" class="btn btn-outline-secondary rounded-pill border-5 fw-bold" data-bs-target="#carousel-gameover" data-bs-slide="next"> next
+                        </button>
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="next" class="btn btn-outline-secondary rounded-pill border-5 fw-bold" data-bs-target="#carousel-gameover" data-bs-slide="next"> next
-                    </button>
-                </div>
-
             </div>
         </div>
+    </div>
     </div>
 
     <!-- mise en place du footer -->
