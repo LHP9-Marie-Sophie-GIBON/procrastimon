@@ -12,7 +12,7 @@
         <?php if (empty($procrastimonList)) { ?>
             <div class="container">
                 <div class="alert alert-primary rounded-5 border-5" role="alert">
-                    <p class="text-center my-auto">The boarding home is empty for now</p>
+                    <p class="text-center my-auto fw-bold">The boarding home is empty for now</p>
                 </div>
             </div>
 

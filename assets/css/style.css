@@ -742,6 +742,10 @@ nav.options button.btn.btnML {
     background-color: #fbbc4f !important;
 }
 
+.toast-container.trophy {
+    top: 24% !important;
+}
+
 /* BADGE */
 span.badge.text-bg-primary {
     font-weight: normal;

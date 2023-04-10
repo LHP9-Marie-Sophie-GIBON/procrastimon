@@ -38,7 +38,7 @@ class Trophy {
     }
 
     // (CREATION) méthode pour insérer un trophée dans la base de données
-    public function insertTrophy($title, $image)
+    public function insertTrophy($title)
     {
         $this->creation = date('Y-m-d');
 
@@ -47,7 +47,7 @@ class Trophy {
         $query->execute([
             ':creation' => $this->creation,
             ':title' => $title,
-            ':image' => $image,
+            ':image' => $this->image,
             ':id_users' => $this->id_users,
         ]);
     }

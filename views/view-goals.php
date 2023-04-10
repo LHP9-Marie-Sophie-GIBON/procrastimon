@@ -10,6 +10,7 @@
     <!-- mise en place du  levelup  -->
     <?php include 'components/levelup.php'; ?>
 
+
     <!-- modal de formulaire -->
     <div class="modal fade <?= !empty($arrayErrors) ? 'openModal' : '' ?>" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -108,7 +109,7 @@
             <!-- Liste des goals vide -->
             <div class="container">
                 <div class="alert alert-primary rounded-5 border-5" role="alert">
-                    <p class="text-center my-auto">You don't have any goal yet !</p>
+                    <p class="text-center my-auto fw-bold">You don't have any goal yet !</p>
                 </div>
             </div>
 
@@ -243,15 +244,6 @@
 
 <!-- TOASTS  -->
 <div class="toast-container position-fixed top-50 start-0 translate-middle-y p-3">
-    <!-- toast trophés -->
-    <div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                <p class="h6">Congrats, you just won a new trophy !</p>
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
     <!-- Toast addExp -->
     <div class="toast addexp <?= $message['addexp'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
@@ -271,6 +263,20 @@
         </div>
     </div>
 </div>
+
+<!-- Toast trophés -->
+<div class="toast-container trophy  position-fixed top-50 start-0 translate-middle-y p-3">
+    <div class="toast <?= $message['trophy'] ?? '' ?> rounded-5 align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <p class="h6">Congrats, you just won a new trophy !</p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    
+</div>
+
 
 
 <!-- mise en place du footer -->

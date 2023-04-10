@@ -1,18 +1,13 @@
 <?php
-
 require('../model/class-users.php');
 require('../model/class-procrastimons.php');
 require('../model/class-sprites.php');
-
-
-
 require('../model/class-goals.php');
-
-
-
 require('../model/class-trophies.php');
 require('../helper/database.php');
 require('../config/connect.php');
+
+
 session_start();
 
 // INSTANCIATION DES CLASSES
@@ -126,18 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$arrayerrors = [];
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-    if (isset($_GET['addexp'])) {
-        $message['addexp'] = 'openToast';
-    }
-
-    if (isset($_GET['removehp'])) {
-        $message['removehp'] = 'openToast';
-    }
-}
-
 // (LEVEL UP) Si le procrastimon a atteint l'expérience maximale
 if ($procrastimon->exp >= 100) {
     $procrastimon->level++;
@@ -152,10 +135,10 @@ if ($procrastimon->exp >= 100) {
     $procrastimon->levelUp($procrastimon->id);
 
     // header
-    header('Location: todos.php?action=levelup');
+    header('Location: todos.php?levelup');
 }
 
-if (isset($_GET['action']) && isset($_GET['action']) == 'levelup') {
+if (isset($_GET['levelup'])) {
     $Fonction = '<script>letsEvolve(); disabledLoader(); </script>';
 }
 
@@ -172,42 +155,63 @@ if ($procrastimon->hp <= 0) {
     exit;
 }
 
-// (GOAL TROPHIES) Création des trophés en fonction du nombre de goals accomplis
-$achievedGoals = $goal->countAchievedGoals(); // Récupération du nombre de goals
-$totalTrophies = $user->getTotalTrophies('total_goal_trophies');
+// (TOASTS) statut du jeu
+$message = [];
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
-    $trophy = new Trophy();
-    $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('1st goal\'s trophy', '../assets/img/trophies/goal_trophy01.jpg');
-    $user->addTrophy('total_goal_trophies');
-    $message['trophy'] = 'OpenToast';
-} elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
-    $trophy = new Trophy();
-    $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('3 goal\'s trophy', '../assets/img/trophies/goal_trophy02.jpg');
-    $user->addTrophy('total_goal_trophies');
-    $message['trophy'] = 'OpenToast';
-} elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
-    $trophy = new Trophy();
-    $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('5 goal\'s trophy', '../assets/img/trophies/goal_trophy03.jpg');
-    $user->addTrophy('total_goal_trophies');
-    $message['trophy'] = 'OpenToast';
-} elseif ($achievedGoals === 10 && $totalTrophies['total_goal_trophies'] < 4) {
-    $trophy = new Trophy();
-    $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('10 goal\'s trophy', '../assets/img/trophies/goal_trophy04.jpg');
-    $user->addTrophy('total_goal_trophies');
-    $message['trophy'] = 'OpenToast';
-} elseif ($achievedGoals === 20 && $totalTrophies['total_goal_trophies'] < 5) {
-    $trophy = new Trophy();
-    $trophy->id_users = $_SESSION['user_id'];
-    $trophy->insertTrophy('20 goal\'s trophy', '../assets/img/trophies/goal_trophy05.jpg');
-    $user->addTrophy('total_goal_trophies');
-    $message['trophy'] = 'OpenToast';
+    if (isset($_GET['addexp'])) {
+        $message['addexp'] = 'openToast';
+
+        // (GOAL TROPHIES) Création des trophés en fonction du nombre de goals accomplis
+        $achievedGoals = $goal->countAchievedGoals(); // Récupération du nombre de goals
+        $totalTrophies = $user->getTotalTrophies('total_goal_trophies');
+
+        if ($achievedGoals === 1 && $totalTrophies['total_goal_trophies'] < 1) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+            $trophy = new Trophy();
+            $trophy->id_users = $_SESSION['user_id'];
+            $trophy->image = "../assets/img/trophies/goal_trophy01.jpg";
+            $trophy->insertTrophy('1st goal\'s trophy');
+            $user->addTrophy('total_goal_trophies');
+            $message['trophy'] = 'openTrophyToast';
+
+        } elseif ($achievedGoals === 3 && $totalTrophies['total_goal_trophies'] < 2) {
+            $trophy = new Trophy();
+            $trophy->id_users = $_SESSION['user_id'];
+            $trophy->image = "../assets/img/trophies/goal_trophy02.jpg";
+            $trophy->insertTrophy('3 goal\'s trophy');
+            $user->addTrophy('total_goal_trophies');
+            $message['trophy'] = 'openTrophyToast';
+
+        } elseif ($achievedGoals === 5 && $totalTrophies['total_goal_trophies'] < 3) {
+            $trophy = new Trophy();
+            $trophy->id_users = $_SESSION['user_id'];
+            $trophy->image = "../assets/img/trophies/goal_trophy03.jpg";
+            $trophy->insertTrophy('5 goal\'s trophy');
+            $user->addTrophy('total_goal_trophies');
+            $message['trophy'] = 'openTrophyToast';
+
+        } elseif ($achievedGoals === 10 && $totalTrophies['total_goal_trophies'] < 4) {
+            $trophy = new Trophy();
+            $trophy->id_users = $_SESSION['user_id'];
+            $trophy->image = "../assets/img/trophies/goal_trophy04.jpg";
+            $trophy->insertTrophy('10 goal\'s trophy');
+            $user->addTrophy('total_goal_trophies');
+            $message['trophy'] = 'openTrophyToast';
+            
+        } elseif ($achievedGoals === 20 && $totalTrophies['total_goal_trophies'] < 5) {
+            $trophy = new Trophy();
+            $trophy->id_users = $_SESSION['user_id'];
+            $trophy->image = "../assets/img/trophies/goal_trophy05.jpg";
+            $trophy->insertTrophy('20 goal\'s trophy');
+            $user->addTrophy('total_goal_trophies');
+            $message['trophy'] = 'openTrophyToast';
+        }
+    }
+
+    if (isset($_GET['removehp'])) {
+        $message['removehp'] = 'openToast';
+    }
 }
-
 
 
 

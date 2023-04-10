@@ -106,7 +106,6 @@ if (loader) {
 
 
 
-
 function disableLoader() { // fonction pour désactiver le loader
     loader.style.display = 'none';
     backdrop.classList.remove('show');
@@ -144,6 +143,14 @@ if (progressBar) {
 let toastElement = document.querySelector('.toast.openToast');
 if (toastElement) {
     let toast = new bootstrap.Toast(toastElement, {
+        keyboard: false
+    });
+    toast.show();
+}
+
+let trophyToast = document.querySelector('.toast.openTrophyToast');
+if (trophyToast) {
+    let toast = new bootstrap.Toast(trophyToast, {
         keyboard: false
     });
     toast.show();
