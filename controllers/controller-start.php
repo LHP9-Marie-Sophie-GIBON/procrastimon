@@ -198,15 +198,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $missing = "<span class='danger error-message'><i class='bi bi-exclamation-circle-fill'></i></span>";
     $wrong = "<span class='danger error-message'><i class='bi bi-x-circle-fill'></i></span>";
 
+    
     // si les champs sont vide : echo "erreur"
     if (empty($_POST['user']) || empty($_POST['user-password'])) {
+         
         $errorsLogin['danger'] = 'text-danger'; 
         $errorsLogin['login'] = $missing;
-        $errorsLogin['Login-error'] = 'Login required';
+        $errorsLogin['login-error'] = 'Username required';
         $errorsLogin['password'] = $missing;
         $errorsLogin['password-error'] = 'Password required';
-
-    } else if (isset($_POST['user']) && isset($_POST['user-password'])) {
+       
+    } 
+        
+    else if (isset($_POST['user']) && isset($_POST['user-password'])) {
         $login = $_POST['user'];
         $password = $_POST['user-password'];
 
@@ -214,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = new User();
         $user->login = $login;
         $user->getUserByLogin();
-        $existingUser = $user->login;
+        $existingUser =  $user->getUserByLogin();
 
         // Vérifier si le mot de passe est correct
         if ($existingUser) {
@@ -228,12 +232,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errorsLogin['password'] = $wrong;
                 $errorsLogin['password-errors'] = 'Wrong password';
             }
-        } else {
+        } else if (!$existingUser ){
             // Authentification échouée : afficher un message d'erreur
             $errorsLogin['login'] = $wrong;
+            $errorsLogin['login-error'] = 'Wrong username';
             $errorsLogin['password'] = $wrong;
+            $errorsLogin['password-error'] = 'Password required';
             $success = false;
         }
+
+    
     }
 }
 

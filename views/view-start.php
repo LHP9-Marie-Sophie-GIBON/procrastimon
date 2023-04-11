@@ -121,7 +121,7 @@
                                 <div class="modal-body">
                                     <div class="row mb-1">
                                         <span class="col-1 my-auto" id="errorLogin"><?= $errorsLogin['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                                        <input id="login" type="text" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['login-error'] ?? 'Login' ?>" aria-label="login" aria-describedby="login" name="user" value="<?= $login ?? '' ?>">
+                                        <input id="login" type="text" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['login-error'] ?? 'Login' ?>" aria-label="login" aria-describedby="login" name="user" value="">
                                     </div>
 
                                     <div class="row mb-3">
