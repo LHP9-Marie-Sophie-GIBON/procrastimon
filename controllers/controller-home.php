@@ -16,6 +16,9 @@ $sprite = new Sprite();
 // AFFICHAGE DE LA PAGE D'ACCUEIL
 if (isset($_SESSION['user_id'])) {
     $user->login($user, $procrastimon, $sprite);
+} else {
+    header('Location: ../index.php');
+    exit;
 }
 
 // BADGES
