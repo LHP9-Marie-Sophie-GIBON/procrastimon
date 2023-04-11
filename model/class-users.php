@@ -44,24 +44,24 @@ class User
     }
 
     // méthode pour récupérer un utilisateur par son id
-    // public function getUserById()
-    // {
-    //     // préparation de la requête
-    //     $query = $this->_pdo->prepare("SELECT * FROM users WHERE id = :id");
+    public function getUserById()
+    {
+        // préparation de la requête
+        $query = $this->_pdo->prepare("SELECT * FROM users WHERE id = :id");
 
-    //     // exécution de la requête
-    //     $query->execute([
-    //         ':id' => $this->id
-    //     ]);
+        // exécution de la requête
+        $query->execute([
+            ':id' => $this->id
+        ]);
 
-    //     // récupération des données
-    //     $data = $query->fetch(PDO::FETCH_ASSOC);
+        // récupération des données
+        $data = $query->fetch(PDO::FETCH_ASSOC);
 
-    //     // hydratation de l'objet
-    //     $this->login = $data['login'];
-    //     $this->mail = $data['mail'];
-    //     $this->password = $data['password'];
-    // }
+        // hydratation de l'objet
+        $this->login = $data['login'];
+        $this->mail = $data['mail'];
+        $this->password = $data['password'];
+    }
 
     // méthode pour récupérer un utilisateur par son login
     public function getUserByLogin()
@@ -74,10 +74,21 @@ class User
             ':login' => $this->login
         ]);
 
-        // récupération des données
-        $query->fetch(PDO::FETCH_ASSOC);
 
-        
+        // vérification si l'utilisateur existe
+        if ($query->rowCount() > 0) {
+            // récupération des données
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            // hydratation de l'objet
+            $this->id = $data['id'];
+            $this->mail = $data['mail'];
+            $this->password = $data['password'];
+
+            return $data;
+        } else {
+            return false;
+        }
     }
 
     // méthode pour vérifier que le login et le mail n'existe pas déja
