@@ -124,7 +124,7 @@
                     ?>
                         <p>Your goal : "<?= $expiredGoal['name'] ?>" is expired (due date : <?= $expiredGoal['due_date'] ?>) !</p>
                     <?php } ?>
-                    <a href="goals.php?removehp" class="btn btn-danger">Next</a>
+                    <a href="goals.php?removehp" class="btn btn-danger rounded-pill">Next</a>
                 </div>
             </div>
 
