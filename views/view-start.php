@@ -26,7 +26,7 @@
                             <!-- user part -->
                             <div class="row mb-1">
                                 <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['login'] ?? '<i class="bi bi-person-circle"></i>' ?></span>
-                                <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?><?= $arrayErrors['login-error'] ?? '' ?>">
+                                <input type="text" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="Login" aria-label="login" aria-describedby="login" name="login" value="<?= $login ?? '' ?><?= $arrayErrors['login-error'] ?? '' ?>">
                             </div>
 
 
@@ -38,12 +38,12 @@
 
                             <div class="row mb-1">
                                 <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                                <input type="password" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="<?= $arrayErrors['password-error'] ?? 'password' ?>" aria-label="password" aria-describedby="password" name="password">
+                                <input type="password" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="<?= $arrayErrors['password-error'] ?? 'Password' ?>" aria-label="password" aria-describedby="password" name="password">
                             </div>
 
                             <div class="row mb-1">
                                 <span class="col-1 my-auto" id="basic-addon1"> <?= $arrayErrors['confirm-password'] ?? '<i class="bi bi-shield-lock-fill"></i>' ?></span>
-                                <input type="password" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="<?= $arrayErrors['confirm-password-error'] ?? 'confirm-password' ?>" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
+                                <input type="password" class="col form-control rounded-pill <?= $arrayErrors['danger'] ?? '' ?>" placeholder="<?= $arrayErrors['confirm-password-error'] ?? 'Confirm-password' ?>" aria-label="confirm-password" aria-describedby="confirm-password" name="confirm-password">
                             </div>
 
 
@@ -126,7 +126,7 @@
 
                                     <div class="row mb-3">
                                         <span class="col-1 my-auto" id="errorPassword"> <?= $errorsLogin['password'] ?? '<i class="bi bi-shield-lock"></i>' ?></span>
-                                        <input id="password" type="password" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['password-error'] ?? 'password' ?>" aria-label="password" aria-describedby="user-password" name="user-password">
+                                        <input id="password" type="password" class="col form-control rounded-pill <?= $errorsLogin['danger'] ?? '' ?>" placeholder="<?= $errorsLogin['password-error'] ?? 'Password' ?>" aria-label="password" aria-describedby="user-password" name="user-password">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -195,7 +195,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary rounded-pill border-5 fw-bold" data-bs-dismiss="modal">Retour</button>
+                <button type="button" class="btn btn-outline-secondary rounded-pill border-5 fw-bold" data-bs-dismiss="modal">Return</button>
             </div>
         </div>
     </div>

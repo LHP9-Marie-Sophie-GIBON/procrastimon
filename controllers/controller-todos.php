@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $completeTodos = $todo->countCompletedTodos();
         $totalTrophies = $user->getTotalTrophies('total_todo_trophies');
 
-        if ($completeTodos === 1 && $totalTrophies['total_todo_trophies'] === 0) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
+        if ($completeTodos === 10 && $totalTrophies['total_todo_trophies'] === 0) { // si le nombre de goals atteints est égal au seuil de trophée suivant, créer un nouveau trophée
             $trophy = new Trophy();
             $trophy->id_users = $_SESSION['user_id'];
             $trophy->image = "../assets/img/trophies/todo_trophy01.webp";
