@@ -7,13 +7,13 @@
     $currentPage = basename(parse_url($currentURL, PHP_URL_PATH), ".php");
 
     if ($currentPage === 'home') { ?>
-        <span class="badge ms-2 mt-2 rounded-pill text-bg-primary">Goals : <?= $numberOfGoals ?> </span>
-        <span class="badge ms-2 mt-2 rounded-pill text-bg-secondary">Todos : <?= $numberOfTodos ?> </span>
+        <a href="goals.php"><span class="badge ms-2 mt-2 rounded-pill text-bg-primary">Goals : <?= $numberOfGoals ?> </span></a>
+        <a href="todos.php"><span class="badge ms-2 mt-2 rounded-pill text-bg-secondary">Todos : <?= $numberOfTodos ?> </span></a>
     <?php } ?>
 
     <div class="row progressbar pe-2 rounded-end-pill border border-light border-5">
         <div class="col-3 rounded-end-circle bg-light border border-light border-5 p-0 m-0">
-            <img src="<?= $sprite->chibi ?>" alt="" class="img-fluid rounded-end-circle imgChibi">
+           <a href="home.php"><img src="<?= $sprite->chibi ?>" alt="" class="img-fluid rounded-end-circle imgChibi"></a> 
         </div>
         <div class="col ">
             <div class="text-light fw-bold h5 mt-1 mb-0">
