@@ -147,7 +147,7 @@
 
 <footer>
     <nav class="navbar start options fixed-bottom justify-content-center" tabindex="1">
-        <button type="button" class="btn btnML text-light" data-bs-toggle="modal" data-bs-target="#modalML">Mentions légales</button>
+        <button type="button" class="btn btnML text-light" data-bs-toggle="modal" data-bs-target="#modalML">LEGAL NOTICE</button>
     </nav>
 </footer>
 
@@ -156,41 +156,42 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">MENTIONS LEGALES</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">LEGAL NOTICE</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Responsable de la publication : GIBON Marie-Sophie <br>
+                <p>
+                    Publisher: Marie-Sophie GIBON <br>
                     Email : mariesophie.gb@gmail.com <br>
-                    Téléphone : / </p>
+                    Phone: / </p>
 
                 <p>
-                    HÉBERGEMENT <br>
-                    Le site web "Procrastimon" est hébergé par Mounlight <br>
-                    Adresse : [Adresse de l'hébergeur] <br>
+                    HOSTING <br>
+                    The website "Procrastimon" is hosted by Mounlight online<br>
+                    Address: [Hosting company address] <br>
                     Email : [Adresse email de l'hébergeur] <br>
-                    Téléphone : [Numéro de téléphone de l'hébergeur] <br>
+                    Phone: [Hosting company phone number] <br>
                 </p>
 
                 <p>
-                    PROPRIÉTÉ INTELLECTUELLE <br>
-                    Le site web "Procrastimon" ainsi que son contenu sont la propriété exclusive de école de la MANU et sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle. Toute reproduction ou représentation, intégrale ou partielle, du site ou de son contenu est interdite sans l'autorisation expresse et préalable de [Nom de l'entreprise].<br>
+                    INTELLECTUAL PROPERTY <br>
+                    The website "Procrastimon" and its content, including the use of a royalty-free music from licensing.jamendo.com and the use of the trophies's illustration from finalfantasy.fandom.com,  are the exclusive property of école de la MANU and are protected by French and international laws relating to intellectual property. Any reproduction or representation, in whole or in part, of the website or its content is prohibited without the express and prior authorization of La Manu. <br>
                 </p>
                 <p>
-                    DONNÉES PERSONNELLES<br>
-                    Les données personnelles collectées sur le site "Procrastimon" sont destinées à école de la MANU et ne seront pas transmises à des tiers. Conformément à la loi "Informatique et Libertés" du 6 janvier 1978, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Vous pouvez exercer ce droit en nous contactant à l'adresse email [Adresse email de l'entreprise].<br>
+                    PERSONAL DATA<br>
+                    The personal data collected on the website "Procrastimon" are intended for La Manu School and will not be transmitted to third parties. In accordance with the "Informatique et Libertés" law of January 6, 1978, you have the right to access, rectify and delete data concerning you. You can exercise this right by contacting us at the email address [contact@lamanu.fr].<br>
                 </p>
                 <p>
                     COOKIES <br>
-                    Le site web "Procrastimon" utilise des cookies pour améliorer l'expérience utilisateur et proposer des services adaptés à vos centres d'intérêts. Vous pouvez désactiver l'utilisation de cookies en modifiant les paramètres de votre navigateur. <br>
+                    The website "Procrastimon" uses cookies to improve the user experience and offer services tailored to your interests. You can disable the use of cookies by changing the settings in your browser. <br>
                 </p>
                 <p>
-                    LIMITATION DE RESPONSABILITÉ <br>
-                    L'école de la MANU ne pourra être tenue responsable des dommages directs ou indirects résultant de l'utilisation du site web "Procrastimon". Nous nous réservons le droit de modifier, de suspendre ou de supprimer le site web et son contenu à tout moment et sans préavis. <br>
+                    LIMITATION OF LIABILITY <br>
+                    La MANU cannot be held responsible for direct or indirect damages resulting from the use of the website "Procrastimon". We reserve the right to modify, suspend or delete the website and its content at any time and without notice. <br>
                 </p>
                 <p>
-                    DROIT APPLICABLE ET JURIDICTION COMPÉTENTE <br>
-                    Les présentes mentions légales sont régies par le droit français. Tout litige relatif au site web "Procrastimon" sera soumis à la compétence exclusive des tribunaux français. <br>
+                    APPLICABLE LAW AND JURISDICTION <br>
+                    These legal notices are governed by French law. Any dispute relating to the website "Procrastimon" will be subject to the exclusive jurisdiction of the French courts. <br>
                 </p>
             </div>
             <div class="modal-footer">
@@ -203,7 +204,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="../assets/js/app.js"></script>
-<script>playMusic(); </script>
+<script>
+    playMusic();
+</script>
 
 
 </body>
